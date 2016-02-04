@@ -1,4 +1,4 @@
-# React-Select
+# Prior to fork from JedWatson/React-Select
 
 ## v1.0.0-beta9 / 2015-02-12
 

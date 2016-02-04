@@ -13,9 +13,9 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactSelect = require('react-select');
+var _reactSelectPlus = require('react-select-plus');
 
-var _reactSelect2 = _interopRequireDefault(_reactSelect);
+var _reactSelectPlus2 = _interopRequireDefault(_reactSelectPlus);
 
 var _componentsContributors = require('./components/Contributors');
 
@@ -55,7 +55,7 @@ _reactDom2['default'].render(_react2['default'].createElement(
 <SelectedValuesField label="Option Creation (tags mode)" options={FLAVOURS} allowCreate hint="Enter a value that's NOT in the list, then hit return" />
 */
 
-},{"./components/Contributors":2,"./components/CustomComponents":3,"./components/CustomRender":4,"./components/Multiselect":5,"./components/NumericSelect":6,"./components/States":7,"react":undefined,"react-dom":undefined,"react-select":undefined}],2:[function(require,module,exports){
+},{"./components/Contributors":2,"./components/CustomComponents":3,"./components/CustomRender":4,"./components/Multiselect":5,"./components/NumericSelect":6,"./components/States":7,"react":undefined,"react-dom":undefined,"react-select-plus":undefined}],2:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -64,9 +64,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactSelect = require('react-select');
+var _reactSelectPlus = require('react-select-plus');
 
-var _reactSelect2 = _interopRequireDefault(_reactSelect);
+var _reactSelectPlus2 = _interopRequireDefault(_reactSelectPlus);
 
 var CONTRIBUTORS = require('../data/contributors');
 var MAX_CONTRIBUTORS = 6;
@@ -125,7 +125,7 @@ var Contributors = _react2['default'].createClass({
 				{ className: 'section-heading' },
 				this.props.label
 			),
-			_react2['default'].createElement(_reactSelect2['default'].Async, { multi: this.state.multi, value: this.state.value, onChange: this.onChange, onValueClick: this.gotoContributor, valueKey: 'github', labelKey: 'name', loadOptions: this.getContributors }),
+			_react2['default'].createElement(_reactSelectPlus2['default'].Async, { multi: this.state.multi, value: this.state.value, onChange: this.onChange, onValueClick: this.gotoContributor, valueKey: 'github', labelKey: 'name', loadOptions: this.getContributors }),
 			_react2['default'].createElement(
 				'div',
 				{ className: 'checkbox-list' },
@@ -161,7 +161,7 @@ var Contributors = _react2['default'].createClass({
 
 module.exports = Contributors;
 
-},{"../data/contributors":8,"react":undefined,"react-select":undefined}],3:[function(require,module,exports){
+},{"../data/contributors":8,"react":undefined,"react-select-plus":undefined}],3:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -170,9 +170,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactSelect = require('react-select');
+var _reactSelectPlus = require('react-select-plus');
 
-var _reactSelect2 = _interopRequireDefault(_reactSelect);
+var _reactSelectPlus2 = _interopRequireDefault(_reactSelectPlus);
 
 var _reactGravatar = require('react-gravatar');
 
@@ -291,7 +291,7 @@ var UsersField = _react2['default'].createClass({
 				{ className: 'section-heading' },
 				this.props.label
 			),
-			_react2['default'].createElement(_reactSelect2['default'], {
+			_react2['default'].createElement(_reactSelectPlus2['default'], {
 				onChange: this.setValue,
 				optionComponent: GravatarOption,
 				options: USERS,
@@ -310,7 +310,7 @@ var UsersField = _react2['default'].createClass({
 
 module.exports = UsersField;
 
-},{"../data/users":10,"react":undefined,"react-gravatar":14,"react-select":undefined}],4:[function(require,module,exports){
+},{"../data/users":10,"react":undefined,"react-gravatar":14,"react-select-plus":undefined}],4:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -319,9 +319,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactSelect = require('react-select');
+var _reactSelectPlus = require('react-select-plus');
 
-var _reactSelect2 = _interopRequireDefault(_reactSelect);
+var _reactSelectPlus2 = _interopRequireDefault(_reactSelectPlus);
 
 var DisabledUpsellOptions = _react2['default'].createClass({
 	displayName: 'DisabledUpsellOptions',
@@ -368,7 +368,7 @@ var DisabledUpsellOptions = _react2['default'].createClass({
 				{ className: 'section-heading' },
 				this.props.label
 			),
-			_react2['default'].createElement(_reactSelect2['default'], {
+			_react2['default'].createElement(_reactSelectPlus2['default'], {
 				placeholder: 'Select your support level',
 				options: options,
 				optionRenderer: this.renderOption,
@@ -386,7 +386,7 @@ var DisabledUpsellOptions = _react2['default'].createClass({
 });
 module.exports = DisabledUpsellOptions;
 
-},{"react":undefined,"react-select":undefined}],5:[function(require,module,exports){
+},{"react":undefined,"react-select-plus":undefined}],5:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -395,9 +395,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactSelect = require('react-select');
+var _reactSelectPlus = require('react-select-plus');
 
-var _reactSelect2 = _interopRequireDefault(_reactSelect);
+var _reactSelectPlus2 = _interopRequireDefault(_reactSelectPlus);
 
 var FLAVOURS = [{ label: 'Chocolate', value: 'chocolate' }, { label: 'Vanilla', value: 'vanilla' }, { label: 'Strawberry', value: 'strawberry' }, { label: 'Caramel', value: 'caramel' }, { label: 'Cookies and Cream', value: 'cookiescream' }, { label: 'Peppermint', value: 'peppermint' }];
 
@@ -439,7 +439,7 @@ var MultiSelectField = _react2['default'].createClass({
 				{ className: 'section-heading' },
 				this.props.label
 			),
-			_react2['default'].createElement(_reactSelect2['default'], { multi: true, simpleValue: true, disabled: this.state.disabled, value: this.state.value, placeholder: 'Select your favourite(s)', options: this.state.options, onChange: this.handleSelectChange }),
+			_react2['default'].createElement(_reactSelectPlus2['default'], { multi: true, simpleValue: true, disabled: this.state.disabled, value: this.state.value, placeholder: 'Select your favourite(s)', options: this.state.options, onChange: this.handleSelectChange }),
 			_react2['default'].createElement(
 				'div',
 				{ className: 'checkbox-list' },
@@ -470,7 +470,7 @@ var MultiSelectField = _react2['default'].createClass({
 
 module.exports = MultiSelectField;
 
-},{"react":undefined,"react-select":undefined}],6:[function(require,module,exports){
+},{"react":undefined,"react-select-plus":undefined}],6:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -479,9 +479,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactSelect = require('react-select');
+var _reactSelectPlus = require('react-select-plus');
 
-var _reactSelect2 = _interopRequireDefault(_reactSelect);
+var _reactSelectPlus2 = _interopRequireDefault(_reactSelectPlus);
 
 var ValuesAsNumbersField = _react2['default'].createClass({
 	displayName: 'ValuesAsNumbersField',
@@ -538,7 +538,7 @@ var ValuesAsNumbersField = _react2['default'].createClass({
 				{ className: 'section-heading' },
 				this.props.label
 			),
-			_react2['default'].createElement(_reactSelect2['default'], {
+			_react2['default'].createElement(_reactSelectPlus2['default'], {
 				matchPos: this.state.matchPos,
 				matchProp: matchProp,
 				multi: this.state.multi,
@@ -602,7 +602,7 @@ var ValuesAsNumbersField = _react2['default'].createClass({
 
 module.exports = ValuesAsNumbersField;
 
-},{"react":undefined,"react-select":undefined}],7:[function(require,module,exports){
+},{"react":undefined,"react-select-plus":undefined}],7:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -611,9 +611,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactSelect = require('react-select');
+var _reactSelectPlus = require('react-select-plus');
 
-var _reactSelect2 = _interopRequireDefault(_reactSelect);
+var _reactSelectPlus2 = _interopRequireDefault(_reactSelectPlus);
 
 var STATES = require('../data/states');
 
@@ -670,7 +670,7 @@ var StatesField = _react2['default'].createClass({
 				{ className: 'section-heading' },
 				this.props.label
 			),
-			_react2['default'].createElement(_reactSelect2['default'], { ref: 'stateSelect', autofocus: true, options: options, simpleValue: true, clearable: this.state.clearable, name: 'selected-state', disabled: this.state.disabled, value: this.state.selectValue, onChange: this.updateValue, searchable: this.state.searchable }),
+			_react2['default'].createElement(_reactSelectPlus2['default'], { ref: 'stateSelect', autofocus: true, options: options, simpleValue: true, clearable: this.state.clearable, name: 'selected-state', disabled: this.state.disabled, value: this.state.selectValue, onChange: this.updateValue, searchable: this.state.searchable }),
 			_react2['default'].createElement(
 				'div',
 				{ style: { marginTop: 14 } },
@@ -740,7 +740,7 @@ var StatesField = _react2['default'].createClass({
 
 module.exports = StatesField;
 
-},{"../data/states":9,"react":undefined,"react-select":undefined}],8:[function(require,module,exports){
+},{"../data/states":9,"react":undefined,"react-select-plus":undefined}],8:[function(require,module,exports){
 'use strict';
 
 module.exports = [{ github: 'jedwatson', name: 'Jed Watson' }, { github: 'bruderstein', name: 'Dave Brotherstone' }, { github: 'jossmac', name: 'Joss Mackison' }, { github: 'jniechcial', name: 'Jakub Niechciał' }, { github: 'craigdallimore', name: 'Craig Dallimore' }, { github: 'julen', name: 'Julen Ruiz Aizpuru' }, { github: 'dcousens', name: 'Daniel Cousens' }, { github: 'jgautsch', name: 'Jon Gautsch' }, { github: 'dmitry-smirnov', name: 'Dmitry Smirnov' }];

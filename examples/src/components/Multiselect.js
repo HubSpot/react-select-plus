@@ -1,5 +1,5 @@
 import React from 'react';
-import Select from 'react-select';
+import Select from 'react-select-plus';
 
 const FLAVOURS = [
 	{ label: 'Chocolate', value: 'chocolate' },

@@ -1,11 +1,7 @@
-[![NPM](https://badge.fury.io/js/react-select.png)](https://www.npmjs.com/package/react-select)
-[![Build Status](https://travis-ci.org/JedWatson/react-select.svg?branch=master)](https://travis-ci.org/JedWatson/react-select)
-[![Coverage Status](https://coveralls.io/repos/JedWatson/react-select/badge.svg?branch=master&service=github)](https://coveralls.io/github/JedWatson/react-select?branch=master)
+React-Select-Plus
+=================
 
-React-Select
-============
-
-A Select control built with and for [React](http://facebook.github.io/react/index.html). Initially built for use in [KeystoneJS](http://www.keystonejs.com).
+A Select control for [React](http://facebook.github.io/react/index.html) based on [JedWatson/React-Select](https://github.com/JedWatson/react-select/).
 
 
 ## New version 1.0.0-beta
@@ -61,7 +57,7 @@ The `value` property of each option should be set to either a string or a number
 When the value is changed, `onChange(newValue, [selectedOptions])` will fire.
 
 ```javascript
-var Select = require('react-select');
+var Select = require('react-select-plus');
 
 var options = [
 	{ value: 'one', label: 'One' },
@@ -112,7 +108,7 @@ The select control will intelligently cache options for input strings that have 
 Unless you specify the property `autoload={false}` the control will automatically load the default set of options (i.e. for `input: ''`) when it is mounted.
 
 ```javascript
-var Select = require('react-select');
+var Select = require('react-select-plus');
 
 var getOptions = function(input, callback) {
 	setTimeout(function() {
@@ -143,7 +139,7 @@ Everything that applies to `loadOptions` with callbacks still applies to the Pro
 An example using the `fetch` API and ES6 syntax, with an API that returns an object like:
 
 ```javascript
-import Select from 'react-select';
+import Select from 'react-select-plus';
 
 /*
  * assuming the API returns something like this:
@@ -174,7 +170,7 @@ const getOptions = (input) => {
 If you want to load options asynchronously externally from the `Select` component, you can have the `Select` component show a loading spinner by passing in the `isLoading` prop set to `true`.
 
 ```javascript
-var Select = require('react-select');
+var Select = require('react-select-plus');
 
 var isLoadingExternally = true;
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Select from 'react-select';
+import Select from 'react-select-plus';
 
 var ValuesAsNumbersField = React.createClass({
 	displayName: 'ValuesAsNumbersField',

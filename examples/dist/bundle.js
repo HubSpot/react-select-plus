@@ -168,7 +168,7 @@ var Async = _react2['default'].createClass({
 
 module.exports = Async;
 
-},{"./Select":"react-select","./utils/stripDiacritics":4,"react":undefined}],2:[function(require,module,exports){
+},{"./Select":"react-select-plus","./utils/stripDiacritics":4,"react":undefined}],2:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -392,7 +392,7 @@ module.exports = function stripDiacritics(str) {
 	return str;
 };
 
-},{}],"react-select":[function(require,module,exports){
+},{}],"react-select-plus":[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -763,7 +763,7 @@ var Select = _react2['default'].createClass({
 					return;
 				}
 				this.selectFocusedOption();
-				break;
+				return;
 			case 13:
 				// enter
 				if (!this.state.isOpen) return;
