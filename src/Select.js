@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import stripDiacritics from './utils/stripDiacritics';
 
 import Async from './Async';
+import Dropdown from './Dropdown';
 import Option from './Option';
 import Value from './Value';
 
@@ -38,6 +39,7 @@ const Select = React.createClass({
 		clearable: React.PropTypes.bool,            // should it be possible to reset value
 		delimiter: React.PropTypes.string,          // delimiter to use to join multiple values for the hidden field value
 		disabled: React.PropTypes.bool,             // whether the Select is disabled or not
+		dropdownComponent: React.PropTypes.func,    // dropdown component to render the menu in
 		escapeClearsValue: React.PropTypes.bool,    // whether escape clears the value when the menu is closed
 		filterOption: React.PropTypes.func,         // method to filter a single option (option, filterString)
 		filterOptions: React.PropTypes.any,         // boolean to enable default filtering or function to filter the options array ([options], filterString, [values])
@@ -93,6 +95,7 @@ const Select = React.createClass({
 			clearValueText: 'Clear value',
 			delimiter: ',',
 			disabled: false,
+			dropdownComponent: Dropdown,
 			escapeClearsValue: true,
 			filterOptions: true,
 			ignoreAccents: true,
@@ -749,6 +752,7 @@ const Select = React.createClass({
 			'is-searchable': this.props.searchable,
 			'has-value': valueArray.length,
 		});
+		let Dropdown = this.props.dropdownComponent;
 		return (
 			<div ref="wrapper" className={className} style={this.props.wrapperStyle}>
 				{this.renderHiddenField(valueArray)}
@@ -767,14 +771,16 @@ const Select = React.createClass({
 					{this.renderArrow()}
 				</div>
 				{isOpen ? (
-					<div ref="menuContainer" className="Select-menu-outer" style={this.props.menuContainerStyle}>
-						<div ref="menu" className="Select-menu"
-								 style={this.props.menuStyle}
-								 onScroll={this.handleMenuScroll}
-								 onMouseDown={this.handleMouseDownOnMenu}>
-							{this.renderMenu(options, !this.props.multi ? valueArray : null, focusedOption)}
+					<Dropdown>
+						<div ref="menuContainer" className="Select-menu-outer" style={this.props.menuContainerStyle}>
+							<div ref="menu" className="Select-menu"
+									 style={this.props.menuStyle}
+									 onScroll={this.handleMenuScroll}
+									 onMouseDown={this.handleMouseDownOnMenu}>
+								{this.renderMenu(options, !this.props.multi ? valueArray : null, focusedOption)}
+							</div>
 						</div>
-					</div>
+					</Dropdown>
 				) : null}
 			</div>
 		);
