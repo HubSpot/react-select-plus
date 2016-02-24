@@ -45,6 +45,7 @@ const Select = React.createClass({
 		ignoreCase: React.PropTypes.bool,           // whether to perform case-insensitive filtering
 		inputProps: React.PropTypes.object,         // custom attributes for the Input
 		isLoading: React.PropTypes.bool,            // whether the Select is loading externally or not (such as options being loaded)
+		isOpen: React.PropTypes.bool,               // whether the Select dropdown menu is open or not
 		labelKey: React.PropTypes.string,           // path of the label value in option objects
 		matchPos: React.PropTypes.string,           // (any|start) match the start or entire string when filtering
 		matchProp: React.PropTypes.string,          // (any|label|value) which option property to filter on
@@ -736,7 +737,7 @@ const Select = React.createClass({
 	render () {
 		let valueArray = this.getValueArray();
 		let options = this._visibleOptions = this.filterOptions(this.props.multi ? valueArray : null);
-		let isOpen = this.state.isOpen;
+		let isOpen = typeof this.props.isOpen === 'boolean' ? this.props.isOpen : this.state.isOpen;
 		if (this.props.multi && !options.length && valueArray.length && !this.state.inputValue) isOpen = false;
 		let focusedOption = this._focusedOption = this.getFocusableOption(valueArray[0]);
 		let className = classNames('Select', this.props.className, {
