@@ -34,6 +34,24 @@
 }
 
 
+// option groups
+
+.Select-option-group-label {
+	box-sizing: border-box;
+	background-color: @select-option-bg;
+	color: @select-option-color;
+	font-weight: bold;
+	cursor: default;
+	display: block;
+	padding: @select-padding-vertical @select-padding-horizontal;
+}
+
+.Select-option-group-label ~ .Select-option,
+.Select-option-group-label ~ .Select-option-group {
+	padding-left: @select-padding-horizontal * 2;
+}
+
+
 // options
 
 .Select-option {
