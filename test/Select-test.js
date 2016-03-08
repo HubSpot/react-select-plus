@@ -750,6 +750,94 @@ describe('Select', () => {
 		});
 	});
 
+	describe('with grouped options', () => {
+		beforeEach(() => {
+
+			options = [
+				{ label: 'Group 1', options: [
+					{ value: 'alpha', label: 'Alpha' },
+					{ label: 'Group 1A', options: [
+						{ value: 'beta', label: 'Beta' }
+					] }
+				] },
+				{ label: 'Group 2', options: [
+					{ value: 'gamma', label: 'Gamma' }
+				] },
+				{ value: 'omega', label: 'Omega' }
+			];
+
+			// Render an instance of the component
+			wrapper = createControlWithWrapper({
+				name: 'grouped-options',
+				value: 'beta',
+				options: options,
+				searchable: true
+			});
+		});
+
+		it('starts with the given value', () => {
+			var node = ReactDOM.findDOMNode(instance);
+			expect(node, 'queried for', DISPLAYED_SELECTION_SELECTOR,
+				'to have items satisfying', 'to have text', 'Beta');
+		});
+
+		it('supports setting the value via prop', () => {
+
+			wrapper.setPropsForChild({
+				value: 'gamma'
+			});
+
+			expect(ReactDOM.findDOMNode(instance), 'queried for', DISPLAYED_SELECTION_SELECTOR,
+				'to have items satisfying', 'to have text', 'Gamma');
+		});
+
+		it('sets the value of the hidden form node', () => {
+
+			wrapper.setPropsForChild({
+				value: 'omega'
+			});
+
+			expect(ReactDOM.findDOMNode(wrapper).querySelector(FORM_VALUE_SELECTOR).value, 'to equal', 'omega' );
+		});
+
+		it('display the raw value if the option is not available', () => {
+
+			wrapper.setPropsForChild({
+				value: { value: 'new', label: 'something new' }
+			});
+
+			expect(ReactDOM.findDOMNode(instance), 'queried for', DISPLAYED_SELECTION_SELECTOR,
+				'to have items satisfying', 'to have text', 'something new');
+		});
+
+		it('updates the display text if the option appears later', () => {
+
+			wrapper.setPropsForChild({
+				value: 'new'
+			});
+
+			wrapper.setPropsForChild({
+				options: [
+					{ label: 'Group 1', options: [
+						{ value: 'alpha', label: 'Alpha' },
+						{ label: 'Group 1A', options: [
+							{ value: 'beta', label: 'Beta' },
+							{ value: 'new', label: 'New item in Group 1A' }
+						] }
+					] },
+					{ label: 'Group 2', options: [
+						{ value: 'gamma', label: 'Gamma' }
+					] },
+					{ value: 'omega', label: 'Omega' }
+				]
+			});
+
+			expect(ReactDOM.findDOMNode(instance), 'queried for', DISPLAYED_SELECTION_SELECTOR,
+				'to have items satisfying', 'to have text', 'New item in Group 1A');
+
+		});
+	});
+
 	describe('with a disabled option', () => {
 
 		beforeEach(() => {
