@@ -17,9 +17,7 @@ Testing, feedback and PRs for the new version are appreciated.
 
 ## Demo & Examples
 
-Live demo: [jedwatson.github.io/react-select](http://jedwatson.github.io/react-select/)
-
-The live demo is still running `v0.9.1`.
+Live demo: [github.hubspot.com/react-select-plus/](http://github.hubspot.com/react-select-plus/)
 
 To build the **new 1.0.0** examples locally, clone this repo then run:
 
