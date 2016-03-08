@@ -8,7 +8,18 @@ import stripDiacritics from './utils/stripDiacritics';
 import Async from './Async';
 import Dropdown from './Dropdown';
 import Option from './Option';
+import OptionGroup from './OptionGroup';
 import Value from './Value';
+
+function clone(obj) {
+  const copy = {};
+  for (let attr in obj) {
+    if (obj.hasOwnProperty(attr)) {
+    	copy[attr] = obj[attr];
+    };
+  }
+  return copy;
+}
 
 function stringifyValue (value) {
 	if (typeof value === 'object') {
@@ -68,6 +79,7 @@ const Select = React.createClass({
 		onOpen: React.PropTypes.func,               // fires when the menu is opened
 		onValueClick: React.PropTypes.func,         // onClick handler for value labels: function (value, event) {}
 		optionComponent: React.PropTypes.func,      // option component to render in dropdown
+		optionGroupComponent: React.PropTypes.func, // option group component to render in dropdown
 		optionRenderer: React.PropTypes.func,       // optionRenderer: function (option) {}
 		options: React.PropTypes.array,             // array of options
 		placeholder: stringOrNode,                  // field placeholder, displayed when there's no value
@@ -111,6 +123,7 @@ const Select = React.createClass({
 			noResultsText: 'No results found',
 			onBlurResetsInput: true,
 			optionComponent: Option,
+			optionGroupComponent: OptionGroup,
 			placeholder: 'Select...',
 			required: false,
 			scrollMenuIntoView: true,
@@ -132,9 +145,19 @@ const Select = React.createClass({
 		};
 	},
 
+	componentWillMount() {
+		this._flatOptions = this.flattenOptions(this.props.options);
+	},
+
 	componentDidMount () {
 		if (this.props.autofocus) {
 			this.focus();
+		}
+	},
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.options !== this.props.options) {
+			this._flatOptions = this.flattenOptions(nextProps.options);
 		}
 	},
 
@@ -413,7 +436,8 @@ const Select = React.createClass({
 
 	expandValue (value) {
 		if (typeof value !== 'string' && typeof value !== 'number') return value;
-		let { options, valueKey } = this.props;
+		let { valueKey } = this.props;
+		let options = this._flatOptions;
 		if (!options) return;
 		for (var i = 0; i < options.length; i++) {
 			if (options[i][valueKey] === value) return options[i];
@@ -638,9 +662,8 @@ const Select = React.createClass({
 		);
 	},
 
-	filterOptions (excludeOptions) {
+	filterOptions (options, excludeOptions) {
 		var filterValue = this.state.inputValue;
-		var options = this.props.options || [];
 		if (typeof this.props.filterOptions === 'function') {
 			return this.props.filterOptions.call(this, options, filterValue, excludeOptions);
 		} else if (this.props.filterOptions) {
@@ -651,7 +674,7 @@ const Select = React.createClass({
 				filterValue = filterValue.toLowerCase();
 			}
 			if (excludeOptions) excludeOptions = excludeOptions.map(i => i[this.props.valueKey]);
-			return options.filter(option => {
+			const includeOption = (option) => {
 				if (excludeOptions && excludeOptions.indexOf(option[this.props.valueKey]) > -1) return false;
 				if (this.props.filterOption) return this.props.filterOption.call(this, option, filterValue);
 				if (!filterValue) return true;
@@ -672,43 +695,91 @@ const Select = React.createClass({
 					(this.props.matchProp !== 'label' && valueTest.indexOf(filterValue) >= 0) ||
 					(this.props.matchProp !== 'value' && labelTest.indexOf(filterValue) >= 0)
 				);
+			};
+			let filteredOptions = [];
+			options.forEach((option) => {
+				if (this.isGroup(option)) {
+					const filteredGroup = clone(option);
+					filteredGroup.options = this.filterOptions(option.options, excludeOptions);
+					if (filteredGroup.options.length) {
+						filteredOptions.push(filteredGroup);
+					};
+				} else if (includeOption(option)) {
+					filteredOptions.push(option);
+				};
 			});
+			return filteredOptions;
 		} else {
 			return options;
 		}
 	},
 
+	isGroup (option) {
+		return option && Array.isArray(option.options);
+	},
+
+	flattenOptions (options) {
+		if (!options) return;
+		let flatOptions = [];
+		for (let i = 0; i < options.length; i ++) {
+			if (this.isGroup(options[i])) {
+				flatOptions = flatOptions.concat(this.flattenOptions(options[i].options));
+			} else {
+				flatOptions.push(options[i]);
+			}
+		}
+		return flatOptions;
+	},
+
 	renderMenu (options, valueArray, focusedOption) {
 		if (options && options.length) {
+			let OptionGroup = this.props.optionGroupComponent;
 			let Option = this.props.optionComponent;
 			let renderLabel = this.props.optionRenderer || this.getOptionLabel;
 
 			return options.map((option, i) => {
-				let isSelected = valueArray && valueArray.indexOf(option) > -1;
-				let isFocused = option === focusedOption;
-				let optionRef = isFocused ? 'focused' : null;
-				let optionClass = classNames({
-					'Select-option': true,
-					'is-selected': isSelected,
-					'is-focused': isFocused,
-					'is-disabled': option.disabled,
-				});
+				if (this.isGroup(option)) {
+					let optionGroupClass = classNames({
+						'Select-option-group': true,
+					});
 
-				return (
-					<Option
-						className={optionClass}
-						isDisabled={option.disabled}
-						isFocused={isFocused}
-						key={`option-${i}-${option[this.props.valueKey]}`}
-						onSelect={this.selectValue}
-						onFocus={this.focusOption}
-						option={option}
-						isSelected={isSelected}
-						ref={optionRef}
-						>
-						{renderLabel(option)}
-					</Option>
-				);
+					return (
+						<OptionGroup
+							className={optionGroupClass}
+							key={`option-group-${i}`}
+							label={renderLabel(option)}
+							option={option}
+							>
+							{this.renderMenu(option.options, valueArray, focusedOption)}
+						</OptionGroup>
+					);
+				} else {
+					let isSelected = valueArray && valueArray.indexOf(option) > -1;
+					let isFocused = option === focusedOption;
+					let optionRef = isFocused ? 'focused' : null;
+					let optionClass = classNames({
+						'Select-option': true,
+						'is-selected': isSelected,
+						'is-focused': isFocused,
+						'is-disabled': option.disabled,
+					});
+
+					return (
+						<Option
+							className={optionClass}
+							isDisabled={option.disabled}
+							isFocused={isFocused}
+							key={`option-${i}-${option[this.props.valueKey]}`}
+							onSelect={this.selectValue}
+							onFocus={this.focusOption}
+							option={option}
+							isSelected={isSelected}
+							ref={optionRef}
+							>
+							{renderLabel(option)}
+						</Option>
+					);
+				}
 			});
 		} else if (this.props.noResultsText) {
 			return (
@@ -739,7 +810,8 @@ const Select = React.createClass({
 
 	render () {
 		let valueArray = this.getValueArray();
-		let options = this._visibleOptions = this.filterOptions(this.props.multi ? valueArray : null);
+		let options = this.filterOptions(this.props.options || [], this.props.multi ? valueArray : null);
+		this._visibleOptions = this.flattenOptions(options);
 		let isOpen = typeof this.props.isOpen === 'boolean' ? this.props.isOpen : this.state.isOpen;
 		if (this.props.multi && !options.length && valueArray.length && !this.state.inputValue) isOpen = false;
 		let focusedOption = this._focusedOption = this.getFocusableOption(valueArray[0]);
