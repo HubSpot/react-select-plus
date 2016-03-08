@@ -1,5 +1,5 @@
 {
-  "name": "react-select",
+  "name": "react-select-plus",
   "main": [
     "dist/react-select.min.js",
     "dist/react-select.min.css"
