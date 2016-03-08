@@ -34,7 +34,7 @@ Then open [`localhost:8000`](http://localhost:8000) in a browser.
 The easiest way to use React-Select is to install it from NPM and include it in your own React build process (using [Browserify](http://browserify.org), etc).
 
 ```javascript
-npm install react-select --save
+npm install react-select-plus --save
 ```
 
 You can also use the standalone build by including `dist/react-select.js` and `dist/react-select.css` in your page. If you use this, make sure you have already included the following dependencies:
