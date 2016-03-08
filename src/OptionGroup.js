@@ -65,7 +65,7 @@ const OptionGroup = React.createClass({
 				onTouchMove={this.handleTouchMove}
 				onTouchEnd={this.handleTouchEnd}
 				title={option.title}>
-				<div className='Select-option-group-label'>
+				<div className="Select-option-group-label">
 					{this.props.label}
 				</div>
 				{this.props.children}

@@ -695,7 +695,7 @@ const Select = React.createClass({
 					(this.props.matchProp !== 'label' && valueTest.indexOf(filterValue) >= 0) ||
 					(this.props.matchProp !== 'value' && labelTest.indexOf(filterValue) >= 0)
 				);
-			}
+			};
 			let filteredOptions = [];
 			options.forEach((option) => {
 				if (this.isGroup(option)) {
