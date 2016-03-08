@@ -7,5 +7,6 @@ module.exports = [
 	{ github: 'julen', name: 'Julen Ruiz Aizpuru' },
 	{ github: 'dcousens', name: 'Daniel Cousens' },
 	{ github: 'jgautsch', name: 'Jon Gautsch' },
-	{ github: 'dmitry-smirnov', name: 'Dmitry Smirnov' },
+  { github: 'dmitry-smirnov', name: 'Dmitry Smirnov' },
+	{ github: 'trevorburnham', name: 'Trevor Burnham' },
 ];

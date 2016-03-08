@@ -267,4 +267,4 @@ Thanks to the projects this was inspired by: [Selectize](http://brianreavis.gith
 
 # License
 
-MIT Licensed. Copyright (c) Jed Watson 2016.
+MIT Licensed. Copyright (c) HubSpot 2016.
