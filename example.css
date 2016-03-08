@@ -1,9 +1,7 @@
 /**
- * React Select
- * ============
- * Created by Jed Watson and Joss Mackison for KeystoneJS, http://www.keystonejs.com/
- * https://twitter.com/jedwatson https://twitter.com/jossmackison https://twitter.com/keystonejs
- * MIT License: https://github.com/keystonejs/react-select
+ * React Select Plus
+ * =================
+ * MIT License: https://github.com/HubSpot/react-select-plus
 */
 .Select {
   position: relative;
@@ -386,7 +384,7 @@ h6,
 }
 h1,
 .h1 {
-  font-size: 3em;
+  font-size: 2.4em;
 }
 h2,
 .h2 {
