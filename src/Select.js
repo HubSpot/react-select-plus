@@ -810,8 +810,7 @@ const Select = React.createClass({
 
 	render () {
 		let valueArray = this.getValueArray();
-		let options = this.filterOptions(this.props.options || [],
-																		 this.props.multi ? valueArray : null);
+		let options = this.filterOptions(this.props.options || [], this.props.multi ? valueArray : null);
 		this._visibleOptions = this.flattenOptions(options);
 		let isOpen = typeof this.props.isOpen === 'boolean' ? this.props.isOpen : this.state.isOpen;
 		if (this.props.multi && !options.length && valueArray.length && !this.state.inputValue) isOpen = false;
