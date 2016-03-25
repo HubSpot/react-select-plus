@@ -1229,6 +1229,7 @@ var Select = _react2['default'].createClass({
 	filterOptions: function filterOptions(options, excludeOptions) {
 		var _this3 = this;
 
+		var excludeOptionValues = null;
 		var filterValue = this.state.inputValue;
 		if (typeof this.props.filterOptions === 'function') {
 			return this.props.filterOptions.call(this, options, filterValue, excludeOptions);
@@ -1240,11 +1241,11 @@ var Select = _react2['default'].createClass({
 				if (_this3.props.ignoreCase) {
 					filterValue = filterValue.toLowerCase();
 				}
-				if (excludeOptions) excludeOptions = excludeOptions.map(function (i) {
+				if (excludeOptions) excludeOptionValues = excludeOptions.map(function (i) {
 					return i[_this3.props.valueKey];
 				});
 				var includeOption = function includeOption(option) {
-					if (excludeOptions && excludeOptions.indexOf(option[_this3.props.valueKey]) > -1) return false;
+					if (excludeOptionValues && excludeOptionValues.indexOf(option[_this3.props.valueKey]) > -1) return false;
 					if (_this3.props.filterOption) return _this3.props.filterOption.call(_this3, option, filterValue);
 					if (!filterValue) return true;
 					var valueTest = String(option[_this3.props.valueKey]);
@@ -1372,10 +1373,14 @@ var Select = _react2['default'].createClass({
 		var _this5 = this;
 
 		if (!this.props.name) return;
-		var value = valueArray.map(function (i) {
-			return stringifyValue(i[_this5.props.valueKey]);
-		}).join(this.props.delimiter);
-		return _react2['default'].createElement('input', { type: 'hidden', ref: 'value', name: this.props.name, value: value, disabled: this.props.disabled });
+		return valueArray.map(function (item, index) {
+			return _react2['default'].createElement('input', { key: 'hidden.' + index,
+				type: 'hidden',
+				ref: 'value' + index,
+				name: _this5.props.name,
+				value: stringifyValue(item[_this5.props.valueKey]),
+				disabled: _this5.props.disabled });
+		});
 	},
 
 	getFocusableOption: function getFocusableOption(selectedOption) {
