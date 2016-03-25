@@ -1554,6 +1554,79 @@ describe('Select', () => {
 
 	});
 
+	describe('with grouped options, multi=true, and searchable=false', () => {
+
+		beforeEach(() => {
+
+			options = [
+				{ label: 'Negative Numbers', options: [
+					{ value: '-2', label: '-2' },
+					{ value: '-1', label: '-1' },
+				] },
+				{ label: 'Positive Numbers', options: [
+					{ value: '1', label: '+1' },
+					{ value: '2', label: '+2' },
+				] }
+			];
+
+			// Render an instance of the component
+			wrapper = createControlWithWrapper({
+				value: '',
+				options: options,
+				searchable: false,
+				multi: true
+			}, {
+				wireUpOnChangeToValue: true
+			});
+
+			// We need a hack here.
+			// JSDOM (at least v3.x) doesn't appear to support div's with tabindex
+			// This just hacks that we are focused
+			// This is (obviously) implementation dependent, and may need to change
+			instance.setState({
+				isFocused: true
+			});
+
+		});
+
+		it('removes the selected options from the menu', () => {
+
+			clickArrowToOpen();
+
+			var items = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-option');
+			var groups = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-option-group-label');
+
+			// Click the option "-1" to select it
+			expect(items[1], 'to have text', '-1');
+			TestUtils.Simulate.mouseDown(items[1]);
+			expect(onChange, 'was called times', 1);
+
+			// Now get the list again
+			items = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-option');
+			groups = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-option-group-label');
+			expect(items[0], 'to have text', '-2');
+			expect(items[1], 'to have text', '+1');
+			expect(items[2], 'to have text', '+2');
+			expect(items, 'to have length', 3);
+			expect(groups[0], 'to have text', 'Negative Numbers');
+			expect(groups[1], 'to have text', 'Positive Numbers');
+			expect(groups, 'to have length', 2);
+
+			// Click the option "-2" to select it
+			TestUtils.Simulate.mouseDown(items[0]);
+
+			expect(onChange, 'was called times', 2);
+			items = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-option');
+			groups = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-option-group-label');
+			expect(items[0], 'to have text', '+1');
+			expect(items[1], 'to have text', '+2');
+			expect(items, 'to have length', 2);
+			expect(groups[0], 'to have text', 'Positive Numbers');
+			expect(groups, 'to have length', 1);
+		});
+
+	});
+
 	describe('with props', () => {
 
 
