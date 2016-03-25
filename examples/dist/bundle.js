@@ -1229,6 +1229,7 @@ var Select = _react2['default'].createClass({
 	filterOptions: function filterOptions(options, excludeOptions) {
 		var _this3 = this;
 
+		var excludeOptionValues = null;
 		var filterValue = this.state.inputValue;
 		if (typeof this.props.filterOptions === 'function') {
 			return this.props.filterOptions.call(this, options, filterValue, excludeOptions);
@@ -1240,11 +1241,11 @@ var Select = _react2['default'].createClass({
 				if (_this3.props.ignoreCase) {
 					filterValue = filterValue.toLowerCase();
 				}
-				if (excludeOptions) excludeOptions = excludeOptions.map(function (i) {
+				if (excludeOptions) excludeOptionValues = excludeOptions.map(function (i) {
 					return i[_this3.props.valueKey];
 				});
 				var includeOption = function includeOption(option) {
-					if (excludeOptions && excludeOptions.indexOf(option[_this3.props.valueKey]) > -1) return false;
+					if (excludeOptionValues && excludeOptionValues.indexOf(option[_this3.props.valueKey]) > -1) return false;
 					if (_this3.props.filterOption) return _this3.props.filterOption.call(_this3, option, filterValue);
 					if (!filterValue) return true;
 					var valueTest = String(option[_this3.props.valueKey]);

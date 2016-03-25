@@ -663,6 +663,7 @@ const Select = React.createClass({
 	},
 
 	filterOptions (options, excludeOptions) {
+		let excludeOptionValues = null;
 		var filterValue = this.state.inputValue;
 		if (typeof this.props.filterOptions === 'function') {
 			return this.props.filterOptions.call(this, options, filterValue, excludeOptions);
@@ -673,9 +674,9 @@ const Select = React.createClass({
 			if (this.props.ignoreCase) {
 				filterValue = filterValue.toLowerCase();
 			}
-			if (excludeOptions) excludeOptions = excludeOptions.map(i => i[this.props.valueKey]);
+			if (excludeOptions) excludeOptionValues = excludeOptions.map(i => i[this.props.valueKey]);
 			const includeOption = (option) => {
-				if (excludeOptions && excludeOptions.indexOf(option[this.props.valueKey]) > -1) return false;
+				if (excludeOptionValues && excludeOptionValues.indexOf(option[this.props.valueKey]) > -1) return false;
 				if (this.props.filterOption) return this.props.filterOption.call(this, option, filterValue);
 				if (!filterValue) return true;
 				var valueTest = String(option[this.props.valueKey]);
