@@ -750,6 +750,54 @@ describe('Select', () => {
 		});
 	});
 
+	describe('with renderInvalidValues=true', () => {
+
+		beforeEach(() => {
+			options = [
+				{ value: 'do', label: 'Do' },
+				{ value: 'do not', label: 'Do Not' }
+			];
+
+			wrapper = createControlWithWrapper({
+				value: 'try',
+				options: options,
+				renderInvalidValues: true
+			});
+		});
+
+		it('renders the given (invalid) value', () => {
+			var node = ReactDOM.findDOMNode(instance);
+			expect(node, 'queried for', DISPLAYED_SELECTION_SELECTOR,
+				'to have items satisfying', 'to have text', 'try');
+		});
+
+	});
+
+	describe('with renderInvalidValues=true and multi=true', () => {
+
+		beforeEach(() => {
+			options = [
+				{ value: 'leo', label: 'Leo' },
+				{ value: 'virgo', label: 'Virgo' }
+			];
+
+			wrapper = createControlWithWrapper({
+				multi: true,
+				value: ['big dipper', 'virgo'],
+				options: options,
+				renderInvalidValues: true
+			});
+		});
+
+		it('renders given invalid values in addition to given valid values', () => {
+			var selectedItems = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-value-label');
+			expect(selectedItems[0], 'to have text', 'big dipper');
+			expect(selectedItems[1], 'to have text', 'Virgo');
+			expect(selectedItems, 'to have length', 2);
+		});
+
+	});
+
 	describe('with grouped options', () => {
 		beforeEach(() => {
 

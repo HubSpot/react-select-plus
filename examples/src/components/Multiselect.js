@@ -24,7 +24,7 @@ var MultiSelectField = React.createClass({
 			disabled: false,
 			crazy: false,
 			options: FLAVOURS,
-			value: [],
+			value: ['Invalid value'],
 		};
 	},
 	handleSelectChange (value) {

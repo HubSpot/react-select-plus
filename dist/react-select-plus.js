@@ -410,6 +410,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var _react = (typeof window !== "undefined" ? window['React'] : typeof global !== "undefined" ? global['React'] : null);
 
 var _react2 = _interopRequireDefault(_react);
@@ -519,6 +521,7 @@ var Select = _react2['default'].createClass({
 		optionRenderer: _react2['default'].PropTypes.func, // optionRenderer: function (option) {}
 		options: _react2['default'].PropTypes.array, // array of options
 		placeholder: stringOrNode, // field placeholder, displayed when there's no value
+		renderInvalidValues: _react2['default'].PropTypes.bool, // boolean to enable rendering values that do not match any options
 		required: _react2['default'].PropTypes.bool, // applies HTML5 required attribute when needed
 		scrollMenuIntoView: _react2['default'].PropTypes.bool, // boolean to enable the viewport to shift so that the full menu fully visible when engaged
 		searchable: _react2['default'].PropTypes.bool, // whether to enable searching feature or not
@@ -561,6 +564,7 @@ var Select = _react2['default'].createClass({
 			optionComponent: _Option2['default'],
 			optionGroupComponent: _OptionGroup2['default'],
 			placeholder: 'Select...',
+			renderInvalidValues: false,
 			required: false,
 			scrollMenuIntoView: true,
 			searchable: true,
@@ -882,12 +886,24 @@ var Select = _react2['default'].createClass({
 
 	expandValue: function expandValue(value) {
 		if (typeof value !== 'string' && typeof value !== 'number') return value;
-		var valueKey = this.props.valueKey;
+		var _props = this.props;
+		var labelKey = _props.labelKey;
+		var valueKey = _props.valueKey;
+		var renderInvalidValues = _props.renderInvalidValues;
 
 		var options = this._flatOptions;
-		if (!options) return;
+		if (!options || value === '') return;
 		for (var i = 0; i < options.length; i++) {
 			if (options[i][valueKey] === value) return options[i];
+		}
+
+		// no matching option, return an invalid option if renderInvalidValues is enabled
+		if (renderInvalidValues) {
+			var _ref;
+
+			return _ref = {
+				invalid: true
+			}, _defineProperty(_ref, labelKey, value), _defineProperty(_ref, valueKey, value), _ref;
 		}
 	},
 
