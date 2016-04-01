@@ -83,6 +83,7 @@ const Select = React.createClass({
 		optionRenderer: React.PropTypes.func,       // optionRenderer: function (option) {}
 		options: React.PropTypes.array,             // array of options
 		placeholder: stringOrNode,                  // field placeholder, displayed when there's no value
+		renderInvalidValues: React.PropTypes.bool,  // boolean to enable rendering values that do not match any options
 		required: React.PropTypes.bool,             // applies HTML5 required attribute when needed
 		scrollMenuIntoView: React.PropTypes.bool,   // boolean to enable the viewport to shift so that the full menu fully visible when engaged
 		searchable: React.PropTypes.bool,           // whether to enable searching feature or not
@@ -125,6 +126,7 @@ const Select = React.createClass({
 			optionComponent: Option,
 			optionGroupComponent: OptionGroup,
 			placeholder: 'Select...',
+			renderInvalidValues: false,
 			required: false,
 			scrollMenuIntoView: true,
 			searchable: true,
@@ -436,11 +438,20 @@ const Select = React.createClass({
 
 	expandValue (value) {
 		if (typeof value !== 'string' && typeof value !== 'number') return value;
-		let { valueKey } = this.props;
+		let { labelKey, valueKey, renderInvalidValues } = this.props;
 		let options = this._flatOptions;
-		if (!options) return;
+		if (!options || value === '') return;
 		for (var i = 0; i < options.length; i++) {
 			if (options[i][valueKey] === value) return options[i];
+		}
+
+		// no matching option, return an invalid option if renderInvalidValues is enabled
+		if (renderInvalidValues) {
+			return {
+				invalid: true,
+				[labelKey]: value,
+				[valueKey]: value
+			};
 		}
 	},
 
