@@ -3,6 +3,7 @@
 
 * added; `menuRenderer` method and example for effeciently rendering thousands of options, thanks [Brian Vaughn](https://github.com/bvaughn)
 * added; `optionClassName` prop, thanks [Max Tyler](https://github.com/iam4x)
+* added; `renderInvalidValues` prop for showing values that do not match options
 
 ## v1.0.0-beta11 / 2016-03-09
 

@@ -291,6 +291,7 @@ Check out the demo site for a more complete example of this.
 	optionRenderer	|	func	|	undefined	|	function which returns a custom way to render the options in the menu
 	options 	|	array	|	undefined	|	array of options
 	placeholder 	|	string\|node	|	'Select ...'	|	field placeholder, displayed when there's no value
+	renderInvalidValues | bool | false | if a `value` does not match any `options`, render it anyway
 	searchable 	|	bool	|	true		|	whether to enable searching feature or not
 	searchingText	|	string	|	'Searching...'	|	message to display whilst options are loading via asyncOptions, or when `isLoading` is true
 	searchPromptText |	string	|	'Type to search'	|	label to prompt for search input
