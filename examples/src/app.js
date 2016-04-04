@@ -10,10 +10,12 @@ import CustomRender from './components/CustomRender';
 import GroupedOptionsField from './components/GroupedOptionsField';
 import Multiselect from './components/Multiselect';
 import NumericSelect from './components/NumericSelect';
+import Cities from './components/Cities';
 import States from './components/States';
 
 ReactDOM.render(
 	<div>
+		<Cities label="Cities" searchable />
 		<States label="States" searchable />
 		<Multiselect label="Multiselect" />
 		<Contributors label="Contributors (Async)" />

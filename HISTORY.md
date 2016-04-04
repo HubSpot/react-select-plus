@@ -1,4 +1,9 @@
 
+## v1.0.0-beta12 / 2016-04-02
+
+* added; `menuRenderer` method and example for effeciently rendering thousands of options, thanks [Brian Vaughn](https://github.com/bvaughn)
+* added; `optionClassName` prop, thanks [Max Tyler](https://github.com/iam4x)
+
 ## v1.0.0-beta11 / 2016-03-09
 
 * updated dependencies to allow use with React 15.x
