@@ -1493,7 +1493,7 @@ var Value = _react2['default'].createClass({
 				onTouchEnd: this.handleTouchEndRemove,
 				onTouchStart: this.handleTouchStart,
 				onTouchMove: this.handleTouchMove },
-			'×'
+			String.fromCharCode(215)
 		);
 	},
 
