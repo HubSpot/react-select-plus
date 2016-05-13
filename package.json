@@ -3,7 +3,7 @@
   "version": "1.0.0-beta12",
   "description": "A Select control built with and for ReactJS",
   "main": "lib/Select.js",
-  "style": "dist/react-select.min.css",
+  "style": "dist/react-select-plus.min.css",
   "author": "HubSpot",
   "license": "MIT",
   "repository": {
