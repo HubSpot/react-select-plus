@@ -15,6 +15,7 @@
 * fixed; issue with value object not being passed to `handleRequired`, thanks [Andrew Hite](https://github.com/andyhite)
 * fixed; the menu-outer container is no longer rendered when it does not contain anything, thanks [Kuan](https://github.com/khankuan)
 * improved; better support for IE8 in styles, thanks [Rockallite Wulf](https://github.com/rockallite)
+* fixed; when opening the menu, scroll to the top of the group containing the focused option rather than to the option itself, thanks [mattics](https://github.com/mattics)
 
 ## v1.0.0-beta12 / 2016-04-02
 
