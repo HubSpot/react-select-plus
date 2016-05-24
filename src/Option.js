@@ -12,8 +12,14 @@ const Option = React.createClass({
 		onSelect: React.PropTypes.func,                // method to handle click on option element
 		onUnfocus: React.PropTypes.func,               // method to handle mouseLeave on option element
 		option: React.PropTypes.object.isRequired,     // object that is base for that option
+		showCheckedIcon: React.PropTypes.bool          // show/hide cheched icon (used for multuple options select)
 	},
-	blockEvent (event) {
+    getInitialState: function() {
+        return {
+            isChecked: this.props.isSelected
+        };
+    },
+    blockEvent (event) {
 		event.preventDefault();
 		event.stopPropagation();
 		if ((event.target.tagName !== 'A') || !('href' in event.target)) {
@@ -30,6 +36,9 @@ const Option = React.createClass({
 		event.preventDefault();
 		event.stopPropagation();
 		this.props.onSelect(this.props.option, event);
+        this.setState({
+            isChecked: !this.state.isChecked
+        });
 	},
 
 	handleMouseEnter (event) {

@@ -95,7 +95,8 @@ const Select = React.createClass({
 		resetValue: React.PropTypes.any,            // value to use when you clear the control
 		scrollMenuIntoView: React.PropTypes.bool,   // boolean to enable the viewport to shift so that the full menu fully visible when engaged
 		searchable: React.PropTypes.bool,           // whether to enable searching feature or not
-		simpleValue: React.PropTypes.bool,          // pass the value to onChange as a simple value (legacy pre 1.0 mode), defaults to false
+		showAllOptions: React.PropTypes.bool,       // always show all options for multiple dropdown
+		simpleValue: React.PropTypes.bool,          // pass the value to onChange as a simple value (legacy pre 1.0 mode), defaults to false,
 		style: React.PropTypes.object,              // optional style to apply to the control
 		tabIndex: React.PropTypes.string,           // optional tab index of the control
 		tabSelectsValue: React.PropTypes.bool,      // whether to treat tabbing out while focused to be value selection
@@ -143,6 +144,7 @@ const Select = React.createClass({
 			resetValue: null,
 			scrollMenuIntoView: true,
 			searchable: true,
+			showAllOptions: false,
 			simpleValue: false,
 			tabSelectsValue: true,
 			valueComponent: Value,
@@ -202,19 +204,19 @@ const Select = React.createClass({
 
 	componentDidUpdate (prevProps, prevState) {
 		// focus to the selected option
-		if (this.refs.menu && this.refs.focused && this.state.isOpen && !this.hasScrolledToOption) {
+		let multiScrollDisable = this.props.multi && this.props.showAllOptions;
+		if (this.refs.menu && this.refs.focused && this.state.isOpen && !this.hasScrolledToOption && !multiScrollDisable) {
 			let focusedOptionNode = ReactDOM.findDOMNode(this.refs.focused);
-      let focusedOptionParent = focusedOptionNode.parentElement;
+	        let focusedOptionParent = focusedOptionNode.parentElement;
 			let menuNode = ReactDOM.findDOMNode(this.refs.menu);
-			menuNode.scrollTop = focusedOptionParent.className === 'Select-menu' ?
-        focusedOptionNode.offsetTop :
+			menuNode.scrollTop = focusedOptionParent.className === 'Select-menu' ? focusedOptionNode.offsetTop :
         focusedOptionParent.offsetTop;
 			this.hasScrolledToOption = true;
 		} else if (!this.state.isOpen) {
 			this.hasScrolledToOption = false;
 		}
 
-		if (this._scrollToFocusedOptionOnUpdate && this.refs.focused && this.refs.menu) {
+		if (this._scrollToFocusedOptionOnUpdate && this.refs.focused && this.refs.menu && !multiScrollDisable) {
 			this._scrollToFocusedOptionOnUpdate = false;
 			var focusedDOM = ReactDOM.findDOMNode(this.refs.focused);
 			var menuDOM = ReactDOM.findDOMNode(this.refs.menu);
@@ -224,7 +226,7 @@ const Select = React.createClass({
 				menuDOM.scrollTop = (focusedDOM.offsetTop + focusedDOM.clientHeight - menuDOM.offsetHeight);
 			}
 		}
-		if (this.props.scrollMenuIntoView && this.refs.menuContainer) {
+		if (this.props.scrollMenuIntoView && this.refs.menuContainer && !multiScrollDisable) {
 			var menuContainerRect = this.refs.menuContainer.getBoundingClientRect();
 			if (window.innerHeight < menuContainerRect.bottom + this.props.menuBuffer) {
 				window.scrollBy(0, menuContainerRect.bottom + this.props.menuBuffer - window.innerHeight);
@@ -451,7 +453,7 @@ const Select = React.createClass({
 	},
 
 	handleMenuScroll (event) {
-		if (!this.props.onMenuScrollToBottom) return;
+		if (!this.props.onMenuScrollToBottom || (this.props.multi && this.props.showAllOptions)) return;
 		let { target } = event;
 		if (target.scrollHeight > target.offsetHeight && !(target.scrollHeight - target.offsetHeight - target.scrollTop)) {
 			this.props.onMenuScrollToBottom();
@@ -517,7 +519,16 @@ const Select = React.createClass({
 	selectValue (value) {
 		this.hasScrolledToOption = false;
 		if (this.props.multi) {
-			this.addValue(value);
+			if (this.props.showAllOptions) {
+				let values = this.getValueArray(this.props.value);
+				if (values.indexOf(value) > -1) {
+					this.removeValue(value);
+				} else {
+					this.addValue(value);
+				}
+			} else {
+				this.addValue(value);
+			}
 			this.setState({
 				inputValue: '',
 			});
@@ -861,6 +872,7 @@ const Select = React.createClass({
 								option={option}
 								isSelected={isSelected}
 								ref={optionRef}
+								showCheckedIcon={this.props.multi && this.props.showAllOptions}
 								>
 								{renderLabel(option)}
 							</Option>
@@ -934,8 +946,13 @@ const Select = React.createClass({
 	},
 
 	render () {
-    let valueArray = this.getValueArray(this.props.value);
-		let options = this.filterOptions(this.props.options || [], this.props.multi ? valueArray : null);
+	    let valueArray = this.getValueArray(this.props.value);
+	    let excludeOptions = this.props.multi ? valueArray : null;
+	    if (this.props.multi && this.props.showAllOptions) {
+            excludeOptions = null;
+	    }
+
+		let options = this.filterOptions(this.props.options || [], excludeOptions);
 		this._visibleOptions = this.flattenOptions(options);
 		let isOpen = typeof this.props.isOpen === 'boolean' ? this.props.isOpen : this.state.isOpen;
 		if (this.props.multi && !options.length && valueArray.length && !this.state.inputValue) isOpen = false;
@@ -951,6 +968,11 @@ const Select = React.createClass({
 			'is-searchable': this.props.searchable,
 			'has-value': valueArray.length,
 		});
+
+		let outerValueArray = !this.props.multi ? valueArray : null;
+		if (this.props.multi && this.props.showAllOptions) {
+			outerValueArray = valueArray;
+		}
 
 		return (
 			<div ref="wrapper" className={className} style={this.props.wrapperStyle}>
@@ -969,7 +991,7 @@ const Select = React.createClass({
 					{this.renderClear()}
 					{this.renderArrow()}
 				</div>
-				{isOpen ? this.renderOuter(options, !this.props.multi ? valueArray : null, focusedOption) : null}
+				{isOpen ? this.renderOuter(options, outerValueArray, focusedOption) : null}
 			</div>
 		);
 	}
