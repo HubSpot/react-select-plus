@@ -7,6 +7,9 @@ const OptionGroup = React.createClass({
 		className: React.PropTypes.string,             // className (based on mouse position)
 		label: React.PropTypes.node,                   // the heading to show above the child options
 		option: React.PropTypes.object.isRequired,     // object that is base for that option group
+		isFocused: React.PropTypes.bool,               // the option is focused
+		onFocus: React.PropTypes.func,                 // method to handle mouseEnter on option element
+		selectGroup: React.PropTypes.bool,         //  if is true you can select the elements of the group
 	},
 
 	blockEvent (event) {
@@ -23,8 +26,20 @@ const OptionGroup = React.createClass({
 	},
 
 	handleMouseDown (event) {
+		const { selectGroup } = this.props;
 		event.preventDefault();
 		event.stopPropagation();
+		if (selectGroup) this.props.onSelect(this.props.option, event);
+	},
+
+	handleMouseEnter (event) {
+		const { selectGroup } = this.props;
+		if (selectGroup) this.onFocus(event);
+	},
+
+	handleMouseMove (event) {
+		const { selectGroup } = this.props;
+		if (selectGroup) this.onFocus(event);
 	},
 
 	handleTouchEnd(event){
@@ -45,10 +60,17 @@ const OptionGroup = React.createClass({
 		this.dragging = false;
 	},
 
+	onFocus (event) {
+		if (!this.props.isFocused) {
+			this.props.onFocus(this.props.option, event);
+		}
+	},
+	
 	render () {
-		var { option } = this.props;
+		var { option, selectGroup } = this.props;
 		var className = classNames(this.props.className, option.className);
-
+		var classNameselectGroup = selectGroup ? 'Select-option-group-label select-parent' : 
+																'Select-option-group-label';
 		return option.disabled ? (
 			<div className={className}
 				onMouseDown={this.blockEvent}
@@ -65,7 +87,7 @@ const OptionGroup = React.createClass({
 				onTouchMove={this.handleTouchMove}
 				onTouchEnd={this.handleTouchEnd}
 				title={option.title}>
-				<div className="Select-option-group-label">
+				<div className={classNameselectGroup}>
 					{this.props.label}
 				</div>
 				{this.props.children}
