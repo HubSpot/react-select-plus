@@ -332,9 +332,12 @@ var OptionGroup = _react2['default'].createClass({
 		children: _react2['default'].PropTypes.any,
 		className: _react2['default'].PropTypes.string, // className (based on mouse position)
 		label: _react2['default'].PropTypes.node, // the heading to show above the child options
-		option: _react2['default'].PropTypes.object.isRequired },
+		option: _react2['default'].PropTypes.object.isRequired, // object that is base for that option group
+		isFocused: _react2['default'].PropTypes.bool, // the option is focused
+		onFocus: _react2['default'].PropTypes.func, // method to handle mouseEnter on option element
+		selectGroup: _react2['default'].PropTypes.bool },
 
-	// object that is base for that option group
+	//  if is true you can select the elements of the group
 	blockEvent: function blockEvent(event) {
 		event.preventDefault();
 		event.stopPropagation();
@@ -349,8 +352,23 @@ var OptionGroup = _react2['default'].createClass({
 	},
 
 	handleMouseDown: function handleMouseDown(event) {
+		var selectGroup = this.props.selectGroup;
+
 		event.preventDefault();
 		event.stopPropagation();
+		if (selectGroup) this.props.onSelect(this.props.option, event);
+	},
+
+	handleMouseEnter: function handleMouseEnter(event) {
+		var selectGroup = this.props.selectGroup;
+
+		if (selectGroup) this.onFocus(event);
+	},
+
+	handleMouseMove: function handleMouseMove(event) {
+		var selectGroup = this.props.selectGroup;
+
+		if (selectGroup) this.onFocus(event);
 	},
 
 	handleTouchEnd: function handleTouchEnd(event) {
@@ -371,11 +389,19 @@ var OptionGroup = _react2['default'].createClass({
 		this.dragging = false;
 	},
 
+	onFocus: function onFocus(event) {
+		if (!this.props.isFocused) {
+			this.props.onFocus(this.props.option, event);
+		}
+	},
+
 	render: function render() {
-		var option = this.props.option;
+		var _props = this.props;
+		var option = _props.option;
+		var selectGroup = _props.selectGroup;
 
 		var className = (0, _classnames2['default'])(this.props.className, option.className);
-
+		var classNameselectGroup = selectGroup ? 'Select-option-group-label select-parent' : 'Select-option-group-label';
 		return option.disabled ? _react2['default'].createElement(
 			'div',
 			{ className: className,
@@ -395,7 +421,7 @@ var OptionGroup = _react2['default'].createClass({
 				title: option.title },
 			_react2['default'].createElement(
 				'div',
-				{ className: 'Select-option-group-label' },
+				{ className: classNameselectGroup },
 				this.props.label
 			),
 			this.props.children
@@ -549,9 +575,10 @@ var Select = _react2['default'].createClass({
 		valueComponent: _react2['default'].PropTypes.func, // value component to render
 		valueKey: _react2['default'].PropTypes.string, // path of the label value in option objects
 		valueRenderer: _react2['default'].PropTypes.func, // valueRenderer: function (option) {}
-		wrapperStyle: _react2['default'].PropTypes.object },
+		wrapperStyle: _react2['default'].PropTypes.object, // optional style to apply to the component wrapper
+		selectGroup: _react2['default'].PropTypes.bool },
 
-	// optional style to apply to the component wrapper
+	// opcional permite seleccionar los grupos
 	statics: { Async: _Async2['default'] },
 
 	getDefaultProps: function getDefaultProps() {
@@ -592,7 +619,8 @@ var Select = _react2['default'].createClass({
 			simpleValue: false,
 			tabSelectsValue: true,
 			valueComponent: _Value2['default'],
-			valueKey: 'value'
+			valueKey: 'value',
+			selectGroup: false
 		};
 	},
 
@@ -993,9 +1021,22 @@ var Select = _react2['default'].createClass({
 		}
 	},
 
+	generateValues: function generateValues(ary) {
+		var ret = [];
+		for (var i = 0; i < ary.length; i++) {
+			if (Array.isArray(ary[i].options)) {
+				ret = ret.concat(this.generateValues(ary[i].options));
+			} else {
+				ret.push(ary[i]);
+			}
+		}
+		return ret;
+	},
+
 	addValue: function addValue(value) {
+		var values = !Array.isArray(value.options) ? this.generateValues([value]) : this.generateValues(value.options);
 		var valueArray = this.getValueArray(this.props.value);
-		this.setValue(valueArray.concat(value));
+		this.setValue(valueArray.concat(values));
 	},
 
 	popValue: function popValue() {
@@ -1031,6 +1072,12 @@ var Select = _react2['default'].createClass({
 	focusOption: function focusOption(option) {
 		this.setState({
 			focusedOption: option
+		});
+	},
+
+	focusGroup: function focusGroup(group) {
+		this.setState({
+			focusedGroup: group
 		});
 	},
 
@@ -1276,14 +1323,16 @@ var Select = _react2['default'].createClass({
 		return flatOptions;
 	},
 
-	renderMenu: function renderMenu(options, valueArray, focusedOption) {
+	renderMenu: function renderMenu(options, valueArray, focusedOption, focusedGroup) {
 		var _this4 = this;
 
 		if (options && options.length) {
 			if (this.props.menuRenderer) {
 				return this.props.menuRenderer({
 					focusedOption: focusedOption,
+					focusedGroup: focusedGroup,
 					focusOption: this.focusOption,
+					focusGroup: this.focusGroup,
 					labelKey: this.props.labelKey,
 					options: options,
 					selectValue: this.selectValue,
@@ -1294,6 +1343,7 @@ var Select = _react2['default'].createClass({
 					var OptionGroup = _this4.props.optionGroupComponent;
 					var Option = _this4.props.optionComponent;
 					var renderLabel = _this4.props.optionRenderer || _this4.getOptionLabel;
+					var selectGroup = _this4.props.selectGroup;
 
 					return {
 						v: options.map(function (option, i) {
@@ -1301,16 +1351,23 @@ var Select = _react2['default'].createClass({
 								var optionGroupClass = (0, _classnames2['default'])({
 									'Select-option-group': true
 								});
+								var isFocused = option === focusedGroup;
+								var groupRef = isFocused ? 'focused' : null;
 
 								return _react2['default'].createElement(
 									OptionGroup,
 									{
 										className: optionGroupClass,
+										isFocused: isFocused,
 										key: 'option-group-' + i,
 										label: renderLabel(option),
-										option: option
+										option: option,
+										onSelect: _this4.selectValue,
+										onFocus: _this4.focusGroup,
+										ref: groupRef,
+										selectGroup: selectGroup
 									},
-									_this4.renderMenu(option.options, valueArray, focusedOption)
+									_this4.renderMenu(option.options, valueArray, focusedOption, focusedGroup)
 								);
 							} else {
 								var isSelected = valueArray && valueArray.indexOf(option) > -1;
@@ -1434,7 +1491,6 @@ var Select = _react2['default'].createClass({
 			'is-searchable': this.props.searchable,
 			'has-value': valueArray.length
 		});
-
 		return _react2['default'].createElement(
 			'div',
 			{ ref: 'wrapper', className: className, style: this.props.wrapperStyle },
