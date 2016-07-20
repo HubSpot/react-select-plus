@@ -53,7 +53,7 @@ const Async = React.createClass({
 		noResultsText: stringOrNode,                    // placeholder displayed when there are no matching search results (shared with Select)
 		onInputChange: React.PropTypes.func,            // onInputChange handler: function (inputValue) {}
 		placeholder: stringOrNode,                      // field placeholder, displayed when there's no value (shared with Select)
-		searchPromptText: React.PropTypes.string,       // label to prompt for search input
+		searchPromptText: stringOrNode,       // label to prompt for search input
 		searchingText: React.PropTypes.string,          // message to display while options are loading
 	},
 	getDefaultProps () {
@@ -120,6 +120,7 @@ const Async = React.createClass({
 		}
 		if (this.props.ignoreAccents) input = stripDiacritics(input);
 		if (this.props.ignoreCase) input = input.toLowerCase();
+
 		this._lastInput = input;
 		if (input.length < this.props.minimumInput) {
 			return this.resetState();
@@ -134,16 +135,20 @@ const Async = React.createClass({
 			isLoading: true,
 		});
 		let responseHandler = this.getResponseHandler(input);
-		return thenPromise(this.props.loadOptions(input, responseHandler), responseHandler);
+		let inputPromise = thenPromise(this.props.loadOptions(input, responseHandler), responseHandler);
+		return inputPromise ? inputPromise.then(() => {
+			return input;
+		}) : input;
 	},
 	render () {
 		let { noResultsText } = this.props;
 		let { isLoading, options } = this.state;
 		if (this.props.isLoading) isLoading = true;
 		let placeholder = isLoading ? this.props.loadingPlaceholder : this.props.placeholder;
-		if (!options.length) {
-			if (this._lastInput.length < this.props.minimumInput) noResultsText = this.props.searchPromptText;
-			if (isLoading) noResultsText = this.props.searchingText;
+		if (isLoading) {
+			noResultsText = this.props.searchingText;
+		} else if (!options.length && this._lastInput.length < this.props.minimumInput) {
+			noResultsText = this.props.searchPromptText;
 		}
 		return (
 			<Select

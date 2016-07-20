@@ -8,10 +8,12 @@ var sinon = require('sinon');
 var unexpected = require('unexpected');
 var unexpectedDom = require('unexpected-dom');
 var unexpectedSinon = require('unexpected-sinon');
+var unexpectedReact = require('unexpected-react');
 var expect = unexpected
 	.clone()
 	.installPlugin(unexpectedDom)
 	.installPlugin(unexpectedSinon)
+	.installPlugin(unexpectedReact)
 	.installPlugin(require('../testHelpers/nodeListType'));
 
 jsdomHelper();
@@ -21,11 +23,16 @@ var ReactDOM = require('react-dom');
 var TestUtils = require('react-addons-test-utils');
 
 var Select = require('../src/Select');
+var Value = require('../src/Value');
 
 // The displayed text of the currently selected item, when items collapsed
 var DISPLAYED_SELECTION_SELECTOR = '.Select-value';
 var FORM_VALUE_SELECTOR = '.Select > input';
 var PLACEHOLDER_SELECTOR = '.Select-placeholder';
+
+var ARROW_UP = { keyCode: 38, key: 'ArrowUp' };
+var ARROW_DOWN = { keyCode: 40, key: 'ArrowDown' };
+var KEY_ENTER = { keyCode: 13, key: 'Enter' };
 
 class PropsWrapper extends React.Component {
 
@@ -83,6 +90,22 @@ describe('Select', () => {
 
 	var pressDown = () => {
 		TestUtils.Simulate.keyDown(getSelectControl(instance), { keyCode: 40, key: 'ArrowDown' });
+	};
+
+	var pressPageUp = () => {
+		TestUtils.Simulate.keyDown(getSelectControl(instance), { keyCode: 33, key: 'PageUp' });
+	};
+
+	var pressPageDown = () => {
+		TestUtils.Simulate.keyDown(getSelectControl(instance), { keyCode: 34, key: 'PageDown' });
+	};
+
+	var pressEndDown = () => {
+		TestUtils.Simulate.keyDown(getSelectControl(instance), { keyCode: 35, key: 'End' });
+	};
+
+	var pressHomeDown = () => {
+		TestUtils.Simulate.keyDown(getSelectControl(instance), { keyCode: 36, key: 'Home' });
 	};
 
 	var typeSearchText = (text) => {
@@ -164,6 +187,19 @@ describe('Select', () => {
 		{ value: 'two', label: '222' },
 		{ value: 'three', label: 'Three' },
 		{ value: 'four', label: 'AbcDef' }
+	];
+
+	var longerListOptions = [
+		{ value: 'one', label: 'One' },
+		{ value: 'two', label: 'Two' },
+		{ value: 'three', label: 'Three' },
+		{ value: 'four', label: 'Four' },
+		{ value: 'five', label: 'Five' },
+		{ value: 'six', label: 'Six' },
+		{ value: 'seven', label: 'Seven' },
+		{ value: 'eight', label: 'Eight' },
+		{ value: 'nine', label: 'Nine' },
+		{ value: 'ten', label: 'ten' }
 	];
 
 	describe('with simple options', () => {
@@ -331,6 +367,117 @@ describe('Select', () => {
 				'to have items satisfying',
 				'to have text', 'Two');
 		});
+
+		it('should move the focused value to the end when pressing end', () => {
+			var selectControl = getSelectControl(instance);
+			TestUtils.Simulate.mouseDown(selectControl);
+			TestUtils.Simulate.keyDown(selectControl, { keyCode: 35, key: 'End' });
+			expect(ReactDOM.findDOMNode(instance), 'queried for', '.Select-option.is-focused',
+				'to have items satisfying',
+				'to have text', 'Three');
+		});
+
+		it('should move the focused value to the beginning when pressing home', () => {
+			var selectControl = getSelectControl(instance);
+			TestUtils.Simulate.mouseDown(selectControl);
+			TestUtils.Simulate.keyDown(selectControl, { keyCode: 35, key: 'End' });
+			TestUtils.Simulate.keyDown(selectControl, { keyCode: 36, key: 'Home' });
+			expect(ReactDOM.findDOMNode(instance), 'queried for', '.Select-option.is-focused',
+				'to have items satisfying',
+				'to have text', 'One');
+		});
+
+		it('should move the focused value to the end if page down is pressed and number of items is less than page size', () => {
+			var selectControl = getSelectControl(instance);
+			TestUtils.Simulate.mouseDown(selectControl);
+			TestUtils.Simulate.keyDown(selectControl, { keyCode: 34, key: 'PageDown' });
+			expect(ReactDOM.findDOMNode(instance), 'queried for', '.Select-option.is-focused',
+				'to have items satisfying',
+				'to have text', 'Three');
+		});
+
+		it('should move the focused value down by page size on page down using default page size', () => {
+
+			var longerListInstance = createControl({
+				name: 'form-field-name',
+				value: 'one',
+				options: longerListOptions,
+				simpleValue: true,
+			});
+
+			var selectControl = getSelectControl(longerListInstance);
+			TestUtils.Simulate.mouseDown(selectControl);
+			TestUtils.Simulate.keyDown(selectControl, { keyCode: 34, key: 'PageDown' });
+			expect(ReactDOM.findDOMNode(longerListInstance), 'queried for', '.Select-option.is-focused',
+				'to have items satisfying',
+				'to have text', 'Six');
+		});
+
+		it('should move the focused value down by page size on page down using custom page size', () => {
+
+			var longerListInstance = createControl({
+				name: 'form-field-name',
+				value: 'one',
+				options: longerListOptions,
+				simpleValue: true,
+				pageSize: 7
+			});
+
+			var selectControl = getSelectControl(longerListInstance);
+			TestUtils.Simulate.mouseDown(selectControl);
+			TestUtils.Simulate.keyDown(selectControl, { keyCode: 34, key: 'PageDown' });
+			expect(ReactDOM.findDOMNode(longerListInstance), 'queried for', '.Select-option.is-focused',
+				'to have items satisfying',
+				'to have text', 'Eight');
+		});
+
+		it('should move the focused value to the start if page up is pressed and number of items is less than page size', () => {
+			var selectControl = getSelectControl(instance);
+			TestUtils.Simulate.mouseDown(selectControl);
+			TestUtils.Simulate.keyDown(selectControl, { keyCode: 34, key: 'PageDown' });
+			TestUtils.Simulate.keyDown(selectControl, { keyCode: 33, key: 'PageUp' });
+			expect(ReactDOM.findDOMNode(instance), 'queried for', '.Select-option.is-focused',
+				'to have items satisfying',
+				'to have text', 'One');
+		});
+
+		it('should move the focused value up by page size on page up using default page size', () => {
+
+			var longerListInstance = createControl({
+				name: 'form-field-name',
+				value: 'one',
+				options: longerListOptions,
+				simpleValue: true,
+			});
+
+			var selectControl = getSelectControl(longerListInstance);
+			TestUtils.Simulate.mouseDown(selectControl);
+			TestUtils.Simulate.keyDown(selectControl, { keyCode: 35, key: 'End' });
+			TestUtils.Simulate.keyDown(selectControl, { keyCode: 33, key: 'PageUp' });
+			expect(ReactDOM.findDOMNode(longerListInstance), 'queried for', '.Select-option.is-focused',
+				'to have items satisfying',
+				'to have text', 'Five');
+		});
+
+		it('should move the focused value up by page size on page up using custom page size', () => {
+
+			var longerListInstance = createControl({
+				name: 'form-field-name',
+				value: 'one',
+				options: longerListOptions,
+				simpleValue: true,
+				pageSize: 7
+			});
+
+			var selectControl = getSelectControl(longerListInstance);
+			TestUtils.Simulate.mouseDown(selectControl);
+			TestUtils.Simulate.keyDown(selectControl, { keyCode: 35, key: 'End' });
+			TestUtils.Simulate.keyDown(selectControl, { keyCode: 33, key: 'PageUp' });
+			expect(ReactDOM.findDOMNode(longerListInstance), 'queried for', '.Select-option.is-focused',
+				'to have items satisfying',
+				'to have text', 'Three');
+		});
+
 
 		it('should clear the selection on escape', () => {
 			var selectControl = getSelectControl(instance);
@@ -518,11 +665,11 @@ describe('Select', () => {
 
 			it('selects the initial value', () => {
 
-				expect(ReactDOM.findDOMNode(instance), 'queried for', '.Select-value .Select-value-label',
-					'to satisfy', [
-						expect.it('to have text', 'Two'),
-						expect.it('to have text', 'One')
-					]);
+				expect(instance, 'to contain',
+					<span className="Select-multi-value-wrapper">
+                        <div><span className="Select-value-label">Two</span></div>
+                        <div><span className="Select-value-label">One</span></div>
+					</span>);
 			});
 
 			it('calls onChange with the correct value when 1 option is selected', () => {
@@ -538,11 +685,11 @@ describe('Select', () => {
 					value: [3, 4]
 				});
 
-				expect(ReactDOM.findDOMNode(instance), 'queried for', '.Select-value .Select-value-label',
-					'to satisfy', [
-						expect.it('to have text', 'Three'),
-						expect.it('to have text', 'Four')
-					]);
+				expect(instance, 'to contain',
+					<span className="Select-multi-value-wrapper">
+                        <div><span className="Select-value-label">Three</span></div>
+                        <div><span className="Select-value-label">Four</span></div>
+					</span>);
 			});
 
 			it('supports updating the value to a single value', () => {
@@ -551,10 +698,10 @@ describe('Select', () => {
 					value: 1
 				});
 
-				expect(ReactDOM.findDOMNode(instance), 'queried for', '.Select-value .Select-value-label',
-					'to satisfy', [
-						expect.it('to have text', 'One')
-					]);
+				expect(instance, 'to contain',
+					<span className="Select-multi-value-wrapper">
+                        <div><span className="Select-value-label">One</span></div>
+					</span>);
 			});
 
 			it('supports updating the value to single value of 0', () => {
@@ -564,10 +711,10 @@ describe('Select', () => {
 					value: 0
 				});
 
-				expect(ReactDOM.findDOMNode(instance), 'queried for', '.Select-value .Select-value-label',
-					'to satisfy', [
-						expect.it('to have text', 'Zero')
-					]);
+				expect(instance, 'to contain',
+					<span className="Select-multi-value-wrapper">
+                        <div><span className="Select-value-label">Zero</span></div>
+					</span>);
 			});
 
 			it('calls onChange with the correct values when multiple options are selected', () => {
@@ -843,10 +990,11 @@ describe('Select', () => {
 		});
 
 		it('renders given invalid values in addition to given valid values', () => {
-			var selectedItems = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-value-label');
-			expect(selectedItems[0], 'to have text', 'big dipper');
-			expect(selectedItems[1], 'to have text', 'Virgo');
-			expect(selectedItems, 'to have length', 2);
+			expect(instance, 'to contain',
+				<span className="Select-multi-value-wrapper">
+											<div><span className="Select-value-label">big dipper</span></div>
+											<div><span className="Select-value-label">Virgo</span></div>
+				</span>);
 		});
 
 	});
@@ -1416,10 +1564,11 @@ describe('Select', () => {
 			it('displays both selected options', () => {
 
 				setValueProp([options[3], options[2]]);
-				expect(ReactDOM.findDOMNode(instance).querySelectorAll('.Select-value-label')[0],
-					'to have text', 'Four');
-				expect(ReactDOM.findDOMNode(instance).querySelectorAll('.Select-value-label')[1],
-					'to have text', 'Three');
+				expect(instance, 'to contain',
+					<span className="Select-multi-value-wrapper">
+                        <div><span className="Select-value-label">Four</span></div>
+                        <div><span className="Select-value-label">Three</span></div>
+					</span>);
 			});
 		});
 
@@ -1439,10 +1588,11 @@ describe('Select', () => {
 			it('displays both selected options', () => {
 
 				setValueProp(['four', 'three']);
-				expect(ReactDOM.findDOMNode(instance).querySelectorAll('.Select-value-label')[0],
-					'to have text', 'Four');
-				expect(ReactDOM.findDOMNode(instance).querySelectorAll('.Select-value-label')[1],
-					'to have text', 'Three');
+				expect(instance, 'to contain',
+					<span className="Select-multi-value-wrapper">
+                        <div><span className="Select-value-label">Four</span></div>
+                        <div><span className="Select-value-label">Three</span></div>
+					</span>);
 			});
 		});
 
@@ -1478,9 +1628,11 @@ describe('Select', () => {
 
 			pressBackspace();
 			expect(onChange, 'was not called');
-			var items = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-value-label');
-			expect(items[0], 'to have text', 'Four');
-			expect(items[1], 'to have text', 'Three');
+			expect(instance, 'to contain',
+				<span className="Select-multi-value-wrapper">
+                    <div><span className="Select-value-label">Four</span></div>
+                    <div><span className="Select-value-label">Three</span></div>
+                </span>);
 		});
 
 		it('removes an item when clicking on the X', () => {
@@ -1514,10 +1666,11 @@ describe('Select', () => {
 
 			pressBackspace();
 			expect(onChange, 'was not called');
-			var items = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-value-label');
-			expect(items[0], 'to have text', 'Four');
-			expect(items[1], 'to have text', 'Two');
-
+			expect(instance, 'to contain',
+				<span className="Select-multi-value-wrapper">
+                    <div><span className="Select-value-label">Four</span></div>
+                    <div><span className="Select-value-label">Two</span></div>
+                </span>);
 		});
 
 		describe('with late options', () => {
@@ -1541,15 +1694,12 @@ describe('Select', () => {
 					]
 				});
 
-				var items = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-value');
 
-				expect(items[0], 'queried for', '.Select-value-label',
-					'to have items satisfying',
-					'to have text', 'new label for One');
-
-				expect(items[1], 'queried for', '.Select-value-label',
-					'to have items satisfying',
-					'to have text', 'new label for Two');
+				expect(instance, 'to contain',
+					<span className="Select-multi-value-wrapper">
+                        <div><span className="Select-value-label">new label for One</span></div>
+                        <div><span className="Select-value-label">new label for Two</span></div>
+					</span>);
 			});
 		});
 
@@ -1590,15 +1740,14 @@ describe('Select', () => {
 
 			clickArrowToOpen();
 
-			var items = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-option');
-			TestUtils.Simulate.mouseDown(items[1]);
-			items = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-option');
-			TestUtils.Simulate.mouseDown(items[0]);
-
-			var selectedItems = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-value-label');
-			expect(selectedItems[0], 'to have text', 'Two');
-			expect(selectedItems[1], 'to have text', 'One');
-			expect(selectedItems, 'to have length', 2);
+			expect(instance,
+				'with event mouseDown', 'on', <div className="Select-option">Two</div>,
+				'with event mouseDown', 'on', <div className="Select-option">One</div>,
+				'to contain',
+				<span className="Select-multi-value-wrapper">
+					<div><span className="Select-value-label">Two</span></div>
+					<div><span className="Select-value-label">One</span></div>
+				</span>);
 		});
 
 		it('calls onChange when each option is selected', () => {
@@ -2003,13 +2152,9 @@ describe('Select', () => {
 
 				it('interprets the initial options correctly', () => {
 
-					var values = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-value');
-
-					expect(values[0], 'queried for', '.Select-value-label', 'to have items satisfying',
-						'to have text', 'AbcDef');
-					expect(values[1], 'queried for', '.Select-value-label', 'to have items satisfying',
-						'to have text', 'Three');
-					expect(values, 'to have length', 2);
+					expect(instance, 'to contain', <span className="Select-value-label">AbcDef</span>);
+					expect(instance, 'to contain', <span className="Select-value-label">Three</span>);
+					expect(ReactDOM.findDOMNode(instance), 'queried for', '.Select-value-label', 'to have length', 2);
 				});
 
 				it('adds an additional option with the correct delimiter', () => {
@@ -2037,13 +2182,9 @@ describe('Select', () => {
 
 				it('interprets the initial options correctly', () => {
 
-					var values = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-value');
-
-					expect(values[0], 'queried for', '.Select-value-label', 'to have items satisfying',
-						'to have text', 'AbcDef');
-					expect(values[1], 'queried for', '.Select-value-label', 'to have items satisfying',
-						'to have text', 'Three');
-					expect(values, 'to have length', 2);
+					expect(instance, 'to contain', <span className="Select-value-label">AbcDef</span>);
+					expect(instance, 'to contain', <span className="Select-value-label">Three</span>);
+					expect(ReactDOM.findDOMNode(instance), 'queried for', '.Select-value-label', 'to have length', 2);
 				});
 
 				it('adds an additional option with the correct delimiter', () => {
@@ -2112,6 +2253,15 @@ describe('Select', () => {
 						expect(instance.state.isFocused, 'to equal', true);
 				    ReactDOM.render(<Select disabled={true} searchable={true} value="three" options={defaultOptions} />, node);
 						expect(instance.state.isFocused, 'to equal', false);
+				});
+
+				it('should close the opened menu if disabled=true', function(){
+
+					findAndFocusInputControl();
+					TestUtils.Simulate.mouseDown(getSelectControl(instance));
+					expect(node, 'queried for', '.Select-option', 'to have length', 4);
+					ReactDOM.render(<Select disabled={true} searchable={true} value="three" options={defaultOptions} />, node);
+					expect(node, 'to contain no elements matching', '.Select-option');
 				});
 			});
 		});
@@ -3097,7 +3247,7 @@ describe('Select', () => {
 
 				valueRenderer = (option) => {
 					return (
-						<span id={'TESTOPTION_' + option.value}>{option.label.toUpperCase()}</span>
+						<span id={'TESTOPTION_' + option.value} className="custom-render">{option.label.toUpperCase()}</span>
 					);
 				};
 
@@ -3113,7 +3263,7 @@ describe('Select', () => {
 
 			it('renders the values using the provided renderer', () => {
 
-				var labelNode = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-value-label span');
+				var labelNode = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-value-label span.custom-render');
 				expect(labelNode[0], 'to have text', 'THREE');
 				expect(labelNode[0], 'to have attributes', {
 					id: 'TESTOPTION_three'
@@ -3314,6 +3464,151 @@ describe('Select', () => {
 			expect(keys, 'to contain', 'options');
 			expect(keys, 'to contain', 'selectValue');
 			expect(keys, 'to contain', 'valueArray');
+		});
+	});
+
+	describe('accessibility', () => {
+
+		describe('with basic searchable control', () => {
+
+			beforeEach(() => {
+
+				instance = createControl({
+					options: [
+						{ value: 'one', label: 'label one' },
+						{ value: 'two', label: 'label two' },
+						{ value: 'three', label: 'label three' }
+					],
+					value: 'two'
+				});
+			});
+
+			it('renders an input with a combobox role', () => {
+
+				expect(instance, 'to contain', <input role="combobox" />);
+			});
+
+			it('renders an input with a combobox role and without popup', () => {
+
+				expect(instance, 'to contain', <input role="combobox" aria-haspopup="false" aria-expanded="false" />);
+			});
+
+			it('renders the correct selected value id', () => {
+				expect(instance, 'queried for', <input role="combobox" />)
+					.then(input => {
+						var currentValueId = input.attributes['aria-activedescendant'].value;
+
+						return expect(ReactDOM.findDOMNode(instance),
+							'queried for', '#' + currentValueId,
+							'to satisfy', [ expect.it('to have text', 'label two') ]);
+					});
+			});
+
+			it('sets the haspopup and expanded to true when menu is shown', () => {
+				expect(instance,
+					'with event keyDown', ARROW_DOWN, 'on', <div className="Select-control" />,
+					'to contain', <input role="combobox" aria-haspopup="true" aria-expanded="true" />);
+			});
+
+			it('sets the active descendant when the next item is highlighted', () => {
+				expect(instance,
+					'with event', 'keyDown', ARROW_DOWN, 'on', <div className="Select-control" />,
+					'with event', 'keyDown', ARROW_DOWN, 'on', <div className="Select-control" />,
+					'queried for', <input role="combobox" />)
+					.then(input => {
+						const currentHighlightId = input.attributes['aria-activedescendant'].value;
+						expect(ReactDOM.findDOMNode(instance).querySelector('#' + currentHighlightId),
+							'to have text', 'label three');
+					});
+			});
+
+			it('passes through the aria-labelledby prop', () => {
+
+				instance = createControl({
+					options: defaultOptions,
+					value: 'one',
+					'aria-labelledby': 'test-label-id'
+				});
+
+				expect(instance,
+					'to contain', <input role="combobox" aria-labelledby="test-label-id" />);
+			});
+
+			it('passes through the aria-label prop', () => {
+
+				instance = createControl({
+					options: defaultOptions,
+					value: 'one',
+					'aria-label': 'This is a test label'
+				});
+
+				expect(instance,
+					'to contain', <input role="combobox" aria-label="This is a test label" />);
+			});
+		});
+
+		describe('with multiselect', () => {
+
+			beforeEach(() => {
+
+				wrapper = createControlWithWrapper({
+					options: [
+						{ value: 'one', label: 'label one' },
+						{ value: 'two', label: 'label two' },
+						{ value: 'three', label: 'label three' },
+						{ value: 'four', label: 'label four' },
+						{ value: 'five', label: 'label five' }
+					],
+					value: [ 'three', 'two' ],
+					multi: true
+				}, {
+					wireUpOnChangeToValue: true
+				});
+			});
+
+			it('shows the `press backspace to remove` message for the last item', () => {
+				expect(instance,
+					'to contain',
+					<span className="Select-aria-only" aria-live="assertive">
+						Press backspace to remove label two
+					</span>);
+			});
+
+			it('hides the `press backspace to remove` message on blur', () => {
+				expect(instance,
+					'with event blur', 'on', <input role="combobox" />,
+					'not to contain',
+					<span className="Select-aria-only" aria-live="assertive">
+						Press backspace to remove label two
+					</span>);
+			});
+
+			it('updates the backspace message when the selected values update', () => {
+
+				wrapper.setPropsForChild({ value: [ 'three', 'two', 'one' ] });
+				expect(instance,
+					'to contain',
+					<span className="Select-aria-only" aria-live="assertive">
+						Press backspace to remove label one
+					</span>);
+			});
+
+			it('updates the active descendant after a selection', () => {
+
+				return expect(wrapper,
+					'with event keyDown', ARROW_DOWN, 'on', <div className="Select-control" />,
+					'with event keyDown', KEY_ENTER, 'on', <div className="Select-control" />,
+					'queried for', <input role="combobox" />)
+					.then(input => {
+
+						// [ 'three', 'two', 'one' ] is now selected,
+						// therefore in-focus should be 'four'
+
+						const activeId = input.attributes['aria-activedescendant'].value;
+						expect(ReactDOM.findDOMNode(instance), 'queried for first', '#' + activeId, 'to have text', 'label four');
+					});
+
+			});
 		});
 	});
 });

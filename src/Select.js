@@ -34,6 +34,8 @@ const stringOrNode = React.PropTypes.oneOfType([
 	React.PropTypes.node
 ]);
 
+let instanceId = 1;
+
 const Select = React.createClass({
 
 	displayName: 'Select',
@@ -41,10 +43,14 @@ const Select = React.createClass({
 	propTypes: {
 		addLabelText: React.PropTypes.string,       // placeholder displayed when you want to add a label on a multi-value input
 		allowCreate: React.PropTypes.bool,          // whether to allow creation of new entries
+		'aria-label': React.PropTypes.string,		// Aria label (for assistive tech)
+		'aria-labelledby': React.PropTypes.string,	// HTML ID of an element that should be used as the label (for assistive tech)
 		autoBlur: React.PropTypes.bool,             // automatically blur the component when an option is selected
 		autofocus: React.PropTypes.bool,            // autofocus the component on mount
 		autosize: React.PropTypes.bool,             // whether to enable autosizing or not
 		backspaceRemoves: React.PropTypes.bool,     // whether backspace removes an item if there is no text input
+		backspaceToRemoveMessage: React.PropTypes.string,  // Message to use for screenreaders to press backspace to remove the current item -
+														   // {label} is replaced with the item label
 		className: React.PropTypes.string,          // className for the outer element
 		clearAllText: stringOrNode,                 // title for the "clear" control when multi: true
 		clearValueText: stringOrNode,               // title for the "clear" control
@@ -89,6 +95,7 @@ const Select = React.createClass({
 		optionGroupComponent: React.PropTypes.func, // option group component to render in dropdown
 		optionRenderer: React.PropTypes.func,       // optionRenderer: function (option) {}
 		options: React.PropTypes.array,             // array of options
+		pageSize: React.PropTypes.number,           // number of entries to page when using page up/down keys
 		placeholder: stringOrNode,                  // field placeholder, displayed when there's no value
 		renderInvalidValues: React.PropTypes.bool,  // boolean to enable rendering values that do not match any options
 		required: React.PropTypes.bool,             // applies HTML5 required attribute when needed
@@ -115,6 +122,7 @@ const Select = React.createClass({
 			autosize: true,
 			allowCreate: false,
 			backspaceRemoves: true,
+			backspaceToRemoveMessage: 'Press backspace to remove {label}',
 			clearable: true,
 			clearAllText: 'Clear all',
 			clearValueText: 'Clear value',
@@ -138,6 +146,7 @@ const Select = React.createClass({
 			openAfterFocus: false,
 			optionComponent: Option,
 			optionGroupComponent: OptionGroup,
+			pageSize: 5,
 			placeholder: 'Select...',
 			renderInvalidValues: false,
 			required: false,
@@ -165,7 +174,7 @@ const Select = React.createClass({
 
 	componentWillMount() {
 		this._flatOptions = this.flattenOptions(this.props.options);
-
+		this._instancePrefix = 'react-select-' + (++instanceId) + '-';
 		const valueArray = this.getValueArray(this.props.value);
 
 		if (this.props.required) {
@@ -234,6 +243,7 @@ const Select = React.createClass({
 		}
 		if (prevProps.disabled !== this.props.disabled) {
 			this.setState({ isFocused: false }); // eslint-disable-line react/no-did-update-set-state
+			this.closeMenu();
 		}
 	},
 
@@ -288,6 +298,10 @@ const Select = React.createClass({
 			return;
 		}
 
+		if (event.target.tagName === 'INPUT') {
+			return;
+		}
+
 		// prevent default event handlers
 		event.stopPropagation();
 		event.preventDefault();
@@ -301,6 +315,14 @@ const Select = React.createClass({
 		}
 
 		if (this.state.isFocused) {
+			// On iOS, we can get into a state where we think the input is focused but it isn't really,
+			// since iOS ignores programmatic calls to input.focus() that weren't triggered by a click event.
+			// Call focus() again here to be safe.
+			this.focus();
+
+			// clears value so that the cursor will be a the end of input then the component re-renders
+			this.refs.input.getInput().value = '';
+
 			// if the input is focused, ensure the menu is open
 			this.setState({
 				isOpen: true,
@@ -365,7 +387,8 @@ const Select = React.createClass({
 	},
 
 	handleInputBlur (event) {
-		if (this.refs.menu && document.activeElement === this.refs.menu) {
+		// The check for menu.contains(activeElement) is necessary to prevent IE11's scrollbar from closing the menu in certain contexts.
+		if (this.refs.menu && (this.refs.menu === document.activeElement || this.refs.menu.contains(document.activeElement))) {
 			this.focus();
 			return;
 		}
@@ -389,7 +412,7 @@ const Select = React.createClass({
 		if (this.state.inputValue !== event.target.value && this.props.onInputChange) {
 			let nextState = this.props.onInputChange(newInputValue);
 			// Note: != used deliberately here to catch undefined and null
-			if (nextState != null) {
+			if (nextState != null && typeof nextState !== 'object') {
 				newInputValue = '' + nextState;
 			}
 		}
@@ -432,6 +455,18 @@ const Select = React.createClass({
 			break;
 			case 40: // down
 				this.focusNextOption();
+			break;
+			case 33: // page up
+				this.focusPageUpOption();
+			break;
+			case 34: // page down
+				this.focusPageDownOption();
+			break;
+			case 35: // end key
+				this.focusEndOption();
+			break;
+			case 36: // home key
+				this.focusStartOption();
 			break;
 			// case 188: // ,
 			// 	if (this.props.allowCreate && this.props.multi) {
@@ -522,14 +557,15 @@ const Select = React.createClass({
 			this.addValue(value);
 			this.setState({
 				inputValue: '',
+				focusedIndex: null
 			});
 		} else {
-			this.setValue(value);
 			this.setState({
 				isOpen: false,
 				inputValue: '',
 				isPseudoFocused: this.state.isFocused,
 			});
+			this.setValue(value);
 		}
 	},
 
@@ -600,37 +636,78 @@ const Select = React.createClass({
 		this.focusAdjacentOption('previous');
 	},
 
+	focusPageUpOption () {
+		this.focusAdjacentOption('page_up');
+	},
+
+	focusPageDownOption () {
+		this.focusAdjacentOption('page_down');
+	},
+
+	focusStartOption () {
+		this.focusAdjacentOption('start');
+	},
+
+	focusEndOption () {
+		this.focusAdjacentOption('end');
+	},
+
 	focusAdjacentOption (dir) {
-		var options = this._visibleOptions.filter(i => !i.disabled);
+		var options = this._visibleOptions
+			.map((option, index) => ({ option, index }))
+			.filter(option => !option.option.disabled);
 		this._scrollToFocusedOptionOnUpdate = true;
 		if (!this.state.isOpen) {
 			this.setState({
 				isOpen: true,
 				inputValue: '',
-				focusedOption: this._focusedOption || options[dir === 'next' ? 0 : options.length - 1]
+				focusedOption: this._focusedOption || options[dir === 'next' ? 0 : options.length - 1].option
 			});
 			return;
 		}
 		if (!options.length) return;
 		var focusedIndex = -1;
 		for (var i = 0; i < options.length; i++) {
-			if (this._focusedOption === options[i]) {
+			if (this._focusedOption === options[i].option) {
 				focusedIndex = i;
 				break;
 			}
 		}
-		var focusedOption = options[0];
-		if (dir === 'next' && focusedIndex > -1 && focusedIndex < options.length - 1) {
-			focusedOption = options[focusedIndex + 1];
+		if (dir === 'next' && focusedIndex !== -1 ) {
+			focusedIndex = (focusedIndex + 1) % options.length;
 		} else if (dir === 'previous') {
 			if (focusedIndex > 0) {
-				focusedOption = options[focusedIndex - 1];
+				focusedIndex = focusedIndex - 1;
 			} else {
-				focusedOption = options[options.length - 1];
+				focusedIndex = options.length - 1;
+			}
+		} else if (dir === 'start') {
+			focusedIndex = 0;
+		} else if (dir === 'end') {
+			focusedIndex = options.length - 1;
+		} else if (dir === 'page_up') {
+			var potentialIndex = focusedIndex - this.props.pageSize;
+			if ( potentialIndex < 0 ) {
+				focusedIndex = 0;
+			} else {
+				focusedIndex = potentialIndex;
+			}
+		} else if (dir === 'page_down') {
+			var potentialIndex = focusedIndex + this.props.pageSize;
+			if ( potentialIndex > options.length - 1 ) {
+				focusedIndex = options.length - 1;
+			} else {
+				focusedIndex = potentialIndex;
 			}
 		}
+
+		if (focusedIndex === -1) {
+			focusedIndex = 0;
+		}
+
 		this.setState({
-			focusedOption: focusedOption
+			focusedIndex: options[focusedIndex].index,
+			focusedOption: options[focusedIndex].option
 		});
 	},
 
@@ -663,13 +740,16 @@ const Select = React.createClass({
 			return valueArray.map((value, i) => {
 				return (
 					<ValueComponent
+						id={this._instancePrefix + '-value-' + i}
+						instancePrefix={this._instancePrefix}
 						disabled={this.props.disabled || value.clearableValue === false}
 						key={`value-${i}-${value[this.props.valueKey]}`}
 						onClick={onClick}
 						onRemove={this.removeValue}
 						value={value}
-						>
+					>
 						{renderLabel(value)}
+						<span className="Select-aria-only">&nbsp;</span>
 					</ValueComponent>
 				);
 			});
@@ -677,61 +757,78 @@ const Select = React.createClass({
 			if (isOpen) onClick = null;
 			return (
 				<ValueComponent
+					id={this._instancePrefix + '-value-item'}
 					disabled={this.props.disabled}
+					instancePrefix={this._instancePrefix}
 					onClick={onClick}
 					value={valueArray[0]}
-					>
+				>
 					{renderLabel(valueArray[0])}
 				</ValueComponent>
 			);
 		}
 	},
 
-	renderInput (valueArray) {
+	renderInput (valueArray, focusedOptionIndex) {
 		if (this.props.inputRenderer) {
 			return this.props.inputRenderer();
 		} else {
 			var className = classNames('Select-input', this.props.inputProps.className);
+			const isOpen = !!this.state.isOpen;
+
+			const ariaOwns = classNames({
+				[this._instancePrefix + '-list']: isOpen,
+				[this._instancePrefix + '-backspace-remove-message']: this.props.multi &&
+																	  !this.props.disabled &&
+																	  this.state.isFocused &&
+																      !this.state.inputValue
+			});
+
+			// TODO: Check how this project includes Object.assign()
+			const inputProps = Object.assign({}, this.props.inputProps, {
+			    role: 'combobox',
+				'aria-expanded': '' + isOpen,
+			    'aria-owns': ariaOwns,
+			    'aria-haspopup': '' + isOpen,
+				'aria-activedescendant': isOpen ? this._instancePrefix + '-option-' + focusedOptionIndex : this._instancePrefix + '-value',
+				'aria-labelledby': this.props['aria-labelledby'],
+				'aria-label': this.props['aria-label'],
+				className: className,
+				tabIndex: this.props.tabIndex,
+				onBlur: this.handleInputBlur,
+				onChange: this.handleInputChange,
+				onFocus: this.handleInputFocus,
+				ref: 'input',
+				required: this.state.required,
+				value: this.state.inputValue
+			});
+
 			if (this.props.disabled || !this.props.searchable) {
 				return (
 					<div
 						{...this.props.inputProps}
+						role="combobox"
+						aria-expanded={isOpen}
+						aria-owns={isOpen ? this._instancePrefix + '-list' : this._instancePrefix + '-value'}
+						aria-activedescendant={isOpen ? this._instancePrefix + '-option-' + focusedOptionIndex : this._instancePrefix + '-value'}
 						className={className}
 						tabIndex={this.props.tabIndex || 0}
 						onBlur={this.handleInputBlur}
 						onFocus={this.handleInputFocus}
 						ref="input"
+						aria-readonly={'' + !!this.props.disabled}
 						style={{ border: 0, width: 1, display:'inline-block' }}/>
 				);
 			}
+
 			if (this.props.autosize) {
 				return (
-					<Input
-						{...this.props.inputProps}
-						className={className}
-						tabIndex={this.props.tabIndex}
-						onBlur={this.handleInputBlur}
-						onChange={this.handleInputChange}
-						onFocus={this.handleInputFocus}
-						minWidth="5"
-						ref="input"
-						required={this.state.required}
-						value={this.state.inputValue}
-					/>
+					<Input {...inputProps} minWidth="5px" />
 				);
 			}
 			return (
 				<div className={ className }>
-					<input
-						{...this.props.inputProps}
-						tabIndex={this.props.tabIndex}
-						onBlur={this.handleInputBlur}
-						onChange={this.handleInputChange}
-						onFocus={this.handleInputFocus}
-						ref="input"
-						required={this.state.required}
-						value={this.state.inputValue}
-					/>
+					<input {...inputProps} />
 				</div>
 			);
 		}
@@ -884,6 +981,8 @@ const Select = React.createClass({
 
 						return (
 							<Option
+                instancePrefix={this._instancePrefix}
+                optionIndex={i}
 								className={optionClass}
 								isDisabled={option.disabled}
 								isFocused={isFocused}
@@ -934,14 +1033,22 @@ const Select = React.createClass({
 		));
 	},
 
-	getFocusableOption (selectedOption) {
+	getFocusableOptionIndex (selectedOption) {
 		var options = this._visibleOptions;
-		if (!options.length) return;
+		if (!options.length) return null;
+
 		let focusedOption = this.state.focusedOption || selectedOption;
-		if (focusedOption && options.indexOf(focusedOption) > -1) return focusedOption;
-		for (var i = 0; i < options.length; i++) {
-			if (!options[i].disabled) return options[i];
+		if (focusedOption && !focusedOption.disabled) {
+			const focusedOptionIndex = options.indexOf(focusedOption);
+			if (focusedOptionIndex !== -1) {
+				return focusedOptionIndex;
+			}
 		}
+
+		for (var i = 0; i < options.length; i++) {
+			if (!options[i].disabled) return i;
+		}
+		return null;
 	},
 
 	renderOuter (options, valueArray, focusedOption) {
@@ -954,7 +1061,7 @@ const Select = React.createClass({
 		return (
       <Dropdown>
         <div ref="menuContainer" className="Select-menu-outer" style={this.props.menuContainerStyle}>
-          <div ref="menu" className="Select-menu"
+          <div ref="menu" role="listbox" className="Select-menu" id={this._instancePrefix + '-list'}
                style={this.props.menuStyle}
                onScroll={this.handleMenuScroll}
                onMouseDown={this.handleMouseDownOnMenu}>
@@ -971,7 +1078,14 @@ const Select = React.createClass({
 		this._visibleOptions = this.flattenOptions(options);
 		let isOpen = typeof this.props.isOpen === 'boolean' ? this.props.isOpen : this.state.isOpen;
 		if (this.props.multi && !options.length && valueArray.length && !this.state.inputValue) isOpen = false;
-		let focusedOption = this._focusedOption = this.getFocusableOption(valueArray[0]);
+		const focusedOptionIndex = this.getFocusableOptionIndex(valueArray[0]);
+
+		let focusedOption = null;
+		if (focusedOptionIndex !== null) {
+			focusedOption = this._focusedOption = this._visibleOptions[focusedOptionIndex];
+		} else {
+			focusedOption = this._focusedOption = null;
+		}
 		let className = classNames('Select', this.props.className, {
 			'Select--multi': this.props.multi,
 			'Select--single': !this.props.multi,
@@ -983,8 +1097,23 @@ const Select = React.createClass({
 			'is-searchable': this.props.searchable,
 			'has-value': valueArray.length,
 		});
+		let removeMessage = null;
+		if (this.props.multi &&
+			!this.props.disabled &&
+			valueArray.length &&
+			!this.state.inputValue &&
+			this.state.isFocused &&
+			this.props.backspaceRemoves) {
+			removeMessage = (
+				<span id={this._instancePrefix + '-backspace-remove-message'} className="Select-aria-only" aria-live="assertive">
+					{this.props.backspaceToRemoveMessage.replace('{label}', valueArray[valueArray.length - 1][this.props.labelKey])}
+				</span>
+			);
+		}
 		return (
-			<div ref="wrapper" className={className} style={this.props.wrapperStyle}>
+			<div ref="wrapper"
+				 className={className}
+				 style={this.props.wrapperStyle}>
 				{this.renderHiddenField(valueArray)}
 				<div ref="control"
 						 className="Select-control"
@@ -994,8 +1123,11 @@ const Select = React.createClass({
 						 onTouchEnd={this.handleTouchEnd}
 						 onTouchStart={this.handleTouchStart}
 						 onTouchMove={this.handleTouchMove}>
-					{this.renderValue(valueArray, isOpen)}
-					{this.renderInput(valueArray)}
+                    <span className="Select-multi-value-wrapper" id={this._instancePrefix + '-value'}>
+						{this.renderValue(valueArray, isOpen)}
+						{this.renderInput(valueArray, focusedOptionIndex)}
+                    </span>
+					{removeMessage}
 					{this.renderLoading()}
 					{this.renderClear()}
 					{this.renderArrow()}

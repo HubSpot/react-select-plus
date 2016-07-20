@@ -1,5 +1,9 @@
 
-## v1.0.0-beta13 / 2016-05-30
+## v1.0.0-beta13.patch1 / 2016-06-22
+
+* (react-select-plus) intermediate release to incorporate upstream fix for https://github.com/JedWatson/react-select/issues/940
+
+## v1.0.0-beta13 / 2016-04-30
 
 * added; `inputRenderer` prop, allows you to override the input component, thanks [Sean Burke](https://github.com/leftmostcat)
 * added; `openOnFocus` prop, causes the menu to always open when the select control is focused, thanks [HuysentruytRuben](https://github.com/HuysentruytRuben)
