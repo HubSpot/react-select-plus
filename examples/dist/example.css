@@ -250,6 +250,9 @@
   display: block;
   padding: 8px 10px;
 }
+.Select-option-group-label.select-parent {
+  cursor: pointer;
+}
 .Select-option-group-label ~ .Select-option,
 .Select-option-group-label ~ .Select-option-group {
   padding-left: 20px;

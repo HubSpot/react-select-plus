@@ -111,6 +111,7 @@ const Select = React.createClass({
 		valueKey: React.PropTypes.string,           // path of the label value in option objects
 		valueRenderer: React.PropTypes.func,        // valueRenderer: function (option) {}
 		wrapperStyle: React.PropTypes.object,       // optional style to apply to the component wrapper
+		selectGroup: React.PropTypes.bool,         // opcional permite seleccionar los grupos
 	},
 
 	statics: { Async },
@@ -156,6 +157,7 @@ const Select = React.createClass({
 			tabSelectsValue: true,
 			valueComponent: Value,
 			valueKey: 'value',
+			selectGroup: false,
 		};
 	},
 
@@ -567,9 +569,23 @@ const Select = React.createClass({
 		}
 	},
 
+	generateValues(ary) {
+		var ret = [];
+    for(var i = 0; i < ary.length; i++) {
+        if(Array.isArray(ary[i].options)) {
+            ret = ret.concat(this.generateValues(ary[i].options));
+        } else {
+            ret.push(ary[i]);
+        }
+    }
+    return ret;
+	},
+
 	addValue (value) {
+		var values = !Array.isArray(value.options) ? this.generateValues([value]) :
+								 this.generateValues(value.options);
 		var valueArray = this.getValueArray(this.props.value);
-		this.setValue(valueArray.concat(value));
+		this.setValue(valueArray.concat(values));
 	},
 
 	popValue () {
@@ -603,6 +619,12 @@ const Select = React.createClass({
 	focusOption (option) {
 		this.setState({
 			focusedOption: option
+		});
+	},
+
+	focusGroup (group) {
+		this.setState({
+			focusedGroup: group
 		});
 	},
 
@@ -904,12 +926,14 @@ const Select = React.createClass({
 		return flatOptions;
 	},
 
-	renderMenu (options, valueArray, focusedOption) {
+	renderMenu (options, valueArray, focusedOption, focusedGroup) {
 		if (options && options.length) {
 			if (this.props.menuRenderer) {
 				return this.props.menuRenderer({
 					focusedOption,
+					focusedGroup,
 					focusOption: this.focusOption,
+					focusGroup: this.focusGroup,
 					labelKey: this.props.labelKey,
 					options,
 					selectValue: this.selectValue,
@@ -919,21 +943,29 @@ const Select = React.createClass({
 				let OptionGroup = this.props.optionGroupComponent;
 				let Option = this.props.optionComponent;
 				let renderLabel = this.props.optionRenderer || this.getOptionLabel;
+				const selectGroup = this.props.selectGroup;
 
 				return options.map((option, i) => {
 					if (this.isGroup(option)) {
 						let optionGroupClass = classNames({
 							'Select-option-group': true,
 						});
+						let isFocused = option === focusedGroup;
+						let groupRef = isFocused ? 'focused' : null;
 
 						return (
 							<OptionGroup
 								className={optionGroupClass}
+								isFocused={isFocused}
 								key={`option-group-${i}`}
 								label={renderLabel(option)}
 								option={option}
+								onSelect={this.selectValue}
+								onFocus={this.focusGroup}
+								ref={groupRef}
+								selectGroup={selectGroup}
 								>
-								{this.renderMenu(option.options, valueArray, focusedOption)}
+								{this.renderMenu(option.options, valueArray, focusedOption, focusedGroup)}
 							</OptionGroup>
 						);
 					} else {
@@ -1065,7 +1097,6 @@ const Select = React.createClass({
 			'is-searchable': this.props.searchable,
 			'has-value': valueArray.length,
 		});
-
 		let removeMessage = null;
 		if (this.props.multi &&
 			!this.props.disabled &&
@@ -1079,7 +1110,6 @@ const Select = React.createClass({
 				</span>
 			);
 		}
-
 		return (
 			<div ref="wrapper"
 				 className={className}
