@@ -1,6 +1,6 @@
 {
   "name": "react-select-plus",
-  "version": "1.0.0-beta13.patch1",
+  "version": "1.0.0-beta14",
   "description": "A Select control built with and for ReactJS",
   "main": "lib/Select.js",
   "style": "dist/react-select-plus.min.css",
@@ -11,8 +11,9 @@
     "url": "https://github.com/HubSpot/react-select-plus.git"
   },
   "dependencies": {
+    "blacklist": "^1.1.2",
     "classnames": "^2.2.4",
-    "react-input-autosize": "^0.6.13"
+    "react-input-autosize": "^1.1.0"
   },
   "devDependencies": {
     "babel": "^5.8.23",
@@ -31,7 +32,7 @@
     "react-addons-test-utils": "^15.0",
     "react-component-gulp-tasks": "^0.7.7",
     "react-dom": "^15.0",
-    "react-gravatar": "^2.4.3",
+    "react-gravatar": "^2.4.5",
     "react-virtualized": "^6.3.0",
     "react-virtualized-select": "^0.0.4",
     "sinon": "^1.17.3",
