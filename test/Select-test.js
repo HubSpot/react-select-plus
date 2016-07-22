@@ -891,8 +891,6 @@ describe('Select', () => {
 				'to have items satisfying', 'to have text', 'One');
 		});
 
-
-
 		it('supports setting the value via prop', () => {
 
 			wrapper.setPropsForChild({
@@ -1519,7 +1517,6 @@ describe('Select', () => {
 				'to have length', 2);
 		});
 	});
-
 
 	describe('with multi-select', () => {
 
@@ -3337,6 +3334,23 @@ describe('Select', () => {
 
 				expect(instance.state.required, 'to be true');
 				wrapper.setPropsForChild({ value: 'one' });
+				expect(instance.state.required, 'to be false');
+			});
+
+			it('input should not have required attribute after updating the component with a value and options', () => {
+				wrapper = createControlWithWrapper({
+					options: defaultOptions,
+					value: 'one',
+					required: true
+				});
+
+				expect(instance.state.required, 'to be false');
+				wrapper.setPropsForChild({
+					value: 'newValue',
+					options: [
+						{ value: 'newValue', label: 'New value, new options' }
+					]
+				});
 				expect(instance.state.required, 'to be false');
 			});
 
