@@ -1,3 +1,8 @@
+## v1.0.0-beta14.patch1 / 2016-07-25
+
+* (react-select-plus) On dropdown open, scroll to element above focused option
+instead of scrolling all the way to the top of the option group.
+
 ## v1.0.0-beta14 / 2016-07-17
 
 * fixed; `react-input-autosize` has been udpated to `1.1.0`, which includes fixes for the new warnings that React 15.2 logs
