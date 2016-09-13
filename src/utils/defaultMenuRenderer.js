@@ -10,6 +10,7 @@ function menuRenderer ({
 	instancePrefix,
 	labelKey,
 	onFocus,
+	onOptionRef,
 	onSelect,
 	optionClassName,
 	optionComponent,
@@ -64,9 +65,9 @@ function menuRenderer ({
 						onSelect={onSelect}
 						option={option}
 						optionIndex={i}
-						ref={optionRef}
+						ref={ref => { onOptionRef(ref, isFocused); }}
 					>
-						{renderLabel(option)}
+						{renderLabel(option, i)}
 					</Option>
 				);
 			}

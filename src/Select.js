@@ -1005,21 +1005,28 @@ const Select = React.createClass({
     return groupedOptions;
   },
 
+	onOptionRef(ref, isFocused) {
+		if (isFocused) {
+			this.focused = ref;
+		}
+	},
+
 	renderMenu (options, valueArray, focusedOption) {
 		if (options && options.length) {
 			return this.props.menuRenderer({
 				focusedOption,
-				focusOption: this.focusOption,
+        focusOption: this.focusOption,
 				instancePrefix: this._instancePrefix,
 				labelKey: this.props.labelKey,
 				onFocus: this.focusOption,
+        onOptionRef: this.onOptionRef,
 				onSelect: this.selectValue,
 				optionClassName: this.props.optionClassName,
 				optionComponent: this.props.optionComponent,
         optionGroupComponent: this.props.optionGroupComponent,
 				optionRenderer: this.props.optionRenderer || this.getOptionLabel,
 				options,
-				selectValue: this.selectValue,
+        selectValue: this.selectValue,
 				valueArray,
 				valueKey: this.props.valueKey,
 			});

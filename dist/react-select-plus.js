@@ -1773,6 +1773,12 @@ var Select = _react2['default'].createClass({
 		return groupedOptions;
 	},
 
+	onOptionRef: function onOptionRef(ref, isFocused) {
+		if (isFocused) {
+			this.focused = ref;
+		}
+	},
+
 	renderMenu: function renderMenu(options, valueArray, focusedOption) {
 		if (options && options.length) {
 			return this.props.menuRenderer({
@@ -1781,6 +1787,7 @@ var Select = _react2['default'].createClass({
 				instancePrefix: this._instancePrefix,
 				labelKey: this.props.labelKey,
 				onFocus: this.focusOption,
+				onOptionRef: this.onOptionRef,
 				onSelect: this.selectValue,
 				optionClassName: this.props.optionClassName,
 				optionComponent: this.props.optionComponent,
@@ -2134,6 +2141,7 @@ function menuRenderer(_ref) {
 	var instancePrefix = _ref.instancePrefix;
 	var labelKey = _ref.labelKey;
 	var onFocus = _ref.onFocus;
+	var onOptionRef = _ref.onOptionRef;
 	var onSelect = _ref.onSelect;
 	var optionClassName = _ref.optionClassName;
 	var optionComponent = _ref.optionComponent;
@@ -2166,33 +2174,41 @@ function menuRenderer(_ref) {
 					renderOptions(option.options)
 				);
 			} else {
-				var isSelected = valueArray && valueArray.indexOf(option) > -1;
-				var isFocused = option === focusedOption;
-				var optionRef = isFocused ? 'focused' : null;
-				var optionClass = (0, _classnames2['default'])(optionClassName, {
-					'Select-option': true,
-					'is-selected': isSelected,
-					'is-focused': isFocused,
-					'is-disabled': option.disabled
-				});
+				var _ret = (function () {
+					var isSelected = valueArray && valueArray.indexOf(option) > -1;
+					var isFocused = option === focusedOption;
+					var optionRef = isFocused ? 'focused' : null;
+					var optionClass = (0, _classnames2['default'])(optionClassName, {
+						'Select-option': true,
+						'is-selected': isSelected,
+						'is-focused': isFocused,
+						'is-disabled': option.disabled
+					});
 
-				return _react2['default'].createElement(
-					Option,
-					{
-						className: optionClass,
-						instancePrefix: instancePrefix,
-						isDisabled: option.disabled,
-						isFocused: isFocused,
-						isSelected: isSelected,
-						key: 'option-' + i + '-' + option[valueKey],
-						onFocus: onFocus,
-						onSelect: onSelect,
-						option: option,
-						optionIndex: i,
-						ref: optionRef
-					},
-					renderLabel(option)
-				);
+					return {
+						v: _react2['default'].createElement(
+							Option,
+							{
+								className: optionClass,
+								instancePrefix: instancePrefix,
+								isDisabled: option.disabled,
+								isFocused: isFocused,
+								isSelected: isSelected,
+								key: 'option-' + i + '-' + option[valueKey],
+								onFocus: onFocus,
+								onSelect: onSelect,
+								option: option,
+								optionIndex: i,
+								ref: function (ref) {
+									onOptionRef(ref, isFocused);
+								}
+							},
+							renderLabel(option, i)
+						)
+					};
+				})();
+
+				if (typeof _ret === 'object') return _ret.v;
 			}
 		});
 	};
