@@ -4,7 +4,7 @@
     "dist/react-select-plus.min.js",
     "dist/react-select-plus.min.css"
   ],
-  "version": "1.0.0-beta14.patch1",
+  "version": "1.0.0-rc.1",
   "homepage": "https://github.com/HubSpot/react-select-plus",
   "authors": [
     "Trevor Burnham"
@@ -17,7 +17,7 @@
   ],
   "dependencies": {
     "classnames": "^2.2.0",
-    "react-input-autosize": "^0.6.5"
+    "react-input-autosize": "^1.1.0"
   },
   "keywords": [
     "react",

@@ -4,13 +4,11 @@ React-Select-Plus
 A Select control for [React](http://facebook.github.io/react/index.html) based on [JedWatson/React-Select](https://github.com/JedWatson/react-select/).
 
 
-## New version 1.0.0-beta
+## New version 1.0.0-rc
 
-I've nearly completed a major rewrite of this component (see issue [#568](https://github.com/JedWatson/react-select/issues/568) for details and progress). The new code has been merged into `master`, and `react-select@1.0.0-beta` has been published to npm and bower.
+I've nearly completed a major rewrite of this component (see issue [#568](https://github.com/JedWatson/react-select/issues/568) for details and progress). The new code has been merged into `master`, and `react-select@1.0.0-rc` has been published to npm and bower.
 
-1.0.0 has some breaking changes. The documentation below still needs to be updated for the new API; notes on the changes can be found in [CHANGES.md](https://github.com/JedWatson/react-select/blob/master/CHANGES.md) and will be finalised into [HISTORY.md](https://github.com/JedWatson/react-select/blob/master/HISTORY.md) soon.
-
-Our tests need some major updates to work with the new API (see [#571](https://github.com/JedWatson/react-select/issues/571)) and are causing the build to fail, but the component is stable and robust in actual usage.
+1.0.0 has some breaking changes. The documentation is still being updated for the new API; notes on the changes can be found in [CHANGES.md](https://github.com/JedWatson/react-select/blob/master/CHANGES.md) and will be finalised into [HISTORY.md](https://github.com/JedWatson/react-select/blob/master/HISTORY.md) soon.
 
 Testing, feedback and PRs for the new version are appreciated.
 
@@ -54,7 +52,7 @@ You can also use the standalone build by including `react-select-plus.js` and `r
 <script src="https://unpkg.com/react-input-autosize/dist/react-input-autosize.js"></script>
 <script src="https://unpkg.com/react-select-plus/dist/react-select-plus.js"></script>
 
-<link rel="stylesheet" href="https://unpkg.com/react-select-plus/dist/react-select-plus.css">
+<link rel="stylesheet" href="https://unpkg.com/react-select-plus/dist/react-select.css">
 ```
 
 
@@ -193,6 +191,29 @@ var isLoadingExternally = true;
 />
 ```
 
+### User-created tags
+
+The `Creatable` component enables users to create new tags within react-select.
+It decorates a `Select` and so it supports all of the default properties (eg single/multi mode, filtering, etc) in addition to a couple of custom ones (shown below).
+The easiest way to use it is like so:
+
+```js
+import { Creatable } from 'react-select';
+
+function render (selectProps) {
+  return <Creatable {...selectProps} />;
+};
+```
+
+##### Creatable properties
+
+Property | Type | Description
+:---|:---|:---
+`isOptionUnique` | function | Searches for any matching option within the set of options. This function prevents duplicate options from being created. By default this is a basic, case-sensitive comparison of label and value. Expected signature: `({ option: Object, options: Array, labelKey: string, valueKey: string }): boolean` |
+`isValidNewOption` | function | Determines if the current input text represents a valid option. By default any non-empty string will be considered valid. Expected signature: `({ label: string }): boolean` |
+`newOptionCreator` | function | Factory to create new option. Expected signature: `({ label: string, labelKey: string, valueKey: string }): Object` |
+`shouldKeyDownEventCreateNewOption` | function | Decides if a keyDown event (eg its `keyCode`) should result in the creation of a new option. ENTER, TAB and comma keys create new options by dfeault. Expected signature: `({ keyCode: number }): boolean` |
+
 ### Filtering options
 
 You can control how options are filtered with the following properties:
@@ -213,7 +234,13 @@ You can also completely replace the method used to filter either a single option
 
 For multi-select inputs, when providing a custom `filterOptions` method, remember to exclude current values from the returned array of options.
 
-#### Effeciently rendering large lists with windowing
+#### Filtering large lists
+
+The default `filterOptions` method scans the options array for matches each time the filter text changes.
+This works well but can get slow as the options array grows to several hundred objects.
+For larger options lists a custom filter function like [`react-select-fast-filter-options`](https://github.com/bvaughn/react-select-fast-filter-options) will produce better results.
+
+### Effeciently rendering large lists with windowing
 
 The `menuRenderer` property can be used to override the default drop-down list of options.
 This should be done when the list is large (hundreds or thousands of items) for faster rendering.
@@ -250,13 +277,36 @@ function cleanInput(inputValue) {
 />
 ```
 
+### Overriding default key-down behavior with onInputKeyDown
+
+`Select` listens to `keyDown` events to select items, navigate drop-down list via arrow keys, etc.
+You can extend or override this behavior by providing a `onInputKeyDown` callback.
+
+```js
+function onInputKeyDown(event) {
+	switch (event.keyCode) {
+		case 9:   // TAB
+			// Extend default TAB behavior by doing something here
+			break;
+		case 13: // ENTER
+			// Override default ENTER behavior by doing stuff here and then preventing default
+			event.preventDefault();
+			break;
+	}
+}
+
+<Select
+	{...otherProps}
+	onInputKeyDown={onInputKeyDown}
+/>
+```
+
 ### Further options
 
 
 	Property	|	Type		|	Default		|	Description
 :-----------------------|:--------------|:--------------|:--------------------------------
 	addLabelText	|	string	|	'Add "{label}"?'	|	text to display when `allowCreate` is true
-	allowCreate	|	bool	|	false		|	allow new options to be created in multi mode (displays an "Add \<option> ?" item when a value not already in the `options` array is entered) [NOTE: not available in 1.0.0-beta]
 	autoBlur	|	bool | false | Blurs the input element after a selection has been made. Handy for lowering the keyboard on mobile devices
 	autofocus       |       bool    |      undefined        |  autofocus the component on mount
 	autoload 	|	bool	|	true		|	whether to auto-load the default async options set
@@ -284,14 +334,15 @@ function cleanInput(inputValue) {
 	menuRenderer | func | undefined | Renders a custom menu with options; accepts the following named parameters: `menuRenderer({ focusedOption, focusOption, options, selectValue, valueArray })`
 	multi 		|	bool	|	undefined	|	multi-value input
 	name 		|	string	|	undefined	|	field name, for hidden `<input />` tag
-	newOptionCreator	|	func	|	undefined	|	factory to create new options when `allowCreate` is true [NOTE: not available in 1.0.0-beta]
 	noResultsText 	|	string	|	'No results found'	|	placeholder displayed when there are no matching search results or a falsy value to hide it
 	onBlur 		|	func	|	undefined	|	onBlur handler: `function(event) {}`
 	onBlurResetsInput	|	bool	|	true	|	whether to clear input on blur or not
 	onChange 	|	func	|	undefined	|	onChange handler: `function(newValue) {}`
 	onClose		|	func	|	undefined	|	handler for when the menu closes: `function () {}`
+	onCloseResetInput | bool  | true  | whether to clear input when closing the menu through the arrow
 	onFocus 	|	func	|	undefined	|	onFocus handler: `function(event) {}`
 	onInputChange	|	func	|	undefined	|	onInputChange handler: `function(inputValue) {}`
+	onInputKeyDown	|	func	|	undefined	|	input keyDown handler; call `event.preventDefault()` to override default `Select` behavior: `function(event) {}`
 	onOpen		|	func	|	undefined	|	handler for when the menu opens: `function () {}`
 	onValueClick	|	func	|	undefined	|	onClick handler for value labels: `function (value, event) {}`
 	openOnFocus | bool | false | open the options menu when the input gets focus (requires searchable = true)
