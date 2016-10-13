@@ -1029,6 +1029,8 @@ var stringOrNode = _react2['default'].PropTypes.oneOfType([_react2['default'].Pr
 
 var instanceId = 1;
 
+var invalidOptions = {};
+
 var Select = _react2['default'].createClass({
 
 	displayName: 'Select',
@@ -1598,9 +1600,10 @@ var Select = _react2['default'].createClass({
 		if (renderInvalidValues) {
 			var _ref;
 
-			return _ref = {
+			invalidOptions[value] = invalidOptions[value] || (_ref = {
 				invalid: true
-			}, _defineProperty(_ref, labelKey, value), _defineProperty(_ref, valueKey, value), _ref;
+			}, _defineProperty(_ref, labelKey, value), _defineProperty(_ref, valueKey, value), _ref);
+			return invalidOptions[value];
 		}
 	},
 

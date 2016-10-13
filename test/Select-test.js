@@ -1731,6 +1731,39 @@ describe('Select', () => {
                 </span>);
 		});
 
+		describe('with multi-select and renderInvalidValues', () => {
+
+			beforeEach(() => {
+
+				options = [
+					{ value: 'one', label: 'One' },
+					{ value: 'two', label: 'Two', clearableValue: false },
+					{ value: 'three', label: 'Three' },
+					{ value: 'four', label: 'Four' }
+				];
+
+				// Render an instance of the component
+				wrapper = createControlWithWrapper({
+					value: '',
+					options: options,
+					renderInvalidValues: true,
+					searchable: true,
+					multi: true
+				});
+			});
+
+			it('removes an invalid item when clicking on the X', () => {
+
+				setValueProp(['fhgwg']);
+				onChange.reset();  // Ignore previous onChange calls
+
+				var deleteButton = ReactDOM.findDOMNode(instance).querySelectorAll('.Select-value-icon')[0];
+				TestUtils.Simulate.mouseDown(deleteButton);
+
+				expect(onChange, 'was called with', []);
+			});
+		});
+
 		describe('with late options', () => {
 
 			beforeEach(() => {
