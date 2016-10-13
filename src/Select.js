@@ -46,6 +46,8 @@ const stringOrNode = React.PropTypes.oneOfType([
 
 let instanceId = 1;
 
+const invalidOptions = {};
+
 const Select = React.createClass({
 
 	displayName: 'Select',
@@ -591,11 +593,12 @@ const Select = React.createClass({
 
 		// no matching option, return an invalid option if renderInvalidValues is enabled
 		if (renderInvalidValues) {
-			return {
+			invalidOptions[value] = invalidOptions[value] || {
 				invalid: true,
 				[labelKey]: value,
 				[valueKey]: value
 			};
+      return invalidOptions[value];
 		}
 	},
 
