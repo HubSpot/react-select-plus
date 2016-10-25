@@ -1,8 +1,15 @@
+/*!
+  Copyright (c) 2016 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/react-select
+*/
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Input from 'react-input-autosize';
+import AutosizeInput from 'react-input-autosize';
 import classNames from 'classnames';
 
+import defaultArrowRenderer from './utils/defaultArrowRenderer';
 import defaultFilterOptions from './utils/defaultFilterOptions';
 import defaultMenuRenderer from './utils/defaultMenuRenderer';
 
@@ -56,12 +63,12 @@ const Select = React.createClass({
 		addLabelText: React.PropTypes.string,       // placeholder displayed when you want to add a label on a multi-value input
 		'aria-label': React.PropTypes.string,       // Aria label (for assistive tech)
 		'aria-labelledby': React.PropTypes.string,	// HTML ID of an element that should be used as the label (for assistive tech)
+		arrowRenderer: React.PropTypes.func, 				// Create drop-down caret element
 		autoBlur: React.PropTypes.bool,             // automatically blur the component when an option is selected
 		autofocus: React.PropTypes.bool,            // autofocus the component on mount
 		autosize: React.PropTypes.bool,             // whether to enable autosizing or not
 		backspaceRemoves: React.PropTypes.bool,     // whether backspace removes an item if there is no text input
-		backspaceToRemoveMessage: React.PropTypes.string,  // Message to use for screenreaders to press backspace to remove the current item -
-                              									// {label} is replaced with the item label
+		backspaceToRemoveMessage: React.PropTypes.string,  // Message to use for screenreaders to press backspace to remove the current item - {label} is replaced with the item label
 		className: React.PropTypes.string,          // className for the outer element
 		clearAllText: stringOrNode,                 // title for the "clear" control when multi: true
 		clearValueText: stringOrNode,               // title for the "clear" control
@@ -131,6 +138,7 @@ const Select = React.createClass({
 	getDefaultProps () {
 		return {
 			addLabelText: 'Add "{label}"?',
+			arrowRenderer: defaultArrowRenderer,
 			autosize: true,
 			backspaceRemoves: true,
 			backspaceToRemoveMessage: 'Press backspace to remove {label}',
@@ -357,7 +365,7 @@ const Select = React.createClass({
 
 			let input = this.input;
 			if (typeof input.getInput === 'function') {
-				// Get the actual DOM input if the ref is an <Input /> component
+				// Get the actual DOM input if the ref is an <AutosizeInput /> component
 				input = input.getInput();
 			}
 
@@ -424,6 +432,7 @@ const Select = React.createClass({
 	},
 
 	handleInputFocus (event) {
+		if (this.props.disabled) return;
 		var isOpen = this.state.isOpen || this._openAfterFocus || this.props.openOnFocus;
 		if (this.props.onFocus) {
 			this.props.onFocus(event);
@@ -888,7 +897,7 @@ const Select = React.createClass({
 
 			if (this.props.autosize) {
 				return (
-					<Input {...inputProps} minWidth="5px" />
+					<AutosizeInput {...inputProps} minWidth="5px" />
 				);
 			}
 			return (
@@ -915,9 +924,15 @@ const Select = React.createClass({
 	},
 
 	renderArrow () {
+		const onMouseDown = this.handleMouseDownOnArrow;
+		const arrow = this.props.arrowRenderer({ onMouseDown });
+
 		return (
-			<span className="Select-arrow-zone" onMouseDown={this.handleMouseDownOnArrow}>
-				<span className="Select-arrow" onMouseDown={this.handleMouseDownOnArrow} />
+			<span
+				className="Select-arrow-zone"
+				onMouseDown={onMouseDown}
+			>
+				{arrow}
 			</span>
 		);
 	},
