@@ -76,6 +76,39 @@ describe('Creatable', () => {
 		expect(creatableNode.querySelector('.Select-menu-outer').textContent, 'not to equal', Select.Creatable.promptTextCreator('existing'));
 	});
 
+	it('should filter the "create..." prompt using both filtered options and currently-selected options', () => {
+		let isOptionUniqueParams;
+		createControl({
+			filterOptions: () => [
+				{ value: 'one', label: 'One' }
+			],
+			isOptionUnique: (params) => {
+				isOptionUniqueParams = params;
+			},
+			multi: true,
+			options: [
+				{ value: 'one', label: 'One' },
+				{ value: 'two', label: 'Two' }
+			],
+			value: [
+				{ value: 'three', label: 'Three' }
+			]
+		});
+		typeSearchText('test');
+		const { options } = isOptionUniqueParams;
+		const values = options.map(option => option.value);
+		expect(values, 'to have length', 2);
+		expect(values, 'to contain', 'one');
+		expect(values, 'to contain', 'three');
+	});
+
+	it('should guard against invalid values returned by filterOptions', () => {
+		createControl({
+			filterOptions: () => null
+		});
+		typeSearchText('test');;
+	});
+
 	it('should not show a "create..." prompt if current filter text is not a valid option (as determined by :isValidNewOption prop)', () => {
 		createControl({
 			isValidNewOption: () => false
@@ -123,6 +156,23 @@ describe('Creatable', () => {
 		TestUtils.Simulate.keyDown(filterInputNode, { keyCode: 40, key: 'ArrowDown' }); // Select 'One'
 		TestUtils.Simulate.keyDown(filterInputNode, { keyCode: 13 });
 		expect(options, 'to have length', 1);
+	});
+
+	it('should allow a custom select type to be rendered via the :children property', () => {
+		let childProps;
+		createControl({
+			children: (props) => {
+				childProps = props;
+				return <div>faux select</div>;
+			}
+		});
+		expect(creatableNode.textContent, 'to equal', 'faux select');
+		expect(childProps.allowCreate, 'to equal', true);
+	});
+
+	it('default :children function renders a Select component', () => {
+		createControl();
+		expect(creatableNode.className, 'to contain', 'Select');
 	});
 
 	it('default :isOptionUnique function should do a simple equality check for value and label', () => {

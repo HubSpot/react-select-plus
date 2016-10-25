@@ -25,7 +25,7 @@ ReactDOM.render(
 		<NumericSelect label="Numeric Values" />
 		<GroupedOptionsField label="Option Groups" />
 		<CustomRender label="Custom Render Methods"/>
-		<CustomComponents label="Custom Placeholder, Option and Value Components" />
+		<CustomComponents label="Custom Placeholder, Option, Value, and Arrow Components" />
 		<Creatable
 			hint="Enter a value that's NOT in the list, then hit return"
 			label="Custom tag creation"
