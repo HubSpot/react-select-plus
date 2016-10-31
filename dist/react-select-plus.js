@@ -1116,7 +1116,7 @@ var Select = _react2['default'].createClass({
 
 	handleTouchOutside: function handleTouchOutside(event) {
 		// handle touch outside on ios to dismiss menu
-		if (this.wrapper && !this.wrapper.contains(event.target)) {
+		if (this.wrapper && !this.wrapper.contains(event.target) && this.menuContainer && !this.menuContainer.contains(event.target)) {
 			this.closeMenu();
 		}
 	},
