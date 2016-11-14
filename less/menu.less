@@ -36,9 +36,30 @@
 
 // option groups
 
+.Select-option-group{
+
+	&.is-focused {
+		background-color: @select-option-focused-bg-fb;  /* Fallback color for IE 8 */
+		background-color: @select-option-focused-bg;
+		color: @select-option-focused-color;
+	}
+	.Select-option-group {
+		text-indent: @select-padding-horizontal * 2;
+		.Select-option {
+			padding-left: @select-padding-horizontal * 2;
+		}
+		.Select-option-group {
+			text-indent: @select-padding-horizontal * 3;
+			.Select-option {
+				padding-left: @select-padding-horizontal * 3;
+			}
+		}
+	}
+}
+
 .Select-option-group-label {
 	box-sizing: border-box;
-	background-color: @select-option-bg;
+	background-color: inherit;
 	color: @select-option-color;
 	font-weight: bold;
 	cursor: default;
@@ -46,9 +67,14 @@
 	padding: @select-padding-vertical @select-padding-horizontal;
 }
 
+.Select-option-group-label-selectable{
+	cursor: pointer;
+}
+
+
 .Select-option-group-label ~ .Select-option,
 .Select-option-group-label ~ .Select-option-group {
-	padding-left: @select-padding-horizontal * 2;
+	text-indent: @select-padding-horizontal * 2;
 }
 
 
@@ -56,7 +82,6 @@
 
 .Select-option {
 	box-sizing: border-box;
-	background-color: @select-option-bg;
 	color: @select-option-color;
 	cursor: pointer;
 	display: block;

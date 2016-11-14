@@ -245,22 +245,42 @@
   max-height: 198px;
   overflow-y: auto;
 }
+.Select-option-group.is-focused {
+  background-color: #ebf5ff;
+  /* Fallback color for IE 8 */
+  background-color: rgba(0, 126, 255, 0.08);
+  color: #333;
+}
+.Select-option-group .Select-option-group {
+  text-indent: 20px;
+}
+.Select-option-group .Select-option-group .Select-option {
+  padding-left: 20px;
+}
+.Select-option-group .Select-option-group .Select-option-group {
+  text-indent: 30px;
+}
+.Select-option-group .Select-option-group .Select-option-group .Select-option {
+  padding-left: 30px;
+}
 .Select-option-group-label {
   box-sizing: border-box;
-  background-color: #fff;
+  background-color: inherit;
   color: #666666;
   font-weight: bold;
   cursor: default;
   display: block;
   padding: 8px 10px;
 }
+.Select-option-group-label-selectable {
+  cursor: pointer;
+}
 .Select-option-group-label ~ .Select-option,
 .Select-option-group-label ~ .Select-option-group {
-  padding-left: 20px;
+  text-indent: 20px;
 }
 .Select-option {
   box-sizing: border-box;
-  background-color: #fff;
   color: #666666;
   cursor: pointer;
   display: block;

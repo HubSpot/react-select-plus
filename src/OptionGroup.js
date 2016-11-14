@@ -4,9 +4,16 @@ import classNames from 'classnames';
 const OptionGroup = React.createClass({
 	propTypes: {
 		children: React.PropTypes.any,
-		className: React.PropTypes.string,             // className (based on mouse position)
-		label: React.PropTypes.node,                   // the heading to show above the child options
-		option: React.PropTypes.object.isRequired,     // object that is base for that option group
+		className: React.PropTypes.string,          // className (based on mouse position)
+		isDisabled: React.PropTypes.bool,              // the option is disabled
+		isFocused: React.PropTypes.bool,						// method to handle mouseEnter on option group label element
+		isFocused: React.PropTypes.bool,            // the option group is focused
+		isSelected: React.PropTypes.bool,           // the option group is selected
+		label: React.PropTypes.node,                // the heading to show above the child options
+		onFocus: React.PropTypes.func,						 	// provide the onFocus function to highlight if selectGroup
+		onSelect: React.PropTypes.func,							// provide the onSelect function to select group if selectGroup
+		option: React.PropTypes.object.isRequired,  // object that is base for that option group
+		selectGroup: React.PropTypes.bool,				  // option to allow Groups to be selected
 	},
 
 	blockEvent (event) {
@@ -23,8 +30,20 @@ const OptionGroup = React.createClass({
 	},
 
 	handleMouseDown (event) {
+		const { selectGroup } = this.props;
 		event.preventDefault();
 		event.stopPropagation();
+		if (selectGroup) this.props.onSelect(this.props.option, event);
+	},
+
+	handleMouseEnter (event) {
+		const { selectGroup } = this.props;
+		if (selectGroup) this.onFocus(event);
+	},
+
+	handleMouseMove (event) {
+		const { selectGroup } = this.props;
+		if (selectGroup) this.onFocus(event);
 	},
 
 	handleTouchEnd(event){
@@ -45,9 +64,22 @@ const OptionGroup = React.createClass({
 		this.dragging = false;
 	},
 
+	onFocus (event) {
+		if (!this.props.isFocused) {
+			this.props.onFocus(this.props.option, event);
+		}
+	},
+
 	render () {
-		var { option } = this.props;
+		var { option, selectGroup, isFocused, isDisabled } = this.props;
 		var className = classNames(this.props.className, option.className);
+
+		var groupLabelClassName = classNames({
+			'Select-option-group-label':  true,
+			'Select-option-group-label-selectable': selectGroup,
+			'is-focused': isFocused,
+			'is-disabled': isDisabled,
+		});
 
 		return option.disabled ? (
 			<div className={className}
@@ -59,13 +91,16 @@ const OptionGroup = React.createClass({
 			<div className={className}
 				style={option.style}
 				onMouseDown={this.handleMouseDown}
-				onMouseEnter={this.handleMouseEnter}
-				onMouseMove={this.handleMouseMove}
+
 				onTouchStart={this.handleTouchStart}
 				onTouchMove={this.handleTouchMove}
 				onTouchEnd={this.handleTouchEnd}
 				title={option.title}>
-				<div className="Select-option-group-label">
+				<div
+					className={groupLabelClassName}
+					onMouseEnter={this.handleMouseEnter}
+					onMouseMove={this.handleMouseMove}
+				>
 					{this.props.label}
 				</div>
 				{this.props.children}

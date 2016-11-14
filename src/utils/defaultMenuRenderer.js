@@ -7,6 +7,7 @@ function isGroup (option) {
 
 function menuRenderer ({
 	focusedOption,
+	selectGroup,
 	instancePrefix,
 	labelKey,
 	onFocus,
@@ -27,17 +28,26 @@ function menuRenderer ({
 	const renderOptions = (optionsSubset) => {
 		return optionsSubset.map((option, i) => {
 			if (isGroup(option)) {
+				let isFocused = option === focusedOption;
+
 				let optionGroupClass = classNames({
 					'Select-option-group': true,
+					'is-focused': isFocused,
+					'is-disabled': option.disabled,
 				});
 
 				return (
 					<OptionGroup
 						className={optionGroupClass}
+						isDisabled={option.disabled}
+						isFocused={isFocused}
 						key={`option-group-${i}`}
 						label={renderLabel(option)}
+						onFocus={onFocus}
+						onSelect={onSelect}
 						option={option}
 						optionIndex={i}
+						selectGroup={selectGroup}
 						>
 						{renderOptions(option.options)}
 					</OptionGroup>

@@ -123,6 +123,7 @@ const Select = React.createClass({
 		resetValue: React.PropTypes.any,            // value to use when you clear the control
 		scrollMenuIntoView: React.PropTypes.bool,   // boolean to enable the viewport to shift so that the full menu fully visible when engaged
 		searchable: React.PropTypes.bool,           // whether to enable searching feature or not
+    selectGroup: React.PropTypes.bool,          // boolean to allow selection of entrire Groups
 		simpleValue: React.PropTypes.bool,          // pass the value to onChange as a simple value (legacy pre 1.0 mode), defaults to false
 		style: React.PropTypes.object,              // optional style to apply to the control
 		tabIndex: React.PropTypes.string,           // optional tab index of the control
@@ -174,6 +175,7 @@ const Select = React.createClass({
 			required: false,
 			scrollMenuIntoView: true,
 			searchable: true,
+      selectGroup: false,
 			simpleValue: false,
 			tabSelectsValue: true,
 			valueComponent: Value,
@@ -651,8 +653,21 @@ const Select = React.createClass({
 
 	addValue (value) {
 		var valueArray = this.getValueArray(this.props.value);
-		this.setValue(valueArray.concat(value));
+    var values = value.options ? this.valuesForGroup(value.options) : value;
+		this.setValue(valueArray.concat(values));
 	},
+
+  valuesForGroup (ary) {
+		var ret = [];
+    for (var i = 0; i < ary.length; i++) {
+      if (Array.isArray(ary[i].options)) {
+        ret = ret.concat(this.valuesForGroup(ary[i].options));
+      } else {
+        ret.push(ary[i]);
+      }
+    }
+    return ret;
+  },
 
 	popValue () {
 		var valueArray = this.getValueArray(this.props.value);
@@ -693,8 +708,8 @@ const Select = React.createClass({
 	},
 
 	focusOption (option) {
-		this.setState({
-			focusedOption: option
+    this.setState({
+			focusedOption: option,
 		});
 	},
 
@@ -960,6 +975,7 @@ const Select = React.createClass({
           matchPos: this.props.matchPos,
           matchProp: this.props.matchProp,
           valueKey: this.props.valueKey,
+          selectGroup: this.props.selectGroup,
         }
       );
 		} else {
@@ -968,27 +984,30 @@ const Select = React.createClass({
 	},
 
 	flattenOptions (options, group) {
-		if (!options) return [];
-		let flatOptions = [];
-		for (let i = 0; i < options.length; i ++) {
-      // We clone each option with a pointer to its parent group for efficient unflattening
+    if (!options) return [];
+    let flatOptions = [];
+    for (let i = 0; i < options.length; i ++) {
       const optionCopy = clone(options[i]);
       optionCopy.isInTree = false;
       if (group) {
         optionCopy.group = group;
       }
-			if (isGroup(optionCopy)) {
-				flatOptions = flatOptions.concat(this.flattenOptions(optionCopy.options, optionCopy));
+      if (isGroup(optionCopy)) {
+
+        optionCopy.isGroupHeading = true;
+        optionCopy.value = optionCopy.label;
+        if (this.props.selectGroup) flatOptions.push(optionCopy);
+        flatOptions = flatOptions.concat(this.flattenOptions(optionCopy.options, optionCopy));
         optionCopy.options = [];
-			} else {
-				flatOptions.push(optionCopy);
-			}
-		}
-		return flatOptions;
+      } else {
+        flatOptions.push(optionCopy);
+      }
+    }
+    return flatOptions;
 	},
 
   unflattenOptions (flatOptions) {
-    const groupedOptions = [];
+    let groupedOptions = [];
     let parent, child;
 
     // Remove all ancestor groups from the tree
@@ -996,8 +1015,9 @@ const Select = React.createClass({
       option.isInTree = false;
       parent = option.group;
       while (parent) {
+        parent.options = [];
+
         if (parent.isInTree) {
-          parent.options = [];
           parent.isInTree = false;
         }
         parent = parent.group;
@@ -1008,6 +1028,7 @@ const Select = React.createClass({
     flatOptions.forEach((option) => {
       child = option;
       parent = child.group;
+
       while (parent) {
         if (!child.isInTree) {
           parent.options.push(child);
@@ -1022,7 +1043,18 @@ const Select = React.createClass({
         child.isInTree = true;
       }
     });
+    groupedOptions = this.removeEmptyGroups(groupedOptions);
     return groupedOptions;
+  },
+
+  removeEmptyGroups (groupedOptions, groupHeading) {
+    return groupedOptions.filter((item, index) => {
+      if (!item.isGroupHeading) return true;
+      this.removeEmptyGroups(item.options, item);
+      if (item.options.length > 0) return true;
+      if (groupHeading) groupHeading.options.splice(index, 1);
+      return false;
+    });
   },
 
 	onOptionRef(ref, isFocused) {
@@ -1047,6 +1079,7 @@ const Select = React.createClass({
 				optionRenderer: this.props.optionRenderer || this.getOptionLabel,
 				options,
         selectValue: this.selectValue,
+        selectGroup: this.props.selectGroup,
 				valueArray,
 				valueKey: this.props.valueKey,
 			});
@@ -1126,7 +1159,8 @@ const Select = React.createClass({
 	render () {
     let valueArray = this.getValueArray(this.props.value);
 		this._visibleOptions = this.filterFlatOptions(this.props.multi ? valueArray : null);
-		let options = this.unflattenOptions(this._visibleOptions);
+    let options = this.unflattenOptions(this._visibleOptions);
+
 		let isOpen = typeof this.props.isOpen === 'boolean' ? this.props.isOpen : this.state.isOpen;
 		if (this.props.multi && !options.length && valueArray.length && !this.state.inputValue) isOpen = false;
 		const focusedOptionIndex = this.getFocusableOptionIndex(valueArray[0]);
@@ -1137,6 +1171,7 @@ const Select = React.createClass({
 		} else {
 			focusedOption = this._focusedOption = null;
 		}
+
 		let className = classNames('Select', this.props.className, {
 			'Select--multi': this.props.multi,
 			'Select--single': !this.props.multi,

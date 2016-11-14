@@ -12,7 +12,12 @@ function filterOptions (options, filterValue, excludeOptions, props) {
 	if (excludeOptions) excludeOptions = excludeOptions.map(i => i[props.valueKey]);
 
 	return options.filter(option => {
-		if (excludeOptions && excludeOptions.indexOf(option[props.valueKey]) > -1) return false;
+		if (excludeOptions && excludeOptions.indexOf(option[props.valueKey]) > -1) {
+			if (option.group && props.selectGroup) {
+				option.group.options.splice(option);
+			}
+			return false;
+		}
 		if (props.filterOption) return props.filterOption.call(this, option, filterValue);
 		if (!filterValue) return true;
 		var valueTest = String(option[props.valueKey]);
