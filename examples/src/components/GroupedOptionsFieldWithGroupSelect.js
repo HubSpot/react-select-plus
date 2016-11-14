@@ -79,6 +79,7 @@ var GroupedOptionsFieldWithGroupSelect = React.createClass({
 				<Select
 					multi
 					onChange={this.onChange}
+					isOpen
 					options={ops}
 					placeholder="Select some colors"
 					selectGroup
