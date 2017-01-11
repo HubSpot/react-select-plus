@@ -1799,7 +1799,6 @@ var Select = _react2['default'].createClass({
 		this.setValue(valueArray.filter(function (i) {
 			return i !== value;
 		}));
-		this.focus();
 	},
 
 	clearValue: function clearValue(event) {
