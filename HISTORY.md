@@ -1,8 +1,3 @@
-## v1.0.0-beta14.patch1 / 2016-07-25
-
-* (react-select-plus) On dropdown open, scroll to element above focused option
-instead of scrolling all the way to the top of the option group.
-
 ## v1.0.0-rc / 2016-09-04
 
 * fixed; reset value to `[]` when `multi=true`, thanks [Michael Williamson](https://github.com/mwilliamson)
@@ -14,6 +9,11 @@ instead of scrolling all the way to the top of the option group.
 * added; optional `instanceId` prop for server-side rendering, thanks [Jevin Anderson](https://github.com/JevinAnderson)
 * added; `onCloseResetsInput` prop, thanks [Frankie](https://github.com/frankievx)
 * added; `Creatable` component, replaces pre-1.0 `allowCreate` prop, thanks [Brian Vaughn](https://github.com/bvaughn)
+
+## v1.0.0-beta14.patch1 / 2016-07-25
+
+* (react-select-plus) On dropdown open, scroll to element above focused option
+instead of scrolling all the way to the top of the option group.
 
 ## v1.0.0-beta14 / 2016-07-17
 

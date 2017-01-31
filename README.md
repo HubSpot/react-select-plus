@@ -1,5 +1,4 @@
 React-Select-Plus
-=================
 
 A Select control for [React](http://facebook.github.io/react/index.html) based on [JedWatson/React-Select](https://github.com/JedWatson/react-select/).
 
@@ -86,6 +85,12 @@ function logChange(val) {
 />
 ```
 
+### Custom classNames
+
+You can provide a custom `className` prop to the `<Select>` component, which will be added to the base `.Select` className for the outer container.
+
+The built-in Options renderer also support custom classNames, just add a `className` property to objects in the `options` array.
+
 ### Multiselect options
 
 You can enable multi-value selection by setting `multi={true}`. In this mode:
@@ -95,7 +100,7 @@ You can enable multi-value selection by setting `multi={true}`. In this mode:
 * The values of the selected items are joined using the `delimiter` prop to create the input value when `joinValues` is true
 * A simple value, if provided, will be split using the `delimiter` prop
 * The `onChange` event provides an array of selected options _or_ a comma-separated string of values (eg `"1,2,3"`) if `simpleValue` is true
-* By default, only options in the `options` array can be selected. Setting `allowCreate` to true allows new options to be created if they do not already exist. *NOTE:* `allowCreate` is not implemented in `1.0.0-beta`, if you need this option please stay on `0.9.x`.
+* By default, only options in the `options` array can be selected. Use the `Creatable` Component (which wraps `Select`) to allow new options to be created if they do not already exist. Hitting comma (','), ENTER or TAB will add a new option. Versions `0.9.x` and below provided a boolean attribute on the `Select` Component (`allowCreate`) to achieve the same functionality. It is no longer available starting with version `1.0.0`.
 * By default, selected options can be cleared. To disable the possibility of clearing a particular option, add `clearableValue: false` to that option:
 ```javascript
 var options = [
@@ -213,8 +218,8 @@ Property | Type | Description
 `isOptionUnique` | function | Searches for any matching option within the set of options. This function prevents duplicate options from being created. By default this is a basic, case-sensitive comparison of label and value. Expected signature: `({ option: Object, options: Array, labelKey: string, valueKey: string }): boolean` |
 `isValidNewOption` | function | Determines if the current input text represents a valid option. By default any non-empty string will be considered valid. Expected signature: `({ label: string }): boolean` |
 `newOptionCreator` | function | Factory to create new option. Expected signature: `({ label: string, labelKey: string, valueKey: string }): Object` |
-`promptTextCreator` | function | Creates prompt/placeholder option text. Expected signature: `(filterText: string): string`
-`shouldKeyDownEventCreateNewOption` | function | Decides if a keyDown event (eg its `keyCode`) should result in the creation of a new option. ENTER, TAB and comma keys create new options by dfeault. Expected signature: `({ keyCode: number }): boolean` |
+`onNewOptionClick` | function | new option click handler, it calls when new option has been selected. `function(option) {}` |
+`shouldKeyDownEventCreateNewOption` | function | Decides if a keyDown event (eg its `keyCode`) should result in the creation of a new option. ENTER, TAB and comma keys create new options by default. Expected signature: `({ keyCode: number }): boolean` |
 `promptTextCreator` | function | Factory for overriding default option creator prompt label. By default it will read 'Create option "{label}"'. Expected signature: `(label: String): String` |
 
 ### Combining Async and Creatable
@@ -242,16 +247,18 @@ You can control how options are filtered with the following properties:
 * `matchPos`: `"start"` or `"any"`: whether to match the text entered at the start or any position in the option value
 * `matchProp`: `"label"`, `"value"` or `"any"`: whether to match the value, label or both values of each option when filtering
 * `ignoreCase`: `Boolean`: whether to ignore case or match the text exactly when filtering
+* `ignoreAccents`: `Boolean`: whether to ignore accents on characters like ø or å
 
 `matchProp` and `matchPos` both default to `"any"`.
 `ignoreCase` defaults to `true`.
+`ignoreAccents` defaults to `true`.
 
 #### Advanced filters
 
 You can also completely replace the method used to filter either a single option, or the entire options array (allowing custom sort mechanisms, etc.)
 
-* `filterOption`: `function(Object option, String filter)` returns `Boolean`. Will override `matchPos`, `matchProp` and `ignoreCase` options.
-* `filterOptions`: `function(Array options, String filter, Array currentValues)` returns `Array filteredOptions`. Will override `filterOption`, `matchPos`, `matchProp` and `ignoreCase` options.
+* `filterOption`: `function(Object option, String filter)` returns `Boolean`. Will override `matchPos`, `matchProp`, `ignoreCase` and `ignoreAccents` options.
+* `filterOptions`: `function(Array options, String filter, Array currentValues)` returns `Array filteredOptions`. Will override `filterOption`, `matchPos`, `matchProp`, `ignoreCase` and `ignoreAccents` options.
 
 For multi-select inputs, when providing a custom `filterOptions` method, remember to exclude current values from the returned array of options.
 
@@ -278,6 +285,9 @@ The custom `menuRenderer` property accepts the following named parameters:
 | focusedOption | `Object` | The currently focused option; should be visible in the menu by default. |
 | focusOption | `Function` | Callback to focus a new option; receives the option as a parameter. |
 | labelKey | `String` | Option labels are accessible with this string key. |
+| optionClassName | `String` | The className that gets used for options |
+| optionComponent | `ReactClass` | The react component that gets used for rendering an option |
+| optionRenderer | `Function` | The function that gets used to render the content of an option |
 | options | `Array<Object>` | Ordered array of options to render. |
 | selectValue | `Function` | Callback to select a new option; receives the option as a parameter. |
 | valueArray | `Array<Object>` | Array of currently selected options. |
@@ -328,22 +338,26 @@ function onInputKeyDown(event) {
 	Property	|	Type		|	Default		|	Description
 :-----------------------|:--------------|:--------------|:--------------------------------
 	addLabelText	|	string	|	'Add "{label}"?'	|	text to display when `allowCreate` is true
-  arrowRenderer | func | undefined | Renders a custom drop-down arrow to be shown in the right-hand side of the select: `arrowRenderer({ onMouseDown })`
+  arrowRenderer | func | undefined | Renders a custom drop-down arrow to be shown in the right-hand side of the select: `arrowRenderer({ onMouseDown, isOpen })`
 	autoBlur	|	bool | false | Blurs the input element after a selection has been made. Handy for lowering the keyboard on mobile devices
 	autofocus       |       bool    |      undefined        |  autofocus the component on mount
 	autoload 	|	bool	|	true		|	whether to auto-load the default async options set
 	autosize  | bool | true  | If enabled, the input will expand as the length of its value increases
 	backspaceRemoves 	|	bool	|	true	|	whether pressing backspace removes the last item when there is no input value
+	backspaceToRemoveMessage	|	string	|	'Press backspace to remove {last label}'	|	prompt shown in input when at least one option in a multiselect is shown, set to '' to clear
 	cache	|	bool	|	true	|	enables the options cache for `asyncOptions` (default: `true`)
 	className 	|	string	|	undefined	|	className for the outer element
 	clearable 	|	bool	|	true		|	should it be possible to reset value
 	clearAllText 	|	string	|	'Clear all'	|	title for the "clear" control when `multi` is true
+	clearRenderer | func | undefined | Renders a custom clear to be shown in the right-hand side of the select when clearable true: `clearRenderer()`
 	clearValueText 	|	string	|	'Clear value'	|	title for the "clear" control
 	resetValue 	|	any	|	null	|	value to use when you clear the control
+	deleteRemoves 	|	bool	|	true	|	whether pressing delete key removes the last item when there is no input value
 	delimiter 	|	string	|	','		|	delimiter to use to join multiple values
 	disabled 	|	bool	|	false		|	whether the Select is disabled or not
 	filterOption 	|	func	|	undefined	|	method to filter a single option: `function(option, filterString)`
 	filterOptions 	|	func	|	undefined	|	method to filter the options array: `function([options], filterString, [values])`
+	ignoreAccents 	|	bool	|	true		|	whether to strip accents when filtering
 	ignoreCase 	|	bool	|	true		|	whether to perform case-insensitive filtering
 	inputProps 	|	object	|	{}		|	custom attributes for the Input (in the Select-control) e.g: `{'data-foo': 'bar'}`
 	isLoading	|	bool	|	false		|	whether the Select is loading externally or not (such as options being loaded)
@@ -356,12 +370,12 @@ function onInputKeyDown(event) {
 	menuRenderer | func | undefined | Renders a custom menu with options; accepts the following named parameters: `menuRenderer({ focusedOption, focusOption, options, selectValue, valueArray })`
 	multi 		|	bool	|	undefined	|	multi-value input
 	name 		|	string	|	undefined	|	field name, for hidden `<input />` tag
-	noResultsText 	|	string	|	'No results found'	|	placeholder displayed when there are no matching search results or a falsy value to hide it
+	noResultsText 	|	string 	|	'No results found'	|	placeholder displayed when there are no matching search results or a falsy value to hide it (can also be a react component)
 	onBlur 		|	func	|	undefined	|	onBlur handler: `function(event) {}`
 	onBlurResetsInput	|	bool	|	true	|	whether to clear input on blur or not
 	onChange 	|	func	|	undefined	|	onChange handler: `function(newValue) {}`
 	onClose		|	func	|	undefined	|	handler for when the menu closes: `function () {}`
-	onCloseResetInput | bool  | true  | whether to clear input when closing the menu through the arrow
+	onCloseResetsInput | bool  | true  | whether to clear input when closing the menu through the arrow
 	onFocus 	|	func	|	undefined	|	onFocus handler: `function(event) {}`
 	onInputChange	|	func	|	undefined	|	onInputChange handler: `function(inputValue) {}`
 	onInputKeyDown	|	func	|	undefined	|	input keyDown handler; call `event.preventDefault()` to override default `Select` behavior: `function(event) {}`
@@ -374,7 +388,6 @@ function onInputKeyDown(event) {
 	renderInvalidValues | bool | false | if a `value` does not match any `options`, render it anyway
 	scrollMenuIntoView |	bool	|	true		|	whether the viewport will shift to display the entire menu when engaged
 	searchable 	|	bool	|	true		|	whether to enable searching feature or not
-	searchingText	|	string	|	'Searching...'	|	message to display whilst options are loading via asyncOptions, or when `isLoading` is true
 	searchPromptText |	string\|node	|	'Type to search'	|	label to prompt for search input
 	tabSelectsValue	|	bool	|	true	|	whether to select the currently focused value when the `[tab]` key is pressed
 	value 		|	any	|	undefined	|	initial field value
