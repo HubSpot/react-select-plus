@@ -1073,12 +1073,6 @@ const Select = React.createClass({
 		}
 	},
 
-	onOptionRef(ref, isFocused) {
-		if (isFocused) {
-			this.focused = ref;
-		}
-	},
-
 	renderMenu (options, valueArray, focusedOption) {
 		if (options && options.length) {
 			return this.props.menuRenderer({
@@ -1097,7 +1091,6 @@ const Select = React.createClass({
         selectValue: this.selectValue,
 				valueArray,
 				valueKey: this.props.valueKey,
-				onOptionRef: this.onOptionRef,
 			});
 		} else if (this.props.noResultsText) {
 			return (

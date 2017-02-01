@@ -2350,12 +2350,6 @@ var Select = _react2['default'].createClass({
 		}
 	},
 
-	onOptionRef: function onOptionRef(ref, isFocused) {
-		if (isFocused) {
-			this.focused = ref;
-		}
-	},
-
 	renderMenu: function renderMenu(options, valueArray, focusedOption) {
 		if (options && options.length) {
 			return this.props.menuRenderer({
@@ -2373,8 +2367,7 @@ var Select = _react2['default'].createClass({
 				options: options,
 				selectValue: this.selectValue,
 				valueArray: valueArray,
-				valueKey: this.props.valueKey,
-				onOptionRef: this.onOptionRef
+				valueKey: this.props.valueKey
 			});
 		} else if (this.props.noResultsText) {
 			return _react2['default'].createElement(
