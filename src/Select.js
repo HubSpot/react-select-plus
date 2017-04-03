@@ -222,6 +222,10 @@ const Select = React.createClass({
 
 		const valueArray = this.getValueArray(nextProps.value, nextProps);
 
+    if (!nextProps.isOpen && this.props.isOpen) {
+      this.closeMenu();
+    }
+
 		if (nextProps.required) {
 			this.setState({
 				required: this.handleRequired(valueArray[0], nextProps.multi),
