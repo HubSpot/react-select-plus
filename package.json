@@ -1,6 +1,6 @@
 {
   "name": "react-select-plus",
-  "version": "1.0.0-rc.3.patch4",
+  "version": "1.0.0-rc.3.patch5",
   "description": "A fork of react-select with support for option groups",
   "main": "lib/Select.js",
   "style": "dist/react-select-plus.min.css",
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.4",
-    "react-input-autosize": "^1.1.0"
+    "react-input-autosize": "1.1.0"
   },
   "devDependencies": {
     "babel": "^5.8.23",
