@@ -5,6 +5,8 @@
 */
 
 import React from 'react';
+import createClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import AutosizeInput from 'react-input-autosize';
 import classNames from 'classnames';
@@ -49,33 +51,33 @@ function stringifyValue (value) {
 	}
 }
 
-const stringOrNode = React.PropTypes.oneOfType([
-	React.PropTypes.string,
-	React.PropTypes.node
+const stringOrNode = PropTypes.oneOfType([
+	PropTypes.string,
+	PropTypes.node
 ]);
 
 let instanceId = 1;
 
 const invalidOptions = {};
 
-const Select = React.createClass({
+const Select = createClass({
 
 	displayName: 'Select',
 
 	propTypes: {
-		addLabelText: React.PropTypes.string,       // placeholder displayed when you want to add a label on a multi-value input
-		'aria-describedby': React.PropTypes.string,	// HTML ID(s) of element(s) that should be used to describe this input (for assistive tech)
-		'aria-label': React.PropTypes.string,       // Aria label (for assistive tech)
-		'aria-labelledby': React.PropTypes.string,	// HTML ID of an element that should be used as the label (for assistive tech)
-		arrowRenderer: React.PropTypes.func,				// Create drop-down caret element
-		autoBlur: React.PropTypes.bool,             // automatically blur the component when an option is selected
-		autofocus: React.PropTypes.bool,            // autofocus the component on mount
-		autosize: React.PropTypes.bool,             // whether to enable autosizing or not
-		backspaceRemoves: React.PropTypes.bool,     // whether backspace removes an item if there is no text input
-		backspaceToRemoveMessage: React.PropTypes.string,  // Message to use for screenreaders to press backspace to remove the current item - {label} is replaced with the item label
-		className: React.PropTypes.string,          // className for the outer element
+		addLabelText: PropTypes.string,       // placeholder displayed when you want to add a label on a multi-value input
+		'aria-describedby': PropTypes.string,	// HTML ID(s) of element(s) that should be used to describe this input (for assistive tech)
+		'aria-label': PropTypes.string,       // Aria label (for assistive tech)
+		'aria-labelledby': PropTypes.string,	// HTML ID of an element that should be used as the label (for assistive tech)
+		arrowRenderer: PropTypes.func,				// Create drop-down caret element
+		autoBlur: PropTypes.bool,             // automatically blur the component when an option is selected
+		autofocus: PropTypes.bool,            // autofocus the component on mount
+		autosize: PropTypes.bool,             // whether to enable autosizing or not
+		backspaceRemoves: PropTypes.bool,     // whether backspace removes an item if there is no text input
+		backspaceToRemoveMessage: PropTypes.string,  // Message to use for screenreaders to press backspace to remove the current item - {label} is replaced with the item label
+		className: PropTypes.string,          // className for the outer element
 		clearAllText: stringOrNode,                 // title for the "clear" control when multi: true
-		clearRenderer: React.PropTypes.func,        // create clearable x element
+		clearRenderer: PropTypes.func,        // create clearable x element
 		clearValueText: stringOrNode,               // title for the "clear" control
 		clearable: React.PropTypes.bool,            // should it be possible to reset value
 		deleteRemoves: React.PropTypes.bool,        // whether backspace removes an item if there is no text input
@@ -172,7 +174,6 @@ const Select = React.createClass({
 			noResultsText: 'No results found',
 			onBlurResetsInput: true,
 			onCloseResetsInput: true,
-			openAfterFocus: false,
 			optionComponent: Option,
 			optionGroupComponent: OptionGroup,
 			pageSize: 5,
@@ -318,12 +319,6 @@ const Select = React.createClass({
 	focus () {
 		if (!this.input) return;
 		this.input.focus();
-
-		if (this.props.openAfterFocus) {
-			this.setState({
-				isOpen: true,
-			});
-		}
 	},
 
 	blurInput () {
@@ -404,7 +399,7 @@ const Select = React.createClass({
 			});
 		} else {
 			// otherwise, focus the input and open the menu
-			this._openAfterFocus = this.props.openOnFocus;
+			this._openAfterFocus = true;
 			this.focus();
 		}
 	},
@@ -1195,6 +1190,7 @@ const Select = React.createClass({
 		let className = classNames('Select', this.props.className, {
 			'Select--multi': this.props.multi,
 			'Select--single': !this.props.multi,
+			'is-clearable': this.props.clearable,
 			'is-disabled': this.props.disabled,
 			'is-focused': this.state.isFocused,
 			'is-loading': this.props.isLoading,
