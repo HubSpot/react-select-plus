@@ -1,5 +1,7 @@
 import React from 'react';
 import Select from 'react-select-plus';
+import createClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import { AutoSizer, VirtualScroll } from 'react-virtualized';
 
 const DATA = require('../data/cities');
@@ -7,11 +9,11 @@ const DATA = require('../data/cities');
 const OPTION_HEIGHT = 35;
 const MAX_OPTIONS_HEIGHT = 200;
 
-var CitiesField = React.createClass({
+var CitiesField = createClass({
 	displayName: 'CitiesField',
 	propTypes: {
-		label: React.PropTypes.string,
-		searchable: React.PropTypes.bool,
+		label: PropTypes.string,
+		searchable: PropTypes.bool,
 	},
 	getDefaultProps () {
 		return {

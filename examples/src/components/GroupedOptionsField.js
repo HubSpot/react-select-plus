@@ -1,4 +1,6 @@
 import React from 'react';
+import createClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import Select from 'react-select-plus';
 
 var ops = [{
@@ -42,12 +44,12 @@ var ops = [{
 	value: 'white',
 }];
 
-var GroupedOptionsField = React.createClass({
+var GroupedOptionsField = createClass({
 	displayName: 'GroupedOptionsField',
 	propTypes: {
-		delimiter: React.PropTypes.string,
-		label: React.PropTypes.string,
-		multi: React.PropTypes.bool,
+		delimiter: PropTypes.string,
+		label: PropTypes.string,
+		multi: PropTypes.bool,
 	},
 
 	getInitialState () {
