@@ -56,7 +56,7 @@ var MultiSelectField = createClass({
 					</label>
 					<label className="checkbox">
 						<input type="checkbox" className="checkbox-control" checked={this.state.crazy} onChange={this.toggleChocolate} />
-						<span className="checkbox-label">I don't like Chocolate (disabled the option)</span>
+						<span className="checkbox-label">I don't like Chocolate (disable the option)</span>
 					</label>
 				</div>
 			</div>
