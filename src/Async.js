@@ -68,15 +68,12 @@ export default class Async extends Component {
 		}
 	}
 
-	componentWillUpdate (nextProps, nextState) {
-		const propertiesToSync = ['options'];
-		propertiesToSync.forEach((prop) => {
-			if (this.props[prop] !== nextProps[prop]) {
-				this.setState({
-					[prop]: nextProps[prop]
-				});
-			}
-		});
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.options !== this.props.options) {
+			this.setState({
+				options: nextProps.options,
+			});
+		}
 	}
 
 	clearOptions() {
@@ -134,26 +131,28 @@ export default class Async extends Component {
 				isLoading: true
 			});
 		}
-
-		return inputValue;
 	}
 
 	_onInputChange (inputValue) {
 		const { ignoreAccents, ignoreCase, onInputChange } = this.props;
+		let transformedInputValue = inputValue;
 
 		if (ignoreAccents) {
-			inputValue = stripDiacritics(inputValue);
+			transformedInputValue = stripDiacritics(transformedInputValue);
 		}
 
 		if (ignoreCase) {
-			inputValue = inputValue.toLowerCase();
+			transformedInputValue = transformedInputValue.toLowerCase();
 		}
 
 		if (onInputChange) {
-			onInputChange(inputValue);
+			onInputChange(transformedInputValue);
 		}
 
-		return this.loadOptions(inputValue);
+		this.loadOptions(transformedInputValue);
+
+		// Return the original input value to avoid modifying the user's view of the input while typing.
+		return inputValue;
 	}
 
 	inputValue() {

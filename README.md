@@ -74,7 +74,7 @@ var options = [
 ];
 
 function logChange(val) {
-  console.log("Selected: " + val);
+  console.log("Selected: " + JSON.stringify(val));
 }
 
 <Select
@@ -268,7 +268,7 @@ The default `filterOptions` method scans the options array for matches each time
 This works well but can get slow as the options array grows to several hundred objects.
 For larger options lists a custom filter function like [`react-select-fast-filter-options`](https://github.com/bvaughn/react-select-fast-filter-options) will produce better results.
 
-### Effeciently rendering large lists with windowing
+### Efficiently rendering large lists with windowing
 
 The `menuRenderer` property can be used to override the default drop-down list of options.
 This should be done when the list is large (hundreds or thousands of items) for faster rendering.
@@ -294,7 +294,8 @@ The custom `menuRenderer` property accepts the following named parameters:
 
 ### Updating input values with onInputChange
 
-You can manipulate the input using the onInputChange and returning a new value.
+You can manipulate the input by providing a `onInputChange` callback that returns a new value.
+**Please note:** When you want to use `onInputChange` only to listen to the input updates, you still have to return the unchanged value!
 
 ```js
 function cleanInput(inputValue) {
@@ -377,7 +378,7 @@ function onInputKeyDown(event) {
 | onClose | func | undefined | handler for when the menu closes: `function () {}` |
 | onCloseResetsInput | bool | true | whether to clear input when closing the menu through the arrow |
 | onFocus | func | undefined | onFocus handler: `function(event) {}` |
-| onInputChange | func | undefined | onInputChange handler: `function(inputValue) {}` |
+| onInputChange | func | undefined | onInputChange handler/interceptor: `function(inputValue: string): string` |
 | onInputKeyDown | func | undefined | input keyDown handler; call `event.preventDefault()` to override default `Select` behavior: `function(event) {}` |
 | onOpen | func | undefined | handler for when the menu opens: `function () {}` |
 | onValueClick | func | undefined | onClick handler for value labels: `function (value, event) {}` |
@@ -391,6 +392,7 @@ function onInputKeyDown(event) {
 | loadingPlaceholder | string\|node | 'Loading...' | label to prompt for loading search result |
 | tabSelectsValue | bool | true | whether to select the currently focused value when the `[tab]` key is pressed |
 | value | any | undefined | initial field value |
+| valueComponent | func | <Value /> | function which returns a custom way to render/manage the value selected `<CustomValue />` |
 | valueKey | string | 'value' | the option property to use for the value |
 | valueRenderer | func | undefined | function which returns a custom way to render the value selected `function (option) {}` |
 
