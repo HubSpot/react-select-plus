@@ -24,7 +24,7 @@ var _react = (typeof window !== "undefined" ? window['React'] : typeof global !=
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = require('prop-types');
+var _propTypes = (typeof window !== "undefined" ? window['React']['PropTypes'] : typeof global !== "undefined" ? global['React']['PropTypes'] : null);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -272,7 +272,7 @@ function defaultChildren(props) {
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./Select":7,"./utils/stripDiacritics":13,"prop-types":undefined}],2:[function(require,module,exports){
+},{"./Select":7,"./utils/stripDiacritics":13}],2:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -284,7 +284,7 @@ var _react = (typeof window !== "undefined" ? window['React'] : typeof global !=
 
 var _react2 = _interopRequireDefault(_react);
 
-var _createReactClass = require('create-react-class');
+var _createReactClass = (typeof window !== "undefined" ? window['React']['createClass'] : typeof global !== "undefined" ? global['React']['createClass'] : null);
 
 var _createReactClass2 = _interopRequireDefault(_createReactClass);
 
@@ -341,7 +341,7 @@ var AsyncCreatable = (0, _createReactClass2['default'])({
 module.exports = AsyncCreatable;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./Select":7,"create-react-class":undefined}],3:[function(require,module,exports){
+},{"./Select":7}],3:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -355,11 +355,11 @@ var _react = (typeof window !== "undefined" ? window['React'] : typeof global !=
 
 var _react2 = _interopRequireDefault(_react);
 
-var _createReactClass = require('create-react-class');
+var _createReactClass = (typeof window !== "undefined" ? window['React']['createClass'] : typeof global !== "undefined" ? global['React']['createClass'] : null);
 
 var _createReactClass2 = _interopRequireDefault(_createReactClass);
 
-var _propTypes = require('prop-types');
+var _propTypes = (typeof window !== "undefined" ? window['React']['PropTypes'] : typeof global !== "undefined" ? global['React']['PropTypes'] : null);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -673,7 +673,7 @@ function shouldKeyDownEventCreateNewOption(_ref6) {
 module.exports = Creatable;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./Select":7,"./utils/defaultFilterOptions":11,"./utils/defaultMenuRenderer":12,"create-react-class":undefined,"prop-types":undefined}],4:[function(require,module,exports){
+},{"./Select":7,"./utils/defaultFilterOptions":11,"./utils/defaultMenuRenderer":12}],4:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -683,11 +683,11 @@ var _react = (typeof window !== "undefined" ? window['React'] : typeof global !=
 
 var _react2 = _interopRequireDefault(_react);
 
-var _createReactClass = require('create-react-class');
+var _createReactClass = (typeof window !== "undefined" ? window['React']['createClass'] : typeof global !== "undefined" ? global['React']['createClass'] : null);
 
 var _createReactClass2 = _interopRequireDefault(_createReactClass);
 
-var _propTypes = require('prop-types');
+var _propTypes = (typeof window !== "undefined" ? window['React']['PropTypes'] : typeof global !== "undefined" ? global['React']['PropTypes'] : null);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -704,7 +704,7 @@ var Dropdown = (0, _createReactClass2['default'])({
 module.exports = Dropdown;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"create-react-class":undefined,"prop-types":undefined}],5:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -714,11 +714,11 @@ var _react = (typeof window !== "undefined" ? window['React'] : typeof global !=
 
 var _react2 = _interopRequireDefault(_react);
 
-var _createReactClass = require('create-react-class');
+var _createReactClass = (typeof window !== "undefined" ? window['React']['createClass'] : typeof global !== "undefined" ? global['React']['createClass'] : null);
 
 var _createReactClass2 = _interopRequireDefault(_createReactClass);
 
-var _propTypes = require('prop-types');
+var _propTypes = (typeof window !== "undefined" ? window['React']['PropTypes'] : typeof global !== "undefined" ? global['React']['PropTypes'] : null);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -825,7 +825,7 @@ var Option = (0, _createReactClass2['default'])({
 module.exports = Option;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"create-react-class":undefined,"prop-types":undefined}],6:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -835,11 +835,11 @@ var _react = (typeof window !== "undefined" ? window['React'] : typeof global !=
 
 var _react2 = _interopRequireDefault(_react);
 
-var _createReactClass = require('create-react-class');
+var _createReactClass = (typeof window !== "undefined" ? window['React']['createClass'] : typeof global !== "undefined" ? global['React']['createClass'] : null);
 
 var _createReactClass2 = _interopRequireDefault(_createReactClass);
 
-var _propTypes = require('prop-types');
+var _propTypes = (typeof window !== "undefined" ? window['React']['PropTypes'] : typeof global !== "undefined" ? global['React']['PropTypes'] : null);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -926,7 +926,7 @@ var OptionGroup = (0, _createReactClass2['default'])({
 module.exports = OptionGroup;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"create-react-class":undefined,"prop-types":undefined}],7:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 (function (global){
 /*!
   Copyright (c) 2016 Jed Watson.
@@ -952,11 +952,11 @@ var _react = (typeof window !== "undefined" ? window['React'] : typeof global !=
 
 var _react2 = _interopRequireDefault(_react);
 
-var _createReactClass = require('create-react-class');
+var _createReactClass = (typeof window !== "undefined" ? window['React']['createClass'] : typeof global !== "undefined" ? global['React']['createClass'] : null);
 
 var _createReactClass2 = _interopRequireDefault(_createReactClass);
 
-var _propTypes = require('prop-types');
+var _propTypes = (typeof window !== "undefined" ? window['React']['PropTypes'] : typeof global !== "undefined" ? global['React']['PropTypes'] : null);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -2298,7 +2298,7 @@ exports['default'] = Select;
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./Async":1,"./AsyncCreatable":2,"./Creatable":3,"./Dropdown":4,"./Option":5,"./OptionGroup":6,"./Value":8,"./utils/defaultArrowRenderer":9,"./utils/defaultClearRenderer":10,"./utils/defaultFilterOptions":11,"./utils/defaultMenuRenderer":12,"create-react-class":undefined,"prop-types":undefined}],8:[function(require,module,exports){
+},{"./Async":1,"./AsyncCreatable":2,"./Creatable":3,"./Dropdown":4,"./Option":5,"./OptionGroup":6,"./Value":8,"./utils/defaultArrowRenderer":9,"./utils/defaultClearRenderer":10,"./utils/defaultFilterOptions":11,"./utils/defaultMenuRenderer":12}],8:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -2308,11 +2308,11 @@ var _react = (typeof window !== "undefined" ? window['React'] : typeof global !=
 
 var _react2 = _interopRequireDefault(_react);
 
-var _createReactClass = require('create-react-class');
+var _createReactClass = (typeof window !== "undefined" ? window['React']['createClass'] : typeof global !== "undefined" ? global['React']['createClass'] : null);
 
 var _createReactClass2 = _interopRequireDefault(_createReactClass);
 
-var _propTypes = require('prop-types');
+var _propTypes = (typeof window !== "undefined" ? window['React']['PropTypes'] : typeof global !== "undefined" ? global['React']['PropTypes'] : null);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -2416,7 +2416,7 @@ var Value = (0, _createReactClass2['default'])({
 module.exports = Value;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"create-react-class":undefined,"prop-types":undefined}],9:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function (global){
 "use strict";
 
