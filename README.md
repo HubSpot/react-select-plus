@@ -51,7 +51,7 @@ You can also use the standalone build by including `react-select-plus.js` and `r
 <script src="https://unpkg.com/react-input-autosize/dist/react-input-autosize.js"></script>
 <script src="https://unpkg.com/react-select-plus/dist/react-select-plus.js"></script>
 
-<link rel="stylesheet" href="https://unpkg.com/react-select-plus/dist/react-select.css">
+<link rel="stylesheet" href="https://unpkg.com/react-select-plus/dist/react-select-plus.css">
 ```
 
 
