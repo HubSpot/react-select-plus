@@ -51,7 +51,9 @@
     "classnames": "global:classNames",
     "react": "global:React",
     "react-dom": "global:ReactDOM",
-    "react-input-autosize": "global:AutosizeInput"
+    "react-input-autosize": "global:AutosizeInput",
+    "create-react-class": "global:React.createClass",
+    "prop-types": "global:React.PropTypes"
   },
   "scripts": {
     "build": "gulp clean && NODE_ENV=production gulp build",
