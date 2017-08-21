@@ -2004,6 +2004,19 @@ describe('Select', () => {
 			]);
 		});
 
+		it('removes the last item with backspace', () => {
+
+			wrapper.setPropsForChild({
+				multi: false,
+				value: 'one'
+			});
+			onChange.reset();  // Ignore previous onChange calls
+
+			pressBackspace();
+
+			expect(onChange, 'was called with', null);
+		});
+
 		it('doesn\'t show the X if clearableValue=false', () => {
 
 			setValueProp(['two']);
@@ -2153,8 +2166,8 @@ describe('Select', () => {
 			clickArrowToOpen();
 
 			expect(instance,
-				'with event mouseDown', 'on', <div className="Select-option">Two</div>,
-				'with event mouseDown', 'on', <div className="Select-option">One</div>,
+				'with event', 'mouseDown', 'on', <div className="Select-option">Two</div>,
+				'with event', 'mouseDown', 'on', <div className="Select-option">One</div>,
 				'to contain',
 				<span className="Select-multi-value-wrapper">
 					<div><span className="Select-value-label">Two</span></div>
@@ -2726,7 +2739,7 @@ describe('Select', () => {
 				expect(spyFilterOption, 'was called with', defaultOptions[1], '');
 				expect(spyFilterOption, 'was called with', defaultOptions[2], '');
 				expect(spyFilterOption, 'was called with', defaultOptions[3], '');
-			});
+			}).timeout(5000);
 
 			describe('when entering text', () => {
 
@@ -2744,7 +2757,7 @@ describe('Select', () => {
 					expect(spyFilterOption, 'was called with', defaultOptions[1], 'xyz');
 					expect(spyFilterOption, 'was called with', defaultOptions[2], 'xyz');
 					expect(spyFilterOption, 'was called with', defaultOptions[3], 'xyz');
-				});
+				}).timeout(5000);
 
 				it('only shows the filtered option', () => {
 
@@ -4045,7 +4058,7 @@ describe('Select', () => {
 
 			it('sets the haspopup and expanded to true when menu is shown', () => {
 				expect(instance,
-					'with event keyDown', ARROW_DOWN, 'on', <div className="Select-control" />,
+					'with event', 'keyDown', ARROW_DOWN, 'on', <div className="Select-control" />,
 					'to contain', <input role="combobox" aria-haspopup="true" aria-expanded="true" />);
 			});
 
@@ -4128,7 +4141,7 @@ describe('Select', () => {
 
 			it('hides the `press backspace to remove` message on blur', () => {
 				expect(instance,
-					'with event blur', 'on', <input role="combobox" />,
+					'with event', 'blur', 'on', <input role="combobox" />,
 					'not to contain',
 					<span className="Select-aria-only" aria-live="assertive">
 						Press backspace to remove label two
@@ -4148,8 +4161,8 @@ describe('Select', () => {
 			it('updates the active descendant after a selection', () => {
 
 				return expect(wrapper,
-					'with event keyDown', ARROW_DOWN, 'on', <div className="Select-control" />,
-					'with event keyDown', KEY_ENTER, 'on', <div className="Select-control" />,
+					'with event', 'keyDown', ARROW_DOWN, 'on', <div className="Select-control" />,
+					'with event', 'keyDown', KEY_ENTER, 'on', <div className="Select-control" />,
 					'queried for', <input role="combobox" />)
 					.then(input => {
 

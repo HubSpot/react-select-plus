@@ -20,7 +20,7 @@ var ReactDOM = require('react-dom');
 var TestUtils = require('react-dom/test-utils');
 var sinon = require('sinon');
 
-var Select = require('../src/Select');
+var Select = require('../src');
 
 describe('Async', () => {
 	let asyncInstance, asyncNode, filterInputNode, loadOptions;
@@ -31,8 +31,8 @@ describe('Async', () => {
 			<Select.Async
 				autoload={false}
 				openOnFocus
-				{...props}
 				loadOptions={loadOptions}
+				{...props}
 			/>
 		);
 		asyncNode = ReactDOM.findDOMNode(asyncInstance);
@@ -319,6 +319,15 @@ describe('Async', () => {
 			typeSearchText('WÄRE');
 			expect(loadOptions, 'was called with', 'WÄRE');
 		});
+
+		it('does not mutate the user input', () => {
+			createControl({
+				ignoreAccents: false,
+				ignoreCase: true
+			});
+			typeSearchText('A');
+			expect(asyncNode.textContent, 'to begin with', 'A');
+		});
 	});
 
 	describe('with ignore case and ignore accents', () => {
@@ -438,13 +447,29 @@ describe('Async', () => {
 	describe('.focus()', () => {
 		beforeEach(() => {
 			createControl({});
+			TestUtils.Simulate.blur(filterInputNode);
 		});
 
 		it('focuses the search input', () => {
-			var input = asyncNode.querySelector('input');
-			expect(input, 'not to equal', document.activeElement);
+			expect(filterInputNode, 'not to equal', document.activeElement);
 			asyncInstance.focus();
-			expect(input, 'to equal', document.activeElement);
+			expect(filterInputNode, 'to equal', document.activeElement);
+		});
+	});
+
+
+	describe('props sync test', () => {
+		it('should update options on componentWillReceiveProps', () => {
+			createControl({
+			});
+			asyncInstance.componentWillReceiveProps({
+				options: [{
+					label: 'bar',
+					value: 'foo',
+				}]
+			});
+			expect(asyncNode.querySelectorAll('[role=option]').length, 'to equal', 1);
+			expect(asyncNode.querySelector('[role=option]').textContent, 'to equal', 'bar');
 		});
 	});
 });
