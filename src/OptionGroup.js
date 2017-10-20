@@ -1,15 +1,8 @@
 import React from 'react';
-import createClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const OptionGroup = createClass({
-	propTypes: {
-		children: PropTypes.any,
-		className: PropTypes.string,             // className (based on mouse position)
-		label: PropTypes.node,                   // the heading to show above the child options
-		option: PropTypes.object.isRequired,     // object that is base for that option group
-	},
+class OptionGroup extends React.Component {
 
 	blockEvent (event) {
 		event.preventDefault();
@@ -22,12 +15,12 @@ const OptionGroup = createClass({
 		} else {
 			window.location.href = event.target.href;
 		}
-	},
+	}
 
 	handleMouseDown (event) {
 		event.preventDefault();
 		event.stopPropagation();
-	},
+	}
 
 	handleTouchEnd(event){
 		// Check if the view is being dragged, In this case
@@ -35,17 +28,17 @@ const OptionGroup = createClass({
 		if(this.dragging) return;
 
 		this.handleMouseDown(event);
-	},
+	}
 
 	handleTouchMove (event) {
 		// Set a flag that the view is being dragged
 		this.dragging = true;
-	},
+	}
 
 	handleTouchStart (event) {
 		// Set a flag that the view is not being dragged
 		this.dragging = false;
-	},
+	}
 
 	render () {
 		var { option } = this.props;
@@ -74,6 +67,13 @@ const OptionGroup = createClass({
 			</div>
 		);
 	}
-});
+};
 
-module.exports = OptionGroup;
+OptionGroup.propTypes = {
+	children: PropTypes.any,
+	className: PropTypes.string,             // className (based on mouse position)
+	label: PropTypes.node,                   // the heading to show above the child options
+	option: PropTypes.object.isRequired,     // object that is base for that option group
+};
+
+export default OptionGroup;
