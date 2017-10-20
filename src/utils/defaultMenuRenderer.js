@@ -77,4 +77,4 @@ function menuRenderer ({
 	return renderOptions(options);
 }
 
-module.exports = menuRenderer;
+export default menuRenderer;
