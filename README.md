@@ -87,6 +87,39 @@ function logChange(val) {
 />
 ```
 
+### Option Groups
+
+You can generate option groups by structuring your options in a nested way as follows:
+
+```
+const options = [
+	{ 
+		label: 'Primary Colors', options: [
+			{ label: 'Yellow', value: 'yellow' }, 
+			{ label: 'Red', value: 'red' }, 
+			{ label: 'Blue', value: 'blue' }
+		] 
+	}, 
+	{ 
+		label: 'Secondary Colors', options: [
+			{ label: 'Orange', value: 'orange' }, 
+			{ 
+				label: 'Purple', options: [
+					{ label: 'Light Purple', value: 'light_purple' }, 
+					{ label: 'Medium Purple', value: 'medium_purple' }, 
+					{ label: 'Dark Purple', value: 'dark_purple' }
+				] 
+			}, 
+			{ label: 'Green', value: 'green' }
+		] 
+	}, 
+	{ 
+		label: 'White', 
+		value: 'white', 
+	}
+];
+```
+
 ### Custom classNames
 
 You can provide a custom `className` prop to the `<Select>` component, which will be added to the base `.Select` className for the outer container.
