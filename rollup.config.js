@@ -4,7 +4,7 @@ import uglify from 'rollup-plugin-uglify';
 import { minify } from 'uglify-es';
 
 const name = 'Select';
-const path = 'dist/react-select';
+const path = 'dist/react-select-plus';
 const globals = {
 	classnames: 'classNames',
 	'prop-types': 'PropTypes',
