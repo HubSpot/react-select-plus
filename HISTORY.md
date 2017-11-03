@@ -1,5 +1,9 @@
 # React-Select-Plus
 
+## v1.0.0-rc.10.patch1 / 2017-11-03
+
+* fixed; broken `dist/` file paths, thanks [Alexander Pletnev](https://github.com/RusAlex)
+
 ## v1.0.0-rc.10 / 2017-09-13
 
 * changed; `openAfterFocus` prop has been renamed to `openOnClick`, and now default to `true`
