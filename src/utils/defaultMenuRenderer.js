@@ -7,6 +7,8 @@ function isGroup (option) {
 
 function menuRenderer ({
 	focusedOption,
+	focusOption,
+	inputValue,
 	instancePrefix,
 	labelKey,
 	onFocus,
@@ -17,6 +19,8 @@ function menuRenderer ({
 	optionGroupComponent,
 	optionRenderer,
 	options,
+	removeValue,
+	selectValue,
 	valueArray,
 	valueKey,
 }) {
@@ -56,6 +60,8 @@ function menuRenderer ({
 				return (
 					<Option
 						className={optionClass}
+						focusOption={focusOption}
+						inputValue={inputValue}
 						instancePrefix={instancePrefix}
 						isDisabled={option.disabled}
 						isFocused={isFocused}
@@ -66,6 +72,8 @@ function menuRenderer ({
 						option={option}
 						optionIndex={i}
 						ref={ref => { onOptionRef(ref, isFocused); }}
+						removeValue={removeValue}
+						selectValue={selectValue}
 					>
 						{renderLabel(option, i)}
 					</Option>

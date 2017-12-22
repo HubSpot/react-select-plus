@@ -146,6 +146,35 @@ describe('Async', () => {
 			return expect(asyncNode.textContent, 'to contain', 'Loading');
 		});
 
+		it('caches the result of all option fetches', (cb) => {
+			const res = {
+				t: createOptionsResponse(['t']),
+				te: createOptionsResponse(['te']),
+				tes: createOptionsResponse(['tes']),
+			};
+			function loadOptions (input, resolve) {
+				const delay = 10 * (3 - input.length);
+				setTimeout(function() {
+					resolve(null, res[input]);
+				}, delay);
+			}
+			createControl({
+				loadOptions,
+			});
+			const instance = asyncInstance;
+			typeSearchText('t');
+			typeSearchText('te');
+			typeSearchText('tes');
+
+			// TODO: How to test this?
+			setTimeout(function() {
+				expect(instance._cache.t, 'to equal', res.t.options);
+				expect(instance._cache.te, 'to equal', res.te.options);
+				expect(instance._cache.tes, 'to equal', res.tes.options);
+				cb();
+			}, 30);
+		});
+
 		describe('with callbacks', () => {
 			it('should display the loaded options', () => {
 				function loadOptions (input, resolve) {
@@ -445,6 +474,15 @@ describe('Async', () => {
 			});
 			typeSearchText('a');
 			return expect(onInputChange, 'was called times', 1);
+		});
+
+		it('should change the value when onInputChange returns a value', () => {
+			const onInputChange = sinon.stub().returns('2');
+			const instance = createControl({
+				onInputChange,
+			});
+			typeSearchText('1');
+			return expect(filterInputNode.value, 'to equal', '2');
 		});
 	});
 

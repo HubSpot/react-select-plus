@@ -12,7 +12,7 @@ class CreatableSelect extends React.Component {
 		this.menuRenderer = this.menuRenderer.bind(this);
 		this.onInputKeyDown = this.onInputKeyDown.bind(this);
 		this.onInputChange = this.onInputChange.bind(this);
-		this.onOptionSelect  = this.onOptionSelect .bind(this);
+		this.onOptionSelect  = this.onOptionSelect.bind(this);
 	}
 
 	createNewOption () {
@@ -42,7 +42,7 @@ class CreatableSelect extends React.Component {
 	}
 
 	filterOptions (...params) {
-		const { filterOptions, isValidNewOption, options, promptTextCreator } = this.props;
+		const { filterOptions, isValidNewOption, promptTextCreator } = this.props;
 
 		// TRICKY Check currently selected options as well.
 		// Don't display a create-prompt for a value that's selected.
@@ -112,12 +112,14 @@ class CreatableSelect extends React.Component {
 	onInputChange (input) {
 		const { onInputChange } = this.props;
 
-		if (onInputChange) {
-			onInputChange(input);
-		}
-
 		// This value may be needed in between Select mounts (when this.select is null)
 		this.inputValue = input;
+
+		if (onInputChange) {
+			this.inputValue = onInputChange(input);
+		}
+
+		return this.inputValue;
 	}
 
 	onInputKeyDown (event) {
@@ -154,6 +156,7 @@ class CreatableSelect extends React.Component {
 		const {
 			newOptionCreator,
 			shouldKeyDownEventCreateNewOption,
+			ref: refProp,
 			...restProps
 		} = this.props;
 
@@ -180,6 +183,9 @@ class CreatableSelect extends React.Component {
 				if (ref) {
 					this.labelKey = ref.props.labelKey;
 					this.valueKey = ref.props.valueKey;
+				}
+				if (refProp) {
+					refProp(ref);
 				}
 			}
 		};
@@ -225,9 +231,9 @@ function shouldKeyDownEventCreateNewOption ({ keyCode }) {
 		case 13:  // ENTER
 		case 188: // COMMA
 			return true;
+		default:
+			return false;
 	}
-
-	return false;
 };
 
 	// Default prop methods
@@ -269,8 +275,8 @@ CreatableSelect.propTypes = {
 	// See Select.propTypes.menuRenderer
 	menuRenderer: PropTypes.any,
 
-		// Factory to create new option.
-		// ({ label: string, labelKey: string, valueKey: string }): Object
+	// Factory to create new option.
+	// ({ label: string, labelKey: string, valueKey: string }): Object
 	newOptionCreator: PropTypes.func,
 
 	// input change handler: function (inputValue) {}
@@ -285,9 +291,11 @@ CreatableSelect.propTypes = {
 	// See Select.propTypes.options
 	options: PropTypes.array,
 
-		// Creates prompt/placeholder option text.
-		// (filterText: string): string
+	// Creates prompt/placeholder option text.
+	// (filterText: string): string
 	promptTextCreator: PropTypes.func,
+
+	ref: PropTypes.func,
 
 	// Decides if a keyDown event (eg its `keyCode`) should result in the creation of a new option.
 	shouldKeyDownEventCreateNewOption: PropTypes.func,
