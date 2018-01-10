@@ -4,6 +4,15 @@ import classNames from 'classnames';
 
 class OptionGroup extends React.Component {
 
+	constructor(props) {
+		super(props);
+
+		this.handleMouseDown = this.handleMouseDown.bind(this);
+		this.handleTouchEnd = this.handleTouchEnd.bind(this);
+		this.handleTouchMove = this.handleTouchMove.bind(this);
+		this.handleTouchStart = this.handleTouchStart.bind(this);
+	}
+
 	blockEvent (event) {
 		event.preventDefault();
 		event.stopPropagation();
@@ -54,8 +63,6 @@ class OptionGroup extends React.Component {
 			<div className={className}
 				style={option.style}
 				onMouseDown={this.handleMouseDown}
-				onMouseEnter={this.handleMouseEnter}
-				onMouseMove={this.handleMouseMove}
 				onTouchStart={this.handleTouchStart}
 				onTouchMove={this.handleTouchMove}
 				onTouchEnd={this.handleTouchEnd}
