@@ -575,9 +575,16 @@ Option.propTypes = {
 var OptionGroup = function (_React$Component) {
 	inherits(OptionGroup, _React$Component);
 
-	function OptionGroup() {
+	function OptionGroup(props) {
 		classCallCheck(this, OptionGroup);
-		return possibleConstructorReturn(this, (OptionGroup.__proto__ || Object.getPrototypeOf(OptionGroup)).apply(this, arguments));
+
+		var _this = possibleConstructorReturn(this, (OptionGroup.__proto__ || Object.getPrototypeOf(OptionGroup)).call(this, props));
+
+		_this.handleMouseDown = _this.handleMouseDown.bind(_this);
+		_this.handleTouchEnd = _this.handleTouchEnd.bind(_this);
+		_this.handleTouchMove = _this.handleTouchMove.bind(_this);
+		_this.handleTouchStart = _this.handleTouchStart.bind(_this);
+		return _this;
 	}
 
 	createClass(OptionGroup, [{
