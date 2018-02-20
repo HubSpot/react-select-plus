@@ -1,16 +1,16 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
 
-function isGroup (option) {
+const isGroup = (option) => {
 	return option && Array.isArray(option.options);
-}
+};
 
-function menuRenderer ({
+const menuRenderer = ({
 	focusedOption,
 	focusOption,
 	inputValue,
 	instancePrefix,
-	labelKey,
 	onFocus,
 	onOptionRef,
 	onSelect,
@@ -23,10 +23,10 @@ function menuRenderer ({
 	selectValue,
 	valueArray,
 	valueKey,
-}) {
+}) => {
 	let OptionGroup = optionGroupComponent;
 	let Option = optionComponent;
-	let renderLabel = optionRenderer || this.getOptionLabel;
+	let renderLabel = optionRenderer;
 
 	const renderOptions = (optionsSubset) => {
 		return optionsSubset.map((option, i) => {
@@ -83,6 +83,24 @@ function menuRenderer ({
 	};
 
 	return renderOptions(options);
-}
+};
+
+menuRenderer.propTypes = {
+	focusOption: PropTypes.func,
+	focusedOption: PropTypes.object,
+	inputValue: PropTypes.string,
+	instancePrefix: PropTypes.string,
+	onFocus: PropTypes.func,
+	onOptionRef: PropTypes.func,
+	onSelect: PropTypes.func,
+	optionClassName: PropTypes.string,
+	optionComponent: PropTypes.func,
+	optionRenderer: PropTypes.func,
+	options: PropTypes.array,
+	removeValue: PropTypes.func,
+	selectValue: PropTypes.func,
+	valueArray: PropTypes.array,
+	valueKey: PropTypes.string,
+};
 
 export default menuRenderer;

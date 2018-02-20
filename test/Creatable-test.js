@@ -19,9 +19,7 @@ var TestUtils = require('react-dom/test-utils');
 var Select = require('../src');
 
 describe('Creatable', () => {
-	let creatableInstance, creatableNode, filterInputNode, innerSelectInstance, renderer;
-
-	beforeEach(() => renderer = TestUtils.createRenderer());
+	let creatableInstance, creatableNode, filterInputNode, innerSelectInstance;
 
 	const defaultOptions = [
 		{ value: 'one', label: 'One' },
@@ -220,6 +218,46 @@ describe('Creatable', () => {
 		expect(test(newOption('qux', 1)), 'to be', false);
 		expect(test(newOption('qux', 4)), 'to be', true);
 		expect(test(newOption('Foo', 11)), 'to be', true);
+	});
+
+	it('default: isOptionUnique function should always return true if given options are empty', () => {
+		const options = [];
+
+		function newOption (label, value) {
+			return { label, value };
+		};
+
+		function test (option) {
+			return Select.Creatable.isOptionUnique({
+				option,
+				options,
+				labelKey: 'label',
+				valueKey: 'value'
+			});
+		};
+
+		expect(test(newOption('foo', 0)), 'to be', true);
+		expect(test(newOption('qux', 1)), 'to be', true);
+	});
+
+	it('default: isOptionUnique function should not crash if given options are null or undefined', () => {
+		const options = null;
+
+		function newOption (label, value) {
+			return { label, value };
+		};
+
+		function test (option) {
+			return Select.Creatable.isOptionUnique({
+				option,
+				options,
+				labelKey: 'label',
+				valueKey: 'value'
+			});
+		};
+
+		expect(test(newOption('foo', 0)), 'to be', true);
+		expect(test(newOption('qux', 1)), 'to be', true);
 	});
 
 	it('default :isValidNewOption function should just ensure a non-empty string is provided', () => {

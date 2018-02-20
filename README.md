@@ -60,10 +60,13 @@ class App extends React.Component {
     console.log(`Selected: ${selectedOption.label}`);
   }
   render() {
+  	const { selectedOption } = this.state;
+  	const value = selectedOption && selectedOption.value;
+  	
     return (
       <Select
         name="form-field-name"
-        value={this.state.value}
+        value={value}
         onChange={this.handleChange}
         options={[
           { value: 'one', label: 'One' },
@@ -399,7 +402,7 @@ function onInputKeyDown(event) {
 | `name` | string | undefined | field name, for hidden `<input />` tag |
 | `noResultsText` | string | 'No results found' | placeholder displayed when there are no matching search results or a falsy value to hide it (can also be a react component) |
 | `onBlur` | function | undefined | onBlur handler: `function(event) {}` |
-| `onBlurResetsInput` | boolean | true | whether to clear input on blur or not |
+| `onBlurResetsInput` | boolean | true | Whether to clear input on blur or not. If set to false, it only works if onCloseResetsInput is false as well. |
 | `onChange` | function | undefined | onChange handler: `function(newOption) {}` |
 | `onClose` | function | undefined | handler for when the menu closes: `function () {}` |
 | `onCloseResetsInput` | boolean | true | whether to clear input when closing the menu through the arrow |
@@ -408,7 +411,7 @@ function onInputKeyDown(event) {
 | `onInputKeyDown` | function | undefined | input keyDown handler; call `event.preventDefault()` to override default `Select` behaviour: `function(event) {}` |
 | `onMenuScrollToBottom` | function | undefined | called when the menu is scrolled to the bottom |
 | `onOpen` | function | undefined | handler for when the menu opens: `function () {}` |
-| `onSelectResetsInput` | boolean | true | whether the input value should be reset when options are selected, for `multi`
+| `onSelectResetsInput` | boolean | true | whether the input value should be reset when options are selected. Also input value will be set to empty if 'onSelectResetsInput=true' and Select will get new value that not equal previous value. |
 | `onValueClick` | function | undefined | onClick handler for value labels: `function (value, event) {}` |
 | `openOnClick` | boolean | true | open the options menu when the control is clicked (requires searchable = true) |
 | `openOnFocus` | boolean | false | open the options menu when the control gets focus |
