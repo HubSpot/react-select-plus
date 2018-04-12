@@ -31,7 +31,7 @@ You can also use the standalone UMD build by including `dist/react-select-plus.j
 <script src="https://unpkg.com/prop-types@15.5.10/prop-types.js"></script>
 <script src="https://unpkg.com/classnames@2.2.5/index.js"></script>
 <script src="https://unpkg.com/react-input-autosize@2.0.0/dist/react-input-autosize.js"></script>
-<script src="https://unpkg.com/react-select/dist/react-select-plus.js"></script>
+<script src="https://unpkg.com/react-select-plus/dist/react-select-plus.js"></script>
 
 <link rel="stylesheet" href="https://unpkg.com/react-select-plus/dist/react-select-plus.css">
 ```
