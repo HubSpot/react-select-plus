@@ -901,7 +901,7 @@ class Select extends React.Component {
 				&& !this.state.inputValue
 		});
 
-		let value = this.state.inputValue;
+		let value = this.props.inputProps.value || this.state.inputValue;
 		if (value && !this.props.onSelectResetsInput && !this.state.isFocused){
 			// it hides input value when it is not focused and was not reset on select
 			value= '';
