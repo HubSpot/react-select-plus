@@ -924,7 +924,7 @@ class Select extends React.Component {
 			role: 'combobox',
 			required: this.state.required,
 			tabIndex: this.props.tabIndex,
-			value: this.props.inputProps.value || '',
+			value,
 		};
 
 		if (this.props.inputRenderer) {
