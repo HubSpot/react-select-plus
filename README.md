@@ -3,6 +3,11 @@
 A fork of [JedWatson/React-Select](https://github.com/JedWatson/react-select/) with support for option groups.
 
 
+## :rotating_light: Project status :rotating_light:
+
+This fork is no longer actively maintained. The primary purpose of this project was to add option group support to react-select, a feature that will be supported in the upcoming react-select 2.0. Another alternative worth checking out is [downshift](https://github.com/paypal/downshift), which provides low-level building blocks for building custom dropdown components.
+
+
 ## Demo & Examples
 
 Live demo: [github.hubspot.com/react-select-plus/](http://github.hubspot.com/react-select-plus/)
