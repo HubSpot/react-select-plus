@@ -501,7 +501,7 @@ function arrowRenderer() {
 
 module.exports = UsersField;
 
-},{"../data/users":16,"react":undefined,"react-gravatar":40,"react-select-plus":undefined}],6:[function(require,module,exports){
+},{"../data/users":16,"react":undefined,"react-gravatar":37,"react-select-plus":undefined}],6:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -584,7 +584,7 @@ var DisabledUpsellOptions = _react2['default'].createClass({
 });
 module.exports = DisabledUpsellOptions;
 
-},{"react":undefined,"react-highlight-words":41,"react-select-plus":undefined}],7:[function(require,module,exports){
+},{"react":undefined,"react-highlight-words":38,"react-select-plus":undefined}],7:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -724,7 +724,7 @@ var GithubUsers = _react2['default'].createClass({
 
 module.exports = GithubUsers;
 
-},{"isomorphic-fetch":27,"react":undefined,"react-select-plus":undefined}],8:[function(require,module,exports){
+},{"isomorphic-fetch":24,"react":undefined,"react-select-plus":undefined}],8:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -1240,7 +1240,7 @@ var CitiesField = _react2['default'].createClass({
 
 module.exports = CitiesField;
 
-},{"../data/cities":13,"react":undefined,"react-virtualized-select":58}],13:[function(require,module,exports){
+},{"../data/cities":13,"react":undefined,"react-virtualized-select":55}],13:[function(require,module,exports){
 'use strict';
 
 exports.CITIES = [{ name: 'Abilene' }, { name: 'Addison' }, { name: 'Akron' }, { name: 'Alameda' }, { name: 'Albany' }, { name: 'Albany' }, { name: 'Albany' }, { name: 'Albuquerque' }, { name: 'Alexandria' }, { name: 'Alexandria' }, { name: 'Alhambra' }, { name: 'Aliso Viejo' }, { name: 'Allen' }, { name: 'Allentown' }, { name: 'Alpharetta' }, { name: 'Altamonte Springs' }, { name: 'Altoona' }, { name: 'Amarillo' }, { name: 'Ames' }, { name: 'Anaheim' }, { name: 'Anchorage' }, { name: 'Anderson' }, { name: 'Ankeny' }, { name: 'Ann Arbor' }, { name: 'Annapolis' }, { name: 'Antioch' }, { name: 'Apache Junction' }, { name: 'Apex' }, { name: 'Apopka' }, { name: 'Apple Valley' }, { name: 'Apple Valley' }, { name: 'Appleton' }, { name: 'Arcadia' }, { name: 'Arlington' }, { name: 'Arlington Heights' }, { name: 'Arvada' }, { name: 'Asheville' }, { name: 'Athens-Clarke County' }, { name: 'Atlanta' }, { name: 'Atlantic City' }, { name: 'Attleboro' }, { name: 'Auburn' }, { name: 'Auburn' }, { name: 'Augusta-Richmond County' }, { name: 'Aurora' }, { name: 'Aurora' }, { name: 'Austin' }, { name: 'Aventura' }, { name: 'Avondale' }, { name: 'Azusa' }, { name: 'Bakersfield' }, { name: 'Baldwin Park' }, { name: 'Baltimore' }, { name: 'Barnstable Town' }, { name: 'Bartlett' }, { name: 'Bartlett' }, { name: 'Baton Rouge' }, { name: 'Battle Creek' }, { name: 'Bayonne' }, { name: 'Baytown' }, { name: 'Beaumont' }, { name: 'Beaumont' }, { name: 'Beavercreek' }, { name: 'Beaverton' }, { name: 'Bedford' }, { name: 'Bell Gardens' }, { name: 'Belleville' }, { name: 'Bellevue' }, { name: 'Bellevue' }, { name: 'Bellflower' }, { name: 'Bellingham' }, { name: 'Beloit' }, { name: 'Bend' }, { name: 'Bentonville' }, { name: 'Berkeley' }, { name: 'Berwyn' }, { name: 'Bethlehem' }, { name: 'Beverly' }, { name: 'Billings' }, { name: 'Biloxi' }, { name: 'Binghamton' }, { name: 'Birmingham' }, { name: 'Bismarck' }, { name: 'Blacksburg' }, { name: 'Blaine' }, { name: 'Bloomington' }, { name: 'Bloomington' }, { name: 'Bloomington' }, { name: 'Blue Springs' }, { name: 'Boca Raton' }, { name: 'Boise City' }, { name: 'Bolingbrook' }, { name: 'Bonita Springs' }, { name: 'Bossier City' }, { name: 'Boston' }, { name: 'Boulder' }, { name: 'Bountiful' }, { name: 'Bowie' }, { name: 'Bowling Green' }, { name: 'Boynton Beach' }, { name: 'Bozeman' }, { name: 'Bradenton' }, { name: 'Brea' }, { name: 'Bremerton' }, { name: 'Brentwood' }, { name: 'Brentwood' }, { name: 'Bridgeport' }, { name: 'Bristol' }, { name: 'Brockton' }, { name: 'Broken Arrow' }, { name: 'Brookfield' }, { name: 'Brookhaven' }, { name: 'Brooklyn Park' }, { name: 'Broomfield' }, { name: 'Brownsville' }, { name: 'Bryan' }, { name: 'Buckeye' }, { name: 'Buena Park' }, { name: 'Buffalo' }, { name: 'Buffalo Grove' }, { name: 'Bullhead City' }, { name: 'Burbank' }, { name: 'Burien' }, { name: 'Burleson' }, { name: 'Burlington' }, { name: 'Burlington' }, { name: 'Burnsville' }, { name: 'Caldwell' }, { name: 'Calexico' }, { name: 'Calumet City' }, { name: 'Camarillo' }, { name: 'Cambridge' }, { name: 'Camden' }, { name: 'Campbell' }, { name: 'Canton' }, { name: 'Cape Coral' }, { name: 'Cape Girardeau' }, { name: 'Carlsbad' }, { name: 'Carmel' }, { name: 'Carol Stream' }, { name: 'Carpentersville' }, { name: 'Carrollton' }, { name: 'Carson' }, { name: 'Carson City' }, { name: 'Cary' }, { name: 'Casa Grande' }, { name: 'Casper' }, { name: 'Castle Rock' }, { name: 'Cathedral City' }, { name: 'Cedar Falls' }, { name: 'Cedar Hill' }, { name: 'Cedar Park' }, { name: 'Cedar Rapids' }, { name: 'Centennial' }, { name: 'Ceres' }, { name: 'Cerritos' }, { name: 'Champaign' }, { name: 'Chandler' }, { name: 'Chapel Hill' }, { name: 'Charleston' }, { name: 'Charleston' }, { name: 'Charlotte' }, { name: 'Charlottesville' }, { name: 'Chattanooga' }, { name: 'Chelsea' }, { name: 'Chesapeake' }, { name: 'Chesterfield' }, { name: 'Cheyenne' }, { name: 'Chicago' }, { name: 'Chico' }, { name: 'Chicopee' }, { name: 'Chino' }, { name: 'Chino Hills' }, { name: 'Chula Vista' }, { name: 'Cicero' }, { name: 'Cincinnati' }, { name: 'Citrus Heights' }, { name: 'Clarksville' }, { name: 'Clearwater' }, { name: 'Cleveland' }, { name: 'Cleveland' }, { name: 'Cleveland Heights' }, { name: 'Clifton' }, { name: 'Clovis' }, { name: 'Clovis' }, { name: 'Coachella' }, { name: 'Coconut Creek' }, { name: 'Coeur d\'Alene' }, { name: 'College Station' }, { name: 'Collierville' }, { name: 'Colorado Springs' }, { name: 'Colton' }, { name: 'Columbia' }, { name: 'Columbia' }, { name: 'Columbus' }, { name: 'Columbus' }, { name: 'Columbus' }, { name: 'Commerce City' }, { name: 'Compton' }, { name: 'Concord' }, { name: 'Concord' }, { name: 'Concord' }, { name: 'Conroe' }, { name: 'Conway' }, { name: 'Coon Rapids' }, { name: 'Coppell' }, { name: 'Coral Gables' }, { name: 'Coral Springs' }, { name: 'Corona' }, { name: 'Corpus Christi' }, { name: 'Corvallis' }, { name: 'Costa Mesa' }, { name: 'Council Bluffs' }, { name: 'Covina' }, { name: 'Covington' }, { name: 'Cranston' }, { name: 'Crystal Lake' }, { name: 'Culver City' }, { name: 'Cupertino' }, { name: 'Cutler Bay' }, { name: 'Cuyahoga Falls' }, { name: 'Cypress' }, { name: 'Dallas' }, { name: 'Daly City' }, { name: 'Danbury' }, { name: 'Danville' }, { name: 'Danville' }, { name: 'Davenport' }, { name: 'Davie' }, { name: 'Davis' }, { name: 'Dayton' }, { name: 'Daytona Beach' }, { name: 'DeKalb' }, { name: 'DeSoto' }, { name: 'Dearborn' }, { name: 'Dearborn Heights' }, { name: 'Decatur' }, { name: 'Decatur' }, { name: 'Deerfield Beach' }, { name: 'Delano' }, { name: 'Delray Beach' }, { name: 'Deltona' }, { name: 'Denton' }, { name: 'Denver' }, { name: 'Des Moines' }, { name: 'Des Plaines' }, { name: 'Detroit' }, { name: 'Diamond Bar' }, { name: 'Doral' }, { name: 'Dothan' }, { name: 'Dover' }, { name: 'Downers Grove' }, { name: 'Downey' }, { name: 'Draper' }, { name: 'Dublin' }, { name: 'Dublin' }, { name: 'Dubuque' }, { name: 'Duluth' }, { name: 'Duncanville' }, { name: 'Dunwoody' }, { name: 'Durham' }, { name: 'Eagan' }, { name: 'East Lansing' }, { name: 'East Orange' }, { name: 'East Providence' }, { name: 'Eastvale' }, { name: 'Eau Claire' }, { name: 'Eden Prairie' }, { name: 'Edina' }, { name: 'Edinburg' }, { name: 'Edmond' }, { name: 'Edmonds' }, { name: 'El Cajon' }, { name: 'El Centro' }, { name: 'El Monte' }, { name: 'El Paso' }, { name: 'Elgin' }, { name: 'Elizabeth' }, { name: 'Elk Grove' }, { name: 'Elkhart' }, { name: 'Elmhurst' }, { name: 'Elyria' }, { name: 'Encinitas' }, { name: 'Enid' }, { name: 'Erie' }, { name: 'Escondido' }, { name: 'Euclid' }, { name: 'Eugene' }, { name: 'Euless' }, { name: 'Evanston' }, { name: 'Evansville' }, { name: 'Everett' }, { name: 'Everett' }, { name: 'Fairfield' }, { name: 'Fairfield' }, { name: 'Fall River' }, { name: 'Fargo' }, { name: 'Farmington' }, { name: 'Farmington Hills' }, { name: 'Fayetteville' }, { name: 'Fayetteville' }, { name: 'Federal Way' }, { name: 'Findlay' }, { name: 'Fishers' }, { name: 'Fitchburg' }, { name: 'Flagstaff' }, { name: 'Flint' }, { name: 'Florence' }, { name: 'Florence' }, { name: 'Florissant' }, { name: 'Flower Mound' }, { name: 'Folsom' }, { name: 'Fond du Lac' }, { name: 'Fontana' }, { name: 'Fort Collins' }, { name: 'Fort Lauderdale' }, { name: 'Fort Myers' }, { name: 'Fort Pierce' }, { name: 'Fort Smith' }, { name: 'Fort Wayne' }, { name: 'Fort Worth' }, { name: 'Fountain Valley' }, { name: 'Franklin' }, { name: 'Frederick' }, { name: 'Freeport' }, { name: 'Fremont' }, { name: 'Fresno' }, { name: 'Friendswood' }, { name: 'Frisco' }, { name: 'Fullerton' }, { name: 'Gainesville' }, { name: 'Gaithersburg' }, { name: 'Galveston' }, { name: 'Garden Grove' }, { name: 'Gardena' }, { name: 'Garland' }, { name: 'Gary' }, { name: 'Gastonia' }, { name: 'Georgetown' }, { name: 'Germantown' }, { name: 'Gilbert' }, { name: 'Gilroy' }, { name: 'Glendale' }, { name: 'Glendale' }, { name: 'Glendora' }, { name: 'Glenview' }, { name: 'Goodyear' }, { name: 'Goose Creek' }, { name: 'Grand Forks' }, { name: 'Grand Island' }, { name: 'Grand Junction' }, { name: 'Grand Prairie' }, { name: 'Grand Rapids' }, { name: 'Grapevine' }, { name: 'Great Falls' }, { name: 'Greeley' }, { name: 'Green Bay' }, { name: 'Greenacres' }, { name: 'Greenfield' }, { name: 'Greensboro' }, { name: 'Greenville' }, { name: 'Greenville' }, { name: 'Greenwood' }, { name: 'Gresham' }, { name: 'Grove City' }, { name: 'Gulfport' }, { name: 'Hackensack' }, { name: 'Hagerstown' }, { name: 'Hallandale Beach' }, { name: 'Haltom City' }, { name: 'Hamilton' }, { name: 'Hammond' }, { name: 'Hampton' }, { name: 'Hanford' }, { name: 'Hanover Park' }, { name: 'Harlingen' }, { name: 'Harrisburg' }, { name: 'Harrisonburg' }, { name: 'Hartford' }, { name: 'Hattiesburg' }, { name: 'Haverhill' }, { name: 'Hawthorne' }, { name: 'Hayward' }, { name: 'Hemet' }, { name: 'Hempstead' }, { name: 'Henderson' }, { name: 'Hendersonville' }, { name: 'Hesperia' }, { name: 'Hialeah' }, { name: 'Hickory' }, { name: 'High Point' }, { name: 'Highland' }, { name: 'Hillsboro' }, { name: 'Hilton Head Island' }, { name: 'Hoboken' }, { name: 'Hoffman Estates' }, { name: 'Hollywood' }, { name: 'Holyoke' }, { name: 'Homestead' }, { name: 'Honolulu' }, { name: 'Hoover' }, { name: 'Houston' }, { name: 'Huber Heights' }, { name: 'Huntersville' }, { name: 'Huntington' }, { name: 'Huntington Beach' }, { name: 'Huntington Park' }, { name: 'Huntsville' }, { name: 'Huntsville' }, { name: 'Hurst' }, { name: 'Hutchinson' }, { name: 'Idaho Falls' }, { name: 'Independence' }, { name: 'Indianapolis' }, { name: 'Indio' }, { name: 'Inglewood' }, { name: 'Iowa City' }, { name: 'Irvine' }, { name: 'Irving' }, { name: 'Jackson' }, { name: 'Jackson' }, { name: 'Jacksonville' }, { name: 'Jacksonville' }, { name: 'Janesville' }, { name: 'Jefferson City' }, { name: 'Jeffersonville' }, { name: 'Jersey City' }, { name: 'Johns Creek' }, { name: 'Johnson City' }, { name: 'Joliet' }, { name: 'Jonesboro' }, { name: 'Joplin' }, { name: 'Jupiter' }, { name: 'Jurupa Valley' }, { name: 'Kalamazoo' }, { name: 'Kannapolis' }, { name: 'Kansas City' }, { name: 'Kansas City' }, { name: 'Kearny' }, { name: 'Keizer' }, { name: 'Keller' }, { name: 'Kenner' }, { name: 'Kennewick' }, { name: 'Kenosha' }, { name: 'Kent' }, { name: 'Kentwood' }, { name: 'Kettering' }, { name: 'Killeen' }, { name: 'Kingsport' }, { name: 'Kirkland' }, { name: 'Kissimmee' }, { name: 'Knoxville' }, { name: 'Kokomo' }, { name: 'La Crosse' }, { name: 'La Habra' }, { name: 'La Mesa' }, { name: 'La Mirada' }, { name: 'La Puente' }, { name: 'La Quinta' }, { name: 'Lacey' }, { name: 'Lafayette' }, { name: 'Lafayette' }, { name: 'Laguna Niguel' }, { name: 'Lake Charles' }, { name: 'Lake Elsinore' }, { name: 'Lake Forest' }, { name: 'Lake Havasu City' }, { name: 'Lake Oswego' }, { name: 'Lakeland' }, { name: 'Lakeville' }, { name: 'Lakewood' }, { name: 'Lakewood' }, { name: 'Lakewood' }, { name: 'Lakewood' }, { name: 'Lancaster' }, { name: 'Lancaster' }, { name: 'Lancaster' }, { name: 'Lancaster' }, { name: 'Lansing' }, { name: 'Laredo' }, { name: 'Largo' }, { name: 'Las Cruces' }, { name: 'Las Vegas' }, { name: 'Lauderhill' }, { name: 'Lawrence' }, { name: 'Lawrence' }, { name: 'Lawrence' }, { name: 'Lawton' }, { name: 'Layton' }, { name: 'League City' }, { name: 'Lee\'s Summit' }, { name: 'Leesburg' }, { name: 'Lehi' }, { name: 'Lenexa' }, { name: 'Leominster' }, { name: 'Lewisville' }, { name: 'Lexington-Fayette' }, { name: 'Lima' }, { name: 'Lincoln' }, { name: 'Lincoln' }, { name: 'Lincoln Park' }, { name: 'Linden' }, { name: 'Little Rock' }, { name: 'Littleton' }, { name: 'Livermore' }, { name: 'Livonia' }, { name: 'Lodi' }, { name: 'Logan' }, { name: 'Lombard' }, { name: 'Lompoc' }, { name: 'Long Beach' }, { name: 'Longmont' }, { name: 'Longview' }, { name: 'Lorain' }, { name: 'Los Angeles' }, { name: 'Louisville/Jefferson County' }, { name: 'Loveland' }, { name: 'Lowell' }, { name: 'Lubbock' }, { name: 'Lynchburg' }, { name: 'Lynn' }, { name: 'Lynwood' }, { name: 'Macon' }, { name: 'Madera' }, { name: 'Madison' }, { name: 'Madison' }, { name: 'Malden' }, { name: 'Manassas' }, { name: 'Manchester' }, { name: 'Manhattan' }, { name: 'Mankato' }, { name: 'Mansfield' }, { name: 'Mansfield' }, { name: 'Manteca' }, { name: 'Maple Grove' }, { name: 'Maplewood' }, { name: 'Marana' }, { name: 'Margate' }, { name: 'Maricopa' }, { name: 'Marietta' }, { name: 'Marlborough' }, { name: 'Martinez' }, { name: 'Marysville' }, { name: 'McAllen' }, { name: 'McKinney' }, { name: 'Medford' }, { name: 'Medford' }, { name: 'Melbourne' }, { name: 'Memphis' }, { name: 'Menifee' }, { name: 'Mentor' }, { name: 'Merced' }, { name: 'Meriden' }, { name: 'Meridian' }, { name: 'Meridian' }, { name: 'Mesa' }, { name: 'Mesquite' }, { name: 'Methuen' }, { name: 'Miami' }, { name: 'Miami Beach' }, { name: 'Miami Gardens' }, { name: 'Middletown' }, { name: 'Middletown' }, { name: 'Midland' }, { name: 'Midland' }, { name: 'Midwest City' }, { name: 'Milford' }, { name: 'Milpitas' }, { name: 'Milwaukee' }, { name: 'Minneapolis' }, { name: 'Minnetonka' }, { name: 'Minot' }, { name: 'Miramar' }, { name: 'Mishawaka' }, { name: 'Mission' }, { name: 'Mission Viejo' }, { name: 'Missoula' }, { name: 'Missouri City' }, { name: 'Mobile' }, { name: 'Modesto' }, { name: 'Moline' }, { name: 'Monroe' }, { name: 'Monrovia' }, { name: 'Montclair' }, { name: 'Montebello' }, { name: 'Monterey Park' }, { name: 'Montgomery' }, { name: 'Moore' }, { name: 'Moorhead' }, { name: 'Moreno Valley' }, { name: 'Morgan Hill' }, { name: 'Mount Pleasant' }, { name: 'Mount Prospect' }, { name: 'Mount Vernon' }, { name: 'Mountain View' }, { name: 'Muncie' }, { name: 'Murfreesboro' }, { name: 'Murray' }, { name: 'Murrieta' }, { name: 'Muskegon' }, { name: 'Muskogee' }, { name: 'Nampa' }, { name: 'Napa' }, { name: 'Naperville' }, { name: 'Nashua' }, { name: 'Nashville-Davidson' }, { name: 'National City' }, { name: 'New Bedford' }, { name: 'New Berlin' }, { name: 'New Braunfels' }, { name: 'New Britain' }, { name: 'New Brunswick' }, { name: 'New Haven' }, { name: 'New Orleans' }, { name: 'New Rochelle' }, { name: 'New York' }, { name: 'Newark' }, { name: 'Newark' }, { name: 'Newark' }, { name: 'Newport Beach' }, { name: 'Newport News' }, { name: 'Newton' }, { name: 'Niagara Falls' }, { name: 'Noblesville' }, { name: 'Norfolk' }, { name: 'Normal' }, { name: 'Norman' }, { name: 'North Charleston' }, { name: 'North Las Vegas' }, { name: 'North Lauderdale' }, { name: 'North Little Rock' }, { name: 'North Miami' }, { name: 'North Miami Beach' }, { name: 'North Port' }, { name: 'North Richland Hills' }, { name: 'Northglenn' }, { name: 'Norwalk' }, { name: 'Norwalk' }, { name: 'Norwich' }, { name: 'Novato' }, { name: 'Novi' }, { name: 'O\'Fallon' }, { name: 'Oak Lawn' }, { name: 'Oak Park' }, { name: 'Oakland' }, { name: 'Oakland Park' }, { name: 'Oakley' }, { name: 'Ocala' }, { name: 'Oceanside' }, { name: 'Ocoee' }, { name: 'Odessa' }, { name: 'Ogden' }, { name: 'Oklahoma City' }, { name: 'Olathe' }, { name: 'Olympia' }, { name: 'Omaha' }, { name: 'Ontario' }, { name: 'Orange' }, { name: 'Orem' }, { name: 'Orland Park' }, { name: 'Orlando' }, { name: 'Ormond Beach' }, { name: 'Oro Valley' }, { name: 'Oshkosh' }, { name: 'Overland Park' }, { name: 'Owensboro' }, { name: 'Oxnard' }, { name: 'Pacifica' }, { name: 'Palatine' }, { name: 'Palm Bay' }, { name: 'Palm Beach Gardens' }, { name: 'Palm Coast' }, { name: 'Palm Desert' }, { name: 'Palm Springs' }, { name: 'Palmdale' }, { name: 'Palo Alto' }, { name: 'Panama City' }, { name: 'Paramount' }, { name: 'Park Ridge' }, { name: 'Parker' }, { name: 'Parma' }, { name: 'Pasadena' }, { name: 'Pasadena' }, { name: 'Pasco' }, { name: 'Passaic' }, { name: 'Paterson' }, { name: 'Pawtucket' }, { name: 'Peabody' }, { name: 'Peachtree Corners' }, { name: 'Pearland' }, { name: 'Pembroke Pines' }, { name: 'Pensacola' }, { name: 'Peoria' }, { name: 'Peoria' }, { name: 'Perris' }, { name: 'Perth Amboy' }, { name: 'Petaluma' }, { name: 'Pflugerville' }, { name: 'Pharr' }, { name: 'Phenix City' }, { name: 'Philadelphia' }, { name: 'Phoenix' }, { name: 'Pico Rivera' }, { name: 'Pine Bluff' }, { name: 'Pinellas Park' }, { name: 'Pittsburg' }, { name: 'Pittsburgh' }, { name: 'Pittsfield' }, { name: 'Placentia' }, { name: 'Plainfield' }, { name: 'Plainfield' }, { name: 'Plano' }, { name: 'Plantation' }, { name: 'Pleasanton' }, { name: 'Plymouth' }, { name: 'Pocatello' }, { name: 'Pomona' }, { name: 'Pompano Beach' }, { name: 'Pontiac' }, { name: 'Port Arthur' }, { name: 'Port Orange' }, { name: 'Port St. Lucie' }, { name: 'Portage' }, { name: 'Porterville' }, { name: 'Portland' }, { name: 'Portland' }, { name: 'Portsmouth' }, { name: 'Poway' }, { name: 'Prescott' }, { name: 'Prescott Valley' }, { name: 'Providence' }, { name: 'Provo' }, { name: 'Pueblo' }, { name: 'Puyallup' }, { name: 'Quincy' }, { name: 'Quincy' }, { name: 'Racine' }, { name: 'Raleigh' }, { name: 'Rancho Cordova' }, { name: 'Rancho Cucamonga' }, { name: 'Rancho Palos Verdes' }, { name: 'Rancho Santa Margarita' }, { name: 'Rapid City' }, { name: 'Reading' }, { name: 'Redding' }, { name: 'Redlands' }, { name: 'Redmond' }, { name: 'Redondo Beach' }, { name: 'Redwood City' }, { name: 'Reno' }, { name: 'Renton' }, { name: 'Revere' }, { name: 'Rialto' }, { name: 'Richardson' }, { name: 'Richland' }, { name: 'Richmond' }, { name: 'Richmond' }, { name: 'Rio Rancho' }, { name: 'Riverside' }, { name: 'Riverton' }, { name: 'Roanoke' }, { name: 'Rochester' }, { name: 'Rochester' }, { name: 'Rochester Hills' }, { name: 'Rock Hill' }, { name: 'Rock Island' }, { name: 'Rockford' }, { name: 'Rocklin' }, { name: 'Rockville' }, { name: 'Rockwall' }, { name: 'Rocky Mount' }, { name: 'Rogers' }, { name: 'Rohnert Park' }, { name: 'Romeoville' }, { name: 'Rosemead' }, { name: 'Roseville' }, { name: 'Roseville' }, { name: 'Roswell' }, { name: 'Roswell' }, { name: 'Round Rock' }, { name: 'Rowlett' }, { name: 'Roy' }, { name: 'Royal Oak' }, { name: 'Sacramento' }, { name: 'Saginaw' }, { name: 'Salem' }, { name: 'Salem' }, { name: 'Salina' }, { name: 'Salinas' }, { name: 'Salt Lake City' }, { name: 'Sammamish' }, { name: 'San Angelo' }, { name: 'San Antonio' }, { name: 'San Bernardino' }, { name: 'San Bruno' }, { name: 'San Buenaventura (Ventura)' }, { name: 'San Clemente' }, { name: 'San Diego' }, { name: 'San Francisco' }, { name: 'San Gabriel' }, { name: 'San Jacinto' }, { name: 'San Jose' }, { name: 'San Leandro' }, { name: 'San Luis Obispo' }, { name: 'San Marcos' }, { name: 'San Marcos' }, { name: 'San Mateo' }, { name: 'San Rafael' }, { name: 'San Ramon' }, { name: 'Sandy' }, { name: 'Sandy Springs' }, { name: 'Sanford' }, { name: 'Santa Ana' }, { name: 'Santa Barbara' }, { name: 'Santa Clara' }, { name: 'Santa Clarita' }, { name: 'Santa Cruz' }, { name: 'Santa Fe' }, { name: 'Santa Maria' }, { name: 'Santa Monica' }, { name: 'Santa Rosa' }, { name: 'Santee' }, { name: 'Sarasota' }, { name: 'Savannah' }, { name: 'Sayreville' }, { name: 'Schaumburg' }, { name: 'Schenectady' }, { name: 'Scottsdale' }, { name: 'Scranton' }, { name: 'Seattle' }, { name: 'Shakopee' }, { name: 'Shawnee' }, { name: 'Sheboygan' }, { name: 'Shelton' }, { name: 'Sherman' }, { name: 'Shoreline' }, { name: 'Shreveport' }, { name: 'Sierra Vista' }, { name: 'Simi Valley' }, { name: 'Sioux City' }, { name: 'Sioux Falls' }, { name: 'Skokie' }, { name: 'Smyrna' }, { name: 'Smyrna' }, { name: 'Somerville' }, { name: 'South Bend' }, { name: 'South Gate' }, { name: 'South Jordan' }, { name: 'South San Francisco' }, { name: 'Southaven' }, { name: 'Southfield' }, { name: 'Spanish Fork' }, { name: 'Sparks' }, { name: 'Spartanburg' }, { name: 'Spokane' }, { name: 'Spokane Valley' }, { name: 'Springdale' }, { name: 'Springfield' }, { name: 'Springfield' }, { name: 'Springfield' }, { name: 'Springfield' }, { name: 'Springfield' }, { name: 'St. Charles' }, { name: 'St. Clair Shores' }, { name: 'St. Cloud' }, { name: 'St. Cloud' }, { name: 'St. George' }, { name: 'St. Joseph' }, { name: 'St. Louis' }, { name: 'St. Louis Park' }, { name: 'St. Paul' }, { name: 'St. Peters' }, { name: 'St. Petersburg' }, { name: 'Stamford' }, { name: 'Stanton' }, { name: 'State College' }, { name: 'Sterling Heights' }, { name: 'Stillwater' }, { name: 'Stockton' }, { name: 'Streamwood' }, { name: 'Strongsville' }, { name: 'Suffolk' }, { name: 'Sugar Land' }, { name: 'Summerville' }, { name: 'Sumter' }, { name: 'Sunnyvale' }, { name: 'Sunrise' }, { name: 'Surprise' }, { name: 'Syracuse' }, { name: 'Tacoma' }, { name: 'Tallahassee' }, { name: 'Tamarac' }, { name: 'Tampa' }, { name: 'Taunton' }, { name: 'Taylor' }, { name: 'Taylorsville' }, { name: 'Temecula' }, { name: 'Tempe' }, { name: 'Temple' }, { name: 'Terre Haute' }, { name: 'Texarkana' }, { name: 'Texas City' }, { name: 'The Colony' }, { name: 'Thornton' }, { name: 'Thousand Oaks' }, { name: 'Tigard' }, { name: 'Tinley Park' }, { name: 'Titusville' }, { name: 'Toledo' }, { name: 'Topeka' }, { name: 'Torrance' }, { name: 'Tracy' }, { name: 'Trenton' }, { name: 'Troy' }, { name: 'Troy' }, { name: 'Tucson' }, { name: 'Tulare' }, { name: 'Tulsa' }, { name: 'Turlock' }, { name: 'Tuscaloosa' }, { name: 'Tustin' }, { name: 'Twin Falls' }, { name: 'Tyler' }, { name: 'Union City' }, { name: 'Union City' }, { name: 'Upland' }, { name: 'Urbana' }, { name: 'Urbandale' }, { name: 'Utica' }, { name: 'Vacaville' }, { name: 'Valdosta' }, { name: 'Vallejo' }, { name: 'Valley Stream' }, { name: 'Vancouver' }, { name: 'Victoria' }, { name: 'Victorville' }, { name: 'Vineland' }, { name: 'Virginia Beach' }, { name: 'Visalia' }, { name: 'Vista' }, { name: 'Waco' }, { name: 'Walnut Creek' }, { name: 'Waltham' }, { name: 'Warner Robins' }, { name: 'Warren' }, { name: 'Warren' }, { name: 'Warwick' }, { name: 'Washington' }, { name: 'Waterbury' }, { name: 'Waterloo' }, { name: 'Watsonville' }, { name: 'Waukegan' }, { name: 'Waukesha' }, { name: 'Wausau' }, { name: 'Wauwatosa' }, { name: 'Wellington' }, { name: 'Weslaco' }, { name: 'West Allis' }, { name: 'West Covina' }, { name: 'West Des Moines' }, { name: 'West Haven' }, { name: 'West Jordan' }, { name: 'West New York' }, { name: 'West Palm Beach' }, { name: 'West Sacramento' }, { name: 'West Valley City' }, { name: 'Westerville' }, { name: 'Westfield' }, { name: 'Westland' }, { name: 'Westminster' }, { name: 'Westminster' }, { name: 'Weston' }, { name: 'Weymouth Town' }, { name: 'Wheaton' }, { name: 'Wheeling' }, { name: 'White Plains' }, { name: 'Whittier' }, { name: 'Wichita' }, { name: 'Wichita Falls' }, { name: 'Wilkes-Barre' }, { name: 'Wilmington' }, { name: 'Wilmington' }, { name: 'Wilson' }, { name: 'Winston-Salem' }, { name: 'Winter Garden' }, { name: 'Woburn' }, { name: 'Woodbury' }, { name: 'Woodland' }, { name: 'Woonsocket' }, { name: 'Worcester' }, { name: 'Wylie' }, { name: 'Wyoming' }, { name: 'Yakima' }, { name: 'Yonkers' }, { name: 'Yorba Linda' }, { name: 'York' }, { name: 'Youngstown' }, { name: 'Yuba City' }, { name: 'Yucaipa' }, { name: 'Yuma' }];
@@ -1425,97 +1425,6 @@ module.exports = function (recalc) {
   return size;
 };
 },{"./inDOM":19}],21:[function(require,module,exports){
-"use strict";
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * 
- */
-
-function makeEmptyFunction(arg) {
-  return function () {
-    return arg;
-  };
-}
-
-/**
- * This function accepts and discards inputs; it has no side effects. This is
- * primarily useful idiomatically for overridable function endpoints which
- * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
- */
-var emptyFunction = function emptyFunction() {};
-
-emptyFunction.thatReturns = makeEmptyFunction;
-emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
-emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
-emptyFunction.thatReturnsNull = makeEmptyFunction(null);
-emptyFunction.thatReturnsThis = function () {
-  return this;
-};
-emptyFunction.thatReturnsArgument = function (arg) {
-  return arg;
-};
-
-module.exports = emptyFunction;
-},{}],22:[function(require,module,exports){
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-'use strict';
-
-/**
- * Use invariant() to assert state which your program assumes to be true.
- *
- * Provide sprintf-style format (only %s is supported) and arguments
- * to provide information about what broke and what you were
- * expecting.
- *
- * The invariant message will be stripped in production, but the invariant
- * will remain to ensure logic does not differ in production.
- */
-
-var validateFormat = function validateFormat(format) {};
-
-if ("production" !== 'production') {
-  validateFormat = function validateFormat(format) {
-    if (format === undefined) {
-      throw new Error('invariant requires an error message argument');
-    }
-  };
-}
-
-function invariant(condition, format, a, b, c, d, e, f) {
-  validateFormat(format);
-
-  if (!condition) {
-    var error;
-    if (format === undefined) {
-      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-    } else {
-      var args = [a, b, c, d, e, f];
-      var argIndex = 0;
-      error = new Error(format.replace(/%s/g, function () {
-        return args[argIndex++];
-      }));
-      error.name = 'Invariant Violation';
-    }
-
-    error.framesToPop = 1; // we don't care about invariant's own frame
-    throw error;
-  }
-}
-
-module.exports = invariant;
-},{}],23:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -1581,70 +1490,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = shallowEqual;
-},{}],24:[function(require,module,exports){
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-'use strict';
-
-var emptyFunction = require('./emptyFunction');
-
-/**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-
-var warning = emptyFunction;
-
-if ("production" !== 'production') {
-  var printWarning = function printWarning(format) {
-    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
-
-    var argIndex = 0;
-    var message = 'Warning: ' + format.replace(/%s/g, function () {
-      return args[argIndex++];
-    });
-    if (typeof console !== 'undefined') {
-      console.error(message);
-    }
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) {}
-  };
-
-  warning = function warning(condition, format) {
-    if (format === undefined) {
-      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-    }
-
-    if (format.indexOf('Failed Composite propType: ') === 0) {
-      return; // Ignore CompositeComponent proptype check.
-    }
-
-    if (!condition) {
-      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-        args[_key2 - 2] = arguments[_key2];
-      }
-
-      printWarning.apply(undefined, [format].concat(args));
-    }
-  };
-}
-
-module.exports = warning;
-},{"./emptyFunction":21}],25:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 /*!
  * Determine if an object is a Buffer
  *
@@ -1667,7 +1513,7 @@ function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
 
-},{}],26:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 module.exports = function() {
   var mediaQuery;
   if (typeof window !== "undefined" && window !== null) {
@@ -1682,7 +1528,7 @@ module.exports = function() {
   return false;
 };
 
-},{}],27:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 // the whatwg-fetch polyfill installs the fetch() function
 // on the global object (window or self)
 //
@@ -1690,7 +1536,7 @@ module.exports = function() {
 require('whatwg-fetch');
 module.exports = self.fetch.bind(self);
 
-},{"whatwg-fetch":105}],28:[function(require,module,exports){
+},{"whatwg-fetch":102}],25:[function(require,module,exports){
 (function(){
   var crypt = require('crypt'),
       utf8 = require('charenc').utf8,
@@ -1852,7 +1698,7 @@ module.exports = self.fetch.bind(self);
 
 })();
 
-},{"charenc":17,"crypt":18,"is-buffer":25}],29:[function(require,module,exports){
+},{"charenc":17,"crypt":18,"is-buffer":22}],26:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -1944,7 +1790,47 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],30:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
+(function (process){
+// Generated by CoffeeScript 1.12.2
+(function() {
+  var getNanoSeconds, hrtime, loadTime, moduleLoadTime, nodeLoadTime, upTime;
+
+  if ((typeof performance !== "undefined" && performance !== null) && performance.now) {
+    module.exports = function() {
+      return performance.now();
+    };
+  } else if ((typeof process !== "undefined" && process !== null) && process.hrtime) {
+    module.exports = function() {
+      return (getNanoSeconds() - nodeLoadTime) / 1e6;
+    };
+    hrtime = process.hrtime;
+    getNanoSeconds = function() {
+      var hr;
+      hr = hrtime();
+      return hr[0] * 1e9 + hr[1];
+    };
+    moduleLoadTime = getNanoSeconds();
+    upTime = process.uptime() * 1e9;
+    nodeLoadTime = moduleLoadTime - upTime;
+  } else if (Date.now) {
+    module.exports = function() {
+      return Date.now() - loadTime;
+    };
+    loadTime = Date.now();
+  } else {
+    module.exports = function() {
+      return new Date().getTime() - loadTime;
+    };
+    loadTime = new Date().getTime();
+  }
+
+}).call(this);
+
+
+
+}).call(this,require('_process'))
+},{"_process":28}],28:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2130,7 +2016,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],31:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2140,11 +2026,24 @@ process.umask = function() { return 0; };
 
 'use strict';
 
+var printWarning = function() {};
+
 if ("production" !== 'production') {
-  var invariant = require('fbjs/lib/invariant');
-  var warning = require('fbjs/lib/warning');
   var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
   var loggedTypeFailures = {};
+
+  printWarning = function(text) {
+    var message = 'Warning: ' + text;
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
 }
 
 /**
@@ -2169,12 +2068,29 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
         try {
           // This is intentionally an invariant that gets caught. It's the same
           // behavior as without this statement except with a better message.
-          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
+          if (typeof typeSpecs[typeSpecName] !== 'function') {
+            var err = Error(
+              (componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' +
+              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.'
+            );
+            err.name = 'Invariant Violation';
+            throw err;
+          }
           error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
         } catch (ex) {
           error = ex;
         }
-        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+        if (error && !(error instanceof Error)) {
+          printWarning(
+            (componentName || 'React class') + ': type specification of ' +
+            location + ' `' + typeSpecName + '` is invalid; the type checker ' +
+            'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
+            'You may have forgotten to pass an argument to the type checker ' +
+            'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' +
+            'shape all require an argument).'
+          )
+
+        }
         if (error instanceof Error && !(error.message in loggedTypeFailures)) {
           // Only monitor this failure once because there tends to be a lot of the
           // same error.
@@ -2182,7 +2098,9 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 
           var stack = getStack ? getStack() : '';
 
-          warning(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
+          printWarning(
+            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
+          );
         }
       }
     }
@@ -2191,7 +2109,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 
 module.exports = checkPropTypes;
 
-},{"./lib/ReactPropTypesSecret":35,"fbjs/lib/invariant":22,"fbjs/lib/warning":24}],32:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":33}],30:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2201,9 +2119,9 @@ module.exports = checkPropTypes;
 
 'use strict';
 
-var emptyFunction = require('fbjs/lib/emptyFunction');
-var invariant = require('fbjs/lib/invariant');
 var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
+
+function emptyFunction() {}
 
 module.exports = function() {
   function shim(props, propName, componentName, location, propFullName, secret) {
@@ -2211,12 +2129,13 @@ module.exports = function() {
       // It is still safe when called from React.
       return;
     }
-    invariant(
-      false,
+    var err = new Error(
       'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
       'Use PropTypes.checkPropTypes() to call them. ' +
       'Read more at http://fb.me/use-check-prop-types'
     );
+    err.name = 'Invariant Violation';
+    throw err;
   };
   shim.isRequired = shim;
   function getShim() {
@@ -2251,7 +2170,7 @@ module.exports = function() {
   return ReactPropTypes;
 };
 
-},{"./lib/ReactPropTypesSecret":35,"fbjs/lib/emptyFunction":21,"fbjs/lib/invariant":22}],33:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":33}],31:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2261,13 +2180,31 @@ module.exports = function() {
 
 'use strict';
 
-var emptyFunction = require('fbjs/lib/emptyFunction');
-var invariant = require('fbjs/lib/invariant');
-var warning = require('fbjs/lib/warning');
 var assign = require('object-assign');
 
 var ReactPropTypesSecret = require('./lib/ReactPropTypesSecret');
 var checkPropTypes = require('./checkPropTypes');
+
+var printWarning = function() {};
+
+if ("production" !== 'production') {
+  printWarning = function(text) {
+    var message = 'Warning: ' + text;
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+}
+
+function emptyFunctionThatReturnsNull() {
+  return null;
+}
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -2411,12 +2348,13 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
       if (secret !== ReactPropTypesSecret) {
         if (throwOnDirectAccess) {
           // New behavior only for users of `prop-types` package
-          invariant(
-            false,
+          var err = new Error(
             'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
             'Use `PropTypes.checkPropTypes()` to call them. ' +
             'Read more at http://fb.me/use-check-prop-types'
           );
+          err.name = 'Invariant Violation';
+          throw err;
         } else if ("production" !== 'production' && typeof console !== 'undefined') {
           // Old behavior for people using React.PropTypes
           var cacheKey = componentName + ':' + propName;
@@ -2425,15 +2363,12 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
             // Avoid spamming the console because they are often not actionable except for lib authors
             manualPropTypeWarningCount < 3
           ) {
-            warning(
-              false,
+            printWarning(
               'You are manually calling a React.PropTypes validation ' +
-              'function for the `%s` prop on `%s`. This is deprecated ' +
+              'function for the `' + propFullName + '` prop on `' + componentName  + '`. This is deprecated ' +
               'and will throw in the standalone `prop-types` package. ' +
               'You may be seeing this warning due to a third-party PropTypes ' +
-              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.',
-              propFullName,
-              componentName
+              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.'
             );
             manualPropTypeCallCache[cacheKey] = true;
             manualPropTypeWarningCount++;
@@ -2477,7 +2412,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
   }
 
   function createAnyTypeChecker() {
-    return createChainableTypeChecker(emptyFunction.thatReturnsNull);
+    return createChainableTypeChecker(emptyFunctionThatReturnsNull);
   }
 
   function createArrayOfTypeChecker(typeChecker) {
@@ -2527,8 +2462,8 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
   function createEnumTypeChecker(expectedValues) {
     if (!Array.isArray(expectedValues)) {
-      "production" !== 'production' ? warning(false, 'Invalid argument supplied to oneOf, expected an instance of array.') : void 0;
-      return emptyFunction.thatReturnsNull;
+      "production" !== 'production' ? printWarning('Invalid argument supplied to oneOf, expected an instance of array.') : void 0;
+      return emptyFunctionThatReturnsNull;
     }
 
     function validate(props, propName, componentName, location, propFullName) {
@@ -2570,21 +2505,18 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
   function createUnionTypeChecker(arrayOfTypeCheckers) {
     if (!Array.isArray(arrayOfTypeCheckers)) {
-      "production" !== 'production' ? warning(false, 'Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
-      return emptyFunction.thatReturnsNull;
+      "production" !== 'production' ? printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
+      return emptyFunctionThatReturnsNull;
     }
 
     for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
       var checker = arrayOfTypeCheckers[i];
       if (typeof checker !== 'function') {
-        warning(
-          false,
+        printWarning(
           'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
-          'received %s at index %s.',
-          getPostfixForTypeWarning(checker),
-          i
+          'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.'
         );
-        return emptyFunction.thatReturnsNull;
+        return emptyFunctionThatReturnsNull;
       }
     }
 
@@ -2795,7 +2727,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
   return ReactPropTypes;
 };
 
-},{"./checkPropTypes":31,"./lib/ReactPropTypesSecret":35,"fbjs/lib/emptyFunction":21,"fbjs/lib/invariant":22,"fbjs/lib/warning":24,"object-assign":29}],34:[function(require,module,exports){
+},{"./checkPropTypes":29,"./lib/ReactPropTypesSecret":33,"object-assign":26}],32:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2825,7 +2757,7 @@ if ("production" !== 'production') {
   module.exports = require('./factoryWithThrowingShims')();
 }
 
-},{"./factoryWithThrowingShims":32,"./factoryWithTypeCheckers":33}],35:[function(require,module,exports){
+},{"./factoryWithThrowingShims":30,"./factoryWithTypeCheckers":31}],33:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2839,7 +2771,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],36:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 'use strict';
 var strictUriEncode = require('strict-uri-encode');
 var objectAssign = require('object-assign');
@@ -3046,7 +2978,7 @@ exports.stringify = function (obj, opts) {
 	}).join('&') : '';
 };
 
-},{"object-assign":29,"strict-uri-encode":104}],37:[function(require,module,exports){
+},{"object-assign":26,"strict-uri-encode":101}],35:[function(require,module,exports){
 (function (global){
 var now = require('performance-now')
   , root = typeof window === 'undefined' ? global : window
@@ -3125,47 +3057,7 @@ module.exports.polyfill = function(object) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"performance-now":38}],38:[function(require,module,exports){
-(function (process){
-// Generated by CoffeeScript 1.12.2
-(function() {
-  var getNanoSeconds, hrtime, loadTime, moduleLoadTime, nodeLoadTime, upTime;
-
-  if ((typeof performance !== "undefined" && performance !== null) && performance.now) {
-    module.exports = function() {
-      return performance.now();
-    };
-  } else if ((typeof process !== "undefined" && process !== null) && process.hrtime) {
-    module.exports = function() {
-      return (getNanoSeconds() - nodeLoadTime) / 1e6;
-    };
-    hrtime = process.hrtime;
-    getNanoSeconds = function() {
-      var hr;
-      hr = hrtime();
-      return hr[0] * 1e9 + hr[1];
-    };
-    moduleLoadTime = getNanoSeconds();
-    upTime = process.uptime() * 1e9;
-    nodeLoadTime = moduleLoadTime - upTime;
-  } else if (Date.now) {
-    module.exports = function() {
-      return Date.now() - loadTime;
-    };
-    loadTime = Date.now();
-  } else {
-    module.exports = function() {
-      return new Date().getTime() - loadTime;
-    };
-    loadTime = new Date().getTime();
-  }
-
-}).call(this);
-
-
-
-}).call(this,require('_process'))
-},{"_process":30}],39:[function(require,module,exports){
+},{"performance-now":27}],36:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -3193,7 +3085,7 @@ function shallowCompare(instance, nextProps, nextState) {
 
 module.exports = shallowCompare;
 
-},{"fbjs/lib/shallowEqual":23}],40:[function(require,module,exports){
+},{"fbjs/lib/shallowEqual":21}],37:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3344,7 +3236,7 @@ Gravatar.defaultProps = {
 
 
 module.exports = Gravatar;
-},{"is-retina":26,"md5":28,"prop-types":34,"query-string":36,"react":undefined}],41:[function(require,module,exports){
+},{"is-retina":23,"md5":25,"prop-types":32,"query-string":34,"react":undefined}],38:[function(require,module,exports){
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -3617,7 +3509,7 @@ module.exports =
 /***/ }
 /******/ ]);
 
-},{"react":undefined}],42:[function(require,module,exports){
+},{"react":undefined}],39:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3889,7 +3781,7 @@ exports.default = Async;
 
 Async.propTypes = propTypes;
 Async.defaultProps = defaultProps;
-},{"./Select":46,"./utils/stripDiacritics":54,"prop-types":34,"react":undefined}],43:[function(require,module,exports){
+},{"./Select":43,"./utils/stripDiacritics":51,"prop-types":32,"react":undefined}],40:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3995,7 +3887,7 @@ AsyncCreatableSelect.defaultProps = {
 };
 
 exports.default = AsyncCreatableSelect;
-},{"./Async":42,"./Creatable":44,"./Select":46,"prop-types":34,"react":undefined}],44:[function(require,module,exports){
+},{"./Async":39,"./Creatable":41,"./Select":43,"prop-types":32,"react":undefined}],41:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -4085,7 +3977,8 @@ var CreatableSelect = function (_React$Component) {
 			var _props2 = this.props,
 			    filterOptions = _props2.filterOptions,
 			    isValidNewOption = _props2.isValidNewOption,
-			    promptTextCreator = _props2.promptTextCreator;
+			    promptTextCreator = _props2.promptTextCreator,
+			    showNewOptionAtTop = _props2.showNewOptionAtTop;
 
 			// TRICKY Check currently selected options as well.
 			// Don't display a create-prompt for a value that's selected.
@@ -4121,7 +4014,11 @@ var CreatableSelect = function (_React$Component) {
 						valueKey: this.valueKey
 					});
 
-					filteredOptions.unshift(this._createPlaceholderOption);
+					if (showNewOptionAtTop) {
+						filteredOptions.unshift(this._createPlaceholderOption);
+					} else {
+						filteredOptions.push(this._createPlaceholderOption);
+					}
 				}
 			}
 
@@ -4179,7 +4076,7 @@ var CreatableSelect = function (_React$Component) {
 
 			var focusedOption = this.select.getFocusedOption();
 
-			if (focusedOption && focusedOption === this._createPlaceholderOption && shouldKeyDownEventCreateNewOption({ keyCode: event.keyCode })) {
+			if (focusedOption && focusedOption === this._createPlaceholderOption && shouldKeyDownEventCreateNewOption(event)) {
 				this.createNewOption();
 
 				// Prevent decorated Select from doing anything additional with this keyDown event
@@ -4317,7 +4214,8 @@ CreatableSelect.defaultProps = {
 	menuRenderer: _defaultMenuRenderer2.default,
 	newOptionCreator: newOptionCreator,
 	promptTextCreator: promptTextCreator,
-	shouldKeyDownEventCreateNewOption: shouldKeyDownEventCreateNewOption
+	shouldKeyDownEventCreateNewOption: shouldKeyDownEventCreateNewOption,
+	showNewOptionAtTop: true
 };
 
 CreatableSelect.propTypes = {
@@ -4364,11 +4262,16 @@ CreatableSelect.propTypes = {
 	ref: _propTypes2.default.func,
 
 	// Decides if a keyDown event (eg its `keyCode`) should result in the creation of a new option.
-	shouldKeyDownEventCreateNewOption: _propTypes2.default.func
+	shouldKeyDownEventCreateNewOption: _propTypes2.default.func,
+
+	// Where to show prompt/placeholder option text.
+	// true: new option prompt at top of list (default)
+	// false: new option prompt at bottom of list
+	showNewOptionAtTop: _propTypes2.default.bool
 };
 
 exports.default = CreatableSelect;
-},{"./Select":46,"./utils/defaultFilterOptions":52,"./utils/defaultMenuRenderer":53,"prop-types":34,"react":undefined}],45:[function(require,module,exports){
+},{"./Select":43,"./utils/defaultFilterOptions":49,"./utils/defaultMenuRenderer":50,"prop-types":32,"react":undefined}],42:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -4517,7 +4420,7 @@ Option.propTypes = {
 };
 
 exports.default = Option;
-},{"./utils/blockEvent":49,"classnames":undefined,"prop-types":34,"react":undefined}],46:[function(require,module,exports){
+},{"./utils/blockEvent":46,"classnames":undefined,"prop-types":32,"react":undefined}],43:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -4769,19 +4672,11 @@ var Select = function (_React$Component) {
 	}, {
 		key: 'toggleTouchOutsideEvent',
 		value: function toggleTouchOutsideEvent(enabled) {
-			if (enabled) {
-				if (!document.addEventListener && document.attachEvent) {
-					document.attachEvent('ontouchstart', this.handleTouchOutside);
-				} else {
-					document.addEventListener('touchstart', this.handleTouchOutside);
-				}
-			} else {
-				if (!document.removeEventListener && document.detachEvent) {
-					document.detachEvent('ontouchstart', this.handleTouchOutside);
-				} else {
-					document.removeEventListener('touchstart', this.handleTouchOutside);
-				}
-			}
+			var eventTogglerName = enabled ? document.addEventListener ? 'addEventListener' : 'attachEvent' : document.removeEventListener ? 'removeEventListener' : 'detachEvent';
+			var pref = document.addEventListener ? '' : 'on';
+
+			document[eventTogglerName](pref + 'touchstart', this.handleTouchOutside);
+			document[eventTogglerName](pref + 'mousedown', this.handleTouchOutside);
 		}
 	}, {
 		key: 'handleTouchOutside',
@@ -4851,7 +4746,8 @@ var Select = function (_React$Component) {
 				} else if (!this.state.isOpen) {
 					this.setState({
 						isOpen: true,
-						isPseudoFocused: false
+						isPseudoFocused: false,
+						focusedOption: null
 					});
 				}
 
@@ -4866,7 +4762,8 @@ var Select = function (_React$Component) {
 				// This code means that if a select is searchable, onClick the options menu will not appear, only on subsequent click will it open.
 				this.focus();
 				return this.setState({
-					isOpen: !this.state.isOpen
+					isOpen: !this.state.isOpen,
+					focusedOption: null
 				});
 			}
 
@@ -5267,6 +5164,9 @@ var Select = function (_React$Component) {
 			});
 			var lastValueIndex = visibleOptions.indexOf(value);
 			this.setValue(valueArray.concat(value));
+			if (!this.props.closeOnSelect) {
+				return;
+			}
 			if (visibleOptions.length - 1 === lastValueIndex) {
 				// the last option was selected; focus the second-last one
 				this.focusOption(visibleOptions[lastValueIndex - 1]);
@@ -5476,7 +5376,8 @@ var Select = function (_React$Component) {
 							onClick: onClick,
 							onRemove: _this5.removeValue,
 							placeholder: _this5.props.placeholder,
-							value: value
+							value: value,
+							values: valueArray
 						},
 						renderLabel(value, i),
 						_react2.default.createElement(
@@ -5527,7 +5428,6 @@ var Select = function (_React$Component) {
 				'aria-label': this.props['aria-label'],
 				'aria-labelledby': this.props['aria-labelledby'],
 				'aria-owns': ariaOwns,
-				className: className,
 				onBlur: this.handleInputBlur,
 				onChange: this.handleInputChange,
 				onFocus: this.handleInputFocus,
@@ -5568,7 +5468,7 @@ var Select = function (_React$Component) {
 			}
 
 			if (this.props.autosize) {
-				return _react2.default.createElement(_reactInputAutosize2.default, _extends({ id: this.props.id }, inputProps, { minWidth: '5' }));
+				return _react2.default.createElement(_reactInputAutosize2.default, _extends({ id: this.props.id }, inputProps, { className: className, minWidth: '5' }));
 			}
 			return _react2.default.createElement(
 				'div',
@@ -5835,7 +5735,7 @@ var Select = function (_React$Component) {
 						style: this.props.style
 					},
 					_react2.default.createElement(
-						'span',
+						'div',
 						{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
 						this.renderValue(valueArray, isOpen),
 						this.renderInput(valueArray, focusedOptionIndex)
@@ -5979,7 +5879,7 @@ Select.defaultProps = {
 };
 
 exports.default = Select;
-},{"./Option":45,"./Value":47,"./utils/defaultArrowRenderer":50,"./utils/defaultClearRenderer":51,"./utils/defaultFilterOptions":52,"./utils/defaultMenuRenderer":53,"classnames":undefined,"prop-types":34,"react":undefined,"react-dom":undefined,"react-input-autosize":undefined}],47:[function(require,module,exports){
+},{"./Option":42,"./Value":44,"./utils/defaultArrowRenderer":47,"./utils/defaultClearRenderer":48,"./utils/defaultFilterOptions":49,"./utils/defaultMenuRenderer":50,"classnames":undefined,"prop-types":32,"react":undefined,"react-dom":undefined,"react-input-autosize":undefined}],44:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6102,7 +6002,7 @@ var Value = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				{ className: (0, _classnames2.default)('Select-value', this.props.value.className),
+				{ className: (0, _classnames2.default)('Select-value', this.props.value.disabled ? 'Select-value-disabled' : '', this.props.value.className),
 					style: this.props.value.style,
 					title: this.props.value.title
 				},
@@ -6125,7 +6025,7 @@ Value.propTypes = {
 };
 
 exports.default = Value;
-},{"classnames":undefined,"prop-types":34,"react":undefined}],48:[function(require,module,exports){
+},{"classnames":undefined,"prop-types":32,"react":undefined}],45:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6191,7 +6091,7 @@ exports.defaultMenuRenderer = _defaultMenuRenderer2.default;
 exports.defaultArrowRenderer = _defaultArrowRenderer2.default;
 exports.defaultClearRenderer = _defaultClearRenderer2.default;
 exports.defaultFilterOptions = _defaultFilterOptions2.default;
-},{"./Async":42,"./AsyncCreatable":43,"./Creatable":44,"./Option":45,"./Select":46,"./Value":47,"./utils/defaultArrowRenderer":50,"./utils/defaultClearRenderer":51,"./utils/defaultFilterOptions":52,"./utils/defaultMenuRenderer":53}],49:[function(require,module,exports){
+},{"./Async":39,"./AsyncCreatable":40,"./Creatable":41,"./Option":42,"./Select":43,"./Value":44,"./utils/defaultArrowRenderer":47,"./utils/defaultClearRenderer":48,"./utils/defaultFilterOptions":49,"./utils/defaultMenuRenderer":50}],46:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6210,7 +6110,7 @@ exports.default = function (event) {
 		window.location.href = event.target.href;
 	}
 };
-},{}],50:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6241,7 +6141,7 @@ arrowRenderer.propTypes = {
 };
 
 exports.default = arrowRenderer;
-},{"prop-types":34,"react":undefined}],51:[function(require,module,exports){
+},{"prop-types":32,"react":undefined}],48:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6262,7 +6162,7 @@ var clearRenderer = function clearRenderer() {
 };
 
 exports.default = clearRenderer;
-},{"react":undefined}],52:[function(require,module,exports){
+},{"react":undefined}],49:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6332,7 +6232,7 @@ var filterOptions = function filterOptions(options, filterValue, excludeOptions,
 };
 
 exports.default = filterOptions;
-},{"./stripDiacritics":54,"./trim":55}],53:[function(require,module,exports){
+},{"./stripDiacritics":51,"./trim":52}],50:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6429,7 +6329,7 @@ menuRenderer.propTypes = {
 };
 
 exports.default = menuRenderer;
-},{"classnames":undefined,"prop-types":34,"react":undefined}],54:[function(require,module,exports){
+},{"classnames":undefined,"prop-types":32,"react":undefined}],51:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6445,7 +6345,7 @@ var stripDiacritics = function stripDiacritics(str) {
 };
 
 exports.default = stripDiacritics;
-},{}],55:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6456,7 +6356,7 @@ var trim = function trim(str) {
 };
 
 exports.default = trim;
-},{}],56:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6686,7 +6586,7 @@ VirtualizedSelect.defaultProps = {
   optionHeight: 35
 };
 exports.default = VirtualizedSelect;
-},{"react":undefined,"react-select":48,"react-virtualized":100}],57:[function(require,module,exports){
+},{"react":undefined,"react-select":45,"react-virtualized":97}],54:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6701,9 +6601,9 @@ var _VirtualizedSelect2 = _interopRequireDefault(_VirtualizedSelect);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _VirtualizedSelect2.default;
-},{"./VirtualizedSelect":56}],58:[function(require,module,exports){
-arguments[4][57][0].apply(exports,arguments)
-},{"./VirtualizedSelect":57,"dup":57}],59:[function(require,module,exports){
+},{"./VirtualizedSelect":53}],55:[function(require,module,exports){
+arguments[4][54][0].apply(exports,arguments)
+},{"./VirtualizedSelect":54,"dup":54}],56:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6845,7 +6745,7 @@ ArrowKeyStepper.propTypes = {
   rowCount: _react.PropTypes.number.isRequired
 };
 exports.default = ArrowKeyStepper;
-},{"react":undefined,"react-addons-shallow-compare":39}],60:[function(require,module,exports){
+},{"react":undefined,"react-addons-shallow-compare":36}],57:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6861,7 +6761,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = _ArrowKeyStepper3.default;
 exports.ArrowKeyStepper = _ArrowKeyStepper3.default;
-},{"./ArrowKeyStepper":59}],61:[function(require,module,exports){
+},{"./ArrowKeyStepper":56}],58:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7035,7 +6935,7 @@ AutoSizer.defaultProps = {
   onResize: function onResize() {}
 };
 exports.default = AutoSizer;
-},{"../vendor/detectElementResize":103,"react":undefined,"react-addons-shallow-compare":39}],62:[function(require,module,exports){
+},{"../vendor/detectElementResize":100,"react":undefined,"react-addons-shallow-compare":36}],59:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7051,7 +6951,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = _AutoSizer3.default;
 exports.AutoSizer = _AutoSizer3.default;
-},{"./AutoSizer":61}],63:[function(require,module,exports){
+},{"./AutoSizer":58}],60:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7365,7 +7265,7 @@ CellMeasurer.propTypes = {
   width: _react.PropTypes.number
 };
 exports.default = CellMeasurer;
-},{"./defaultCellSizeCache":64,"react":undefined,"react-addons-shallow-compare":39,"react-dom":undefined}],64:[function(require,module,exports){
+},{"./defaultCellSizeCache":61,"react":undefined,"react-addons-shallow-compare":36,"react-dom":undefined}],61:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7463,7 +7363,7 @@ var CellSizeCache = function () {
 }();
 
 exports.default = CellSizeCache;
-},{}],65:[function(require,module,exports){
+},{}],62:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7484,7 +7384,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _CellMeasurer3.default;
 exports.CellMeasurer = _CellMeasurer3.default;
 exports.defaultCellSizeCache = _defaultCellSizeCache3.default;
-},{"./CellMeasurer":63,"./defaultCellSizeCache":64}],66:[function(require,module,exports){
+},{"./CellMeasurer":60,"./defaultCellSizeCache":61}],63:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -7806,7 +7706,7 @@ function defaultCellGroupRenderer(_ref5) {
     return !!renderedCell;
   });
 }
-},{"../utils/getUpdatedOffsetForIndex":102,"./CollectionView":67,"./utils/calculateSizeAndPositionData":71,"react":undefined,"react-addons-shallow-compare":39}],67:[function(require,module,exports){
+},{"../utils/getUpdatedOffsetForIndex":99,"./CollectionView":64,"./utils/calculateSizeAndPositionData":68,"react":undefined,"react-addons-shallow-compare":36}],64:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8482,7 +8382,7 @@ CollectionView.defaultProps = {
   verticalOverscanSize: 0
 };
 exports.default = CollectionView;
-},{"../utils/createCallbackMemoizer":101,"classnames":undefined,"dom-helpers/util/scrollbarSize":20,"raf":37,"react":undefined,"react-addons-shallow-compare":39}],68:[function(require,module,exports){
+},{"../utils/createCallbackMemoizer":98,"classnames":undefined,"dom-helpers/util/scrollbarSize":20,"raf":35,"react":undefined,"react-addons-shallow-compare":36}],65:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8553,7 +8453,7 @@ var Section = function () {
 
 
 exports.default = Section;
-},{}],69:[function(require,module,exports){
+},{}],66:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8709,7 +8609,7 @@ var SectionManager = function () {
 }();
 
 exports.default = SectionManager;
-},{"./Section":68}],70:[function(require,module,exports){
+},{"./Section":65}],67:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8725,7 +8625,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = _Collection3.default;
 exports.Collection = _Collection3.default;
-},{"./Collection":66}],71:[function(require,module,exports){
+},{"./Collection":63}],68:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8773,7 +8673,7 @@ function calculateSizeAndPositionData(_ref) {
     width: width
   };
 }
-},{"../SectionManager":69}],72:[function(require,module,exports){
+},{"../SectionManager":66}],69:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8909,7 +8809,7 @@ ColumnSizer.propTypes = {
   width: _react.PropTypes.number.isRequired
 };
 exports.default = ColumnSizer;
-},{"../Grid":85,"react":undefined,"react-addons-shallow-compare":39}],73:[function(require,module,exports){
+},{"../Grid":82,"react":undefined,"react-addons-shallow-compare":36}],70:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -8925,7 +8825,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = _ColumnSizer3.default;
 exports.ColumnSizer = _ColumnSizer3.default;
-},{"./ColumnSizer":72}],74:[function(require,module,exports){
+},{"./ColumnSizer":69}],71:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9036,7 +8936,7 @@ Column.propTypes = {
   width: _react.PropTypes.number.isRequired
 };
 exports.default = Column;
-},{"./defaultCellDataGetter":78,"./defaultCellRenderer":79,"./defaultHeaderRenderer":80,"react":undefined}],75:[function(require,module,exports){
+},{"./defaultCellDataGetter":75,"./defaultCellRenderer":76,"./defaultHeaderRenderer":77,"react":undefined}],72:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9700,7 +9600,7 @@ FlexTable.defaultProps = {
   style: {}
 };
 exports.default = FlexTable;
-},{"../Grid":85,"./FlexColumn":74,"./SortDirection":76,"./defaultRowRenderer":81,"classnames":undefined,"react":undefined,"react-addons-shallow-compare":39,"react-dom":undefined}],76:[function(require,module,exports){
+},{"../Grid":82,"./FlexColumn":71,"./SortDirection":73,"./defaultRowRenderer":78,"classnames":undefined,"react":undefined,"react-addons-shallow-compare":36,"react-dom":undefined}],73:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9721,7 +9621,7 @@ var SortDirection = {
 };
 
 exports.default = SortDirection;
-},{}],77:[function(require,module,exports){
+},{}],74:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9769,7 +9669,7 @@ function SortIndicator(_ref) {
 SortIndicator.propTypes = {
   sortDirection: _react.PropTypes.oneOf([_SortDirection2.default.ASC, _SortDirection2.default.DESC])
 };
-},{"./SortDirection":76,"classnames":undefined,"react":undefined}],78:[function(require,module,exports){
+},{"./SortDirection":73,"classnames":undefined,"react":undefined}],75:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9794,7 +9694,7 @@ function defaultCellDataGetter(_ref) {
     return rowData[dataKey];
   }
 }
-},{}],79:[function(require,module,exports){
+},{}],76:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9820,7 +9720,7 @@ function defaultCellRenderer(_ref) {
     return String(cellData);
   }
 }
-},{}],80:[function(require,module,exports){
+},{}],77:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9869,7 +9769,7 @@ function defaultHeaderRenderer(_ref) {
 
   return children;
 }
-},{"./SortIndicator":77,"react":undefined}],81:[function(require,module,exports){
+},{"./SortIndicator":74,"react":undefined}],78:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9939,7 +9839,7 @@ function defaultRowRenderer(_ref) {
     columns
   );
 }
-},{"react":undefined}],82:[function(require,module,exports){
+},{"react":undefined}],79:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -9990,7 +9890,7 @@ exports.FlexTable = _FlexTable3.default;
 exports.FlexColumn = _FlexColumn3.default;
 exports.SortDirection = _SortDirection3.default;
 exports.SortIndicator = _SortIndicator3.default;
-},{"./FlexColumn":74,"./FlexTable":75,"./SortDirection":76,"./SortIndicator":77,"./defaultCellDataGetter":78,"./defaultCellRenderer":79,"./defaultHeaderRenderer":80,"./defaultRowRenderer":81}],83:[function(require,module,exports){
+},{"./FlexColumn":71,"./FlexTable":72,"./SortDirection":73,"./SortIndicator":74,"./defaultCellDataGetter":75,"./defaultCellRenderer":76,"./defaultHeaderRenderer":77,"./defaultRowRenderer":78}],80:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11032,7 +10932,7 @@ Grid.defaultProps = {
   tabIndex: 0
 };
 exports.default = Grid;
-},{"../utils/createCallbackMemoizer":101,"./defaultCellRangeRenderer":84,"./utils/ScalingCellSizeAndPositionManager":87,"./utils/calculateSizeAndPositionDataAndUpdateScrollOffset":88,"./utils/getOverscanIndices":89,"./utils/updateScrollIndexHelper":90,"classnames":undefined,"dom-helpers/util/scrollbarSize":20,"raf":37,"react":undefined,"react-addons-shallow-compare":39}],84:[function(require,module,exports){
+},{"../utils/createCallbackMemoizer":98,"./defaultCellRangeRenderer":81,"./utils/ScalingCellSizeAndPositionManager":84,"./utils/calculateSizeAndPositionDataAndUpdateScrollOffset":85,"./utils/getOverscanIndices":86,"./utils/updateScrollIndexHelper":87,"classnames":undefined,"dom-helpers/util/scrollbarSize":20,"raf":35,"react":undefined,"react-addons-shallow-compare":36}],81:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11135,7 +11035,7 @@ function defaultCellRangeRenderer(_ref) {
 
   return renderedCells;
 }
-},{"classnames":undefined,"react":undefined}],85:[function(require,module,exports){
+},{"classnames":undefined,"react":undefined}],82:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11156,7 +11056,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _Grid3.default;
 exports.Grid = _Grid3.default;
 exports.defaultCellRangeRenderer = _defaultCellRangeRenderer3.default;
-},{"./Grid":83,"./defaultCellRangeRenderer":84}],86:[function(require,module,exports){
+},{"./Grid":80,"./defaultCellRangeRenderer":81}],83:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11454,7 +11354,7 @@ var CellSizeAndPositionManager = function () {
 }();
 
 exports.default = CellSizeAndPositionManager;
-},{}],87:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11671,7 +11571,7 @@ var ScalingCellSizeAndPositionManager = function () {
 }();
 
 exports.default = ScalingCellSizeAndPositionManager;
-},{"./CellSizeAndPositionManager":86}],88:[function(require,module,exports){
+},{"./CellSizeAndPositionManager":83}],85:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11714,7 +11614,7 @@ function calculateSizeAndPositionDataAndUpdateScrollOffset(_ref) {
     }
   }
 }
-},{}],89:[function(require,module,exports){
+},{}],86:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11761,7 +11661,7 @@ function getOverscanIndices(_ref) {
     overscanStopIndex: Math.min(cellCount - 1, overscanStopIndex)
   };
 }
-},{}],90:[function(require,module,exports){
+},{}],87:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11818,7 +11718,7 @@ function updateScrollIndexHelper(_ref) {
     }
   }
 }
-},{}],91:[function(require,module,exports){
+},{}],88:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12105,7 +12005,7 @@ function scanForUnloadedRanges(_ref3) {
 function forceUpdateReactVirtualizedComponent(component) {
   typeof component.forceUpdateGrid === 'function' ? component.forceUpdateGrid() : component.forceUpdate();
 }
-},{"../utils/createCallbackMemoizer":101,"react":undefined,"react-addons-shallow-compare":39}],92:[function(require,module,exports){
+},{"../utils/createCallbackMemoizer":98,"react":undefined,"react-addons-shallow-compare":36}],89:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12121,7 +12021,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = _InfiniteLoader3.default;
 exports.InfiniteLoader = _InfiniteLoader3.default;
-},{"./InfiniteLoader":91}],93:[function(require,module,exports){
+},{"./InfiniteLoader":88}],90:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12222,7 +12122,7 @@ ScrollSync.propTypes = {
   children: _react.PropTypes.func.isRequired
 };
 exports.default = ScrollSync;
-},{"react":undefined,"react-addons-shallow-compare":39}],94:[function(require,module,exports){
+},{"react":undefined,"react-addons-shallow-compare":36}],91:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12238,7 +12138,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = _ScrollSync3.default;
 exports.ScrollSync = _ScrollSync3.default;
-},{"./ScrollSync":93}],95:[function(require,module,exports){
+},{"./ScrollSync":90}],92:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12532,7 +12432,7 @@ VirtualScroll.defaultProps = {
   style: {}
 };
 exports.default = VirtualScroll;
-},{"../Grid":85,"classnames":undefined,"react":undefined,"react-addons-shallow-compare":39}],96:[function(require,module,exports){
+},{"../Grid":82,"classnames":undefined,"react":undefined,"react-addons-shallow-compare":36}],93:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12548,7 +12448,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = _VirtualScroll3.default;
 exports.VirtualScroll = _VirtualScroll3.default;
-},{"./VirtualScroll":95}],97:[function(require,module,exports){
+},{"./VirtualScroll":92}],94:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12744,7 +12644,7 @@ WindowScroller.defaultProps = {
   onScroll: function onScroll() {}
 };
 exports.default = WindowScroller;
-},{"./utils/onScroll":99,"raf":37,"react":undefined,"react-addons-shallow-compare":39,"react-dom":undefined}],98:[function(require,module,exports){
+},{"./utils/onScroll":96,"raf":35,"react":undefined,"react-addons-shallow-compare":36,"react-dom":undefined}],95:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12765,7 +12665,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _WindowScroller3.default;
 exports.WindowScroller = _WindowScroller3.default;
 exports.IS_SCROLLING_TIMEOUT = _onScroll2.default;
-},{"./WindowScroller":97,"./utils/onScroll":99}],99:[function(require,module,exports){
+},{"./WindowScroller":94,"./utils/onScroll":96}],96:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -12840,7 +12740,7 @@ function unregisterScrollListener(component) {
     }
   }
 }
-},{}],100:[function(require,module,exports){
+},{}],97:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -13005,7 +12905,7 @@ Object.defineProperty(exports, 'WindowScroller', {
     return _WindowScroller.WindowScroller;
   }
 });
-},{"./ArrowKeyStepper":60,"./AutoSizer":62,"./CellMeasurer":65,"./Collection":70,"./ColumnSizer":73,"./FlexTable":82,"./Grid":85,"./InfiniteLoader":92,"./ScrollSync":94,"./VirtualScroll":96,"./WindowScroller":98}],101:[function(require,module,exports){
+},{"./ArrowKeyStepper":57,"./AutoSizer":59,"./CellMeasurer":62,"./Collection":67,"./ColumnSizer":70,"./FlexTable":79,"./Grid":82,"./InfiniteLoader":89,"./ScrollSync":91,"./VirtualScroll":93,"./WindowScroller":95}],98:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -13043,7 +12943,7 @@ function createCallbackMemoizer() {
     }
   };
 }
-},{}],102:[function(require,module,exports){
+},{}],99:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -13084,7 +12984,7 @@ function getUpdatedOffsetForIndex(_ref) {
       return Math.max(minOffset, Math.min(maxOffset, currentOffset));
   }
 }
-},{}],103:[function(require,module,exports){
+},{}],100:[function(require,module,exports){
 'use strict';
 
 /**
@@ -13247,7 +13147,7 @@ module.exports = {
   addResizeListener: addResizeListener,
   removeResizeListener: removeResizeListener
 };
-},{}],104:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 'use strict';
 module.exports = function (str) {
 	return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
@@ -13255,7 +13155,7 @@ module.exports = function (str) {
 	});
 };
 
-},{}],105:[function(require,module,exports){
+},{}],102:[function(require,module,exports){
 (function(self) {
   'use strict';
 
