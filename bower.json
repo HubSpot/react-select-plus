@@ -4,7 +4,7 @@
     "dist/react-select-plus.min.js",
     "dist/react-select-plus.min.css"
   ],
-  "version": "1.0.0-rc.3.patch7",
+  "version": "1.0.0-rc.3.patch8",
   "homepage": "https://github.com/HubSpot/react-select-plus",
   "authors": [
     "Trevor Burnham"
