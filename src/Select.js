@@ -13,6 +13,7 @@ import defaultArrowRenderer from './utils/defaultArrowRenderer';
 import defaultFilterOptions from './utils/defaultFilterOptions';
 import defaultMenuRenderer from './utils/defaultMenuRenderer';
 import defaultClearRenderer from './utils/defaultClearRenderer';
+import stripDiacritics from './utils/stripDiacritics';
 
 import Async from './Async';
 import AsyncCreatable from './AsyncCreatable';
@@ -1246,5 +1247,7 @@ const Select = React.createClass({
 	}
 
 });
+
+Select.stripDiacritics = stripDiacritics;
 
 export default Select;

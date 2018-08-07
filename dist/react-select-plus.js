@@ -957,6 +957,10 @@ var _utilsDefaultClearRenderer = require('./utils/defaultClearRenderer');
 
 var _utilsDefaultClearRenderer2 = _interopRequireDefault(_utilsDefaultClearRenderer);
 
+var _utilsStripDiacritics = require('./utils/stripDiacritics');
+
+var _utilsStripDiacritics2 = _interopRequireDefault(_utilsStripDiacritics);
+
 var _Async = require('./Async');
 
 var _Async2 = _interopRequireDefault(_Async);
@@ -2264,11 +2268,13 @@ var Select = _react2['default'].createClass({
 
 });
 
+Select.stripDiacritics = _utilsStripDiacritics2['default'];
+
 exports['default'] = Select;
 module.exports = exports['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./Async":1,"./AsyncCreatable":2,"./Creatable":3,"./Dropdown":4,"./Option":5,"./OptionGroup":6,"./Value":8,"./utils/defaultArrowRenderer":9,"./utils/defaultClearRenderer":10,"./utils/defaultFilterOptions":11,"./utils/defaultMenuRenderer":12}],8:[function(require,module,exports){
+},{"./Async":1,"./AsyncCreatable":2,"./Creatable":3,"./Dropdown":4,"./Option":5,"./OptionGroup":6,"./Value":8,"./utils/defaultArrowRenderer":9,"./utils/defaultClearRenderer":10,"./utils/defaultFilterOptions":11,"./utils/defaultMenuRenderer":12,"./utils/stripDiacritics":13}],8:[function(require,module,exports){
 (function (global){
 'use strict';
 
