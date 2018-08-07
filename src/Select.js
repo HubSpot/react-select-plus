@@ -249,14 +249,16 @@ const Select = React.createClass({
 			let focusedOptionNode = ReactDOM.findDOMNode(this.focused);
       let focusedOptionPreviousSibling = focusedOptionNode.previousSibling;
       let focusedOptionParent = focusedOptionNode.parentElement;
-      let menuNode = ReactDOM.findDOMNode(this.menu);
+			let menuNode = ReactDOM.findDOMNode(this.menu);
       if (focusedOptionPreviousSibling) {
         menuNode.scrollTop = focusedOptionPreviousSibling.offsetTop;
       } else if (focusedOptionParent && focusedOptionParent === 'Select-menu') {
         menuNode.scrollTop = focusedOptionParent.offsetTop;
       } else {
         menuNode.scrollTop = focusedOptionNode.offsetTop;
-      }
+			}
+			const paddingTop = parseInt(window.getComputedStyle(menuNode, null).paddingTop, 10);
+			if (menuNode.scrollTop <= paddingTop) menuNode.scrollTop = 0;
 			this.hasScrolledToOption = true;
 		} else if (!this.state.isOpen) {
 			this.hasScrolledToOption = false;

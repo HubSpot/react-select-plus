@@ -1220,6 +1220,8 @@ var Select = _react2['default'].createClass({
 			} else {
 				menuNode.scrollTop = focusedOptionNode.offsetTop;
 			}
+			var paddingTop = parseInt(window.getComputedStyle(menuNode, null).paddingTop, 10);
+			if (menuNode.scrollTop <= paddingTop) menuNode.scrollTop = 0;
 			this.hasScrolledToOption = true;
 		} else if (!this.state.isOpen) {
 			this.hasScrolledToOption = false;
