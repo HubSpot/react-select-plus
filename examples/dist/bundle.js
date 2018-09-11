@@ -1798,7 +1798,12 @@ var Select = _react2['default'].createClass({
 				return;
 			case 13:
 				// enter
-				if (!this.state.isOpen) return;
+				if (!this.state.isOpen) {
+					this.setState({
+						isOpen: true
+					});
+					return;
+				};
 				event.stopPropagation();
 				this.selectFocusedOption();
 				break;
