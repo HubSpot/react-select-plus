@@ -448,6 +448,8 @@ const Select = React.createClass({
 				isOpen: false,
 				isPseudoFocused: this.state.isFocused && !this.props.multi,
 				inputValue: ''
+			}, () => {
+				if (this.props.onInputChange) this.props.onInputChange('');
 			});
 		} else {
 			this.setState({
@@ -676,6 +678,7 @@ const Select = React.createClass({
 				focusedIndex: null
 			}, () => {
 				this.addValue(value);
+				if (this.props.onInputChange) this.props.onInputChange('');
 			});
 		} else {
 			this.setState({
@@ -684,6 +687,7 @@ const Select = React.createClass({
 				isPseudoFocused: this.state.isFocused,
 			}, () => {
 				this.setValue(value);
+				if (this.props.onInputChange) this.props.onInputChange('');
 			});
 		}
 	},
@@ -726,7 +730,10 @@ const Select = React.createClass({
 		this.setState({
 			isOpen: false,
 			inputValue: '',
-		}, this.focus);
+		}, () => {
+			this.focus();
+			if (this.props.onInputChange) this.props.onInputChange('');
+		});
 	},
 
 	getResetValue () {
@@ -779,6 +786,8 @@ const Select = React.createClass({
 				isOpen: true,
 				inputValue: '',
 				focusedOption: this._focusedOption || (options.length ? options[dir === 'next' ? 0 : options.length - 1].option : null)
+			}, () => {
+				if (this.props.onInputChange) this.props.onInputChange('');
 			});
 			return;
 		}
