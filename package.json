@@ -1,6 +1,6 @@
 {
   "name": "react-select-plus-delete",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "A fork of react-select with support for option groups",
   "main": "lib/index.js",
   "jsnext:main": "dist/react-select-plus.es.js",
