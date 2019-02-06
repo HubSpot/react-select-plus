@@ -1,6 +1,6 @@
 {
-  "name": "react-select-plus",
-  "version": "1.2.0",
+  "name": "react-select-plus-delete",
+  "version": "1.2.1",
   "description": "A fork of react-select with support for option groups",
   "main": "lib/index.js",
   "jsnext:main": "dist/react-select-plus.es.js",
@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/HubSpot/react-select-plus.git"
+    "url": "git+https://github.com/HubSpot/react-select-plus.git"
   },
   "dependencies": {
     "classnames": "^2.2.4",
@@ -106,5 +106,14 @@
   ],
   "lint-staged": {
     "*.js": "eslint"
+  },
+  "bugs": {
+    "url": "https://github.com/HubSpot/react-select-plus/issues"
+  },
+  "homepage": "https://github.com/HubSpot/react-select-plus#readme",
+  "directories": {
+    "example": "examples",
+    "lib": "lib",
+    "test": "test"
   }
 }
