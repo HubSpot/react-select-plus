@@ -81,13 +81,14 @@ class Value extends React.Component {
 	}
 
 	render () {
+		const { isDeleteRight } = this.props;
 		return (
 			<div className={classNames('Select-value', this.props.value.className)}
 				style={this.props.value.style}
 				title={this.props.value.title}
 				>
-				{this.renderRemoveIcon()}
-				{this.renderLabel()}
+				{isDeleteRight ? this.renderLabel() : this.renderRemoveIcon()}
+				{isDeleteRight ? this.renderRemoveIcon() : this.renderLabel() }
 			</div>
 		);
 	}
@@ -97,9 +98,10 @@ Value.propTypes = {
 	children: PropTypes.node,
 	disabled: PropTypes.bool,               // disabled prop passed to ReactSelect
 	id: PropTypes.string,                   // Unique id for the value - used for aria
+	isDeleteRight: PropTypes.bool,					// is Delete icon on right
 	onClick: PropTypes.func,                // method to handle click on value label
 	onRemove: PropTypes.func,               // method to handle removal of the value
-	value: PropTypes.object.isRequired,     // the option object for this value
+	value: PropTypes.object.isRequired      // the option object for this value
 };
 
 export default Value;
